@@ -24,7 +24,6 @@
     <div id="app">
         <global-menu
                 homelink="{{ route('home') }}"
-                title="{{ config('app.name') }}"
                 :user="{{ json_encode(Auth::user()) }}"
                 links=""
         ></global-menu>

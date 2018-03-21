@@ -2,7 +2,7 @@
     <div class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" v-bind:href="homelink">
             <i class="fas fa-balance-scale"></i>
-            {{ title }}
+            {{ $t('SkitchBB') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -44,6 +44,6 @@
 
 <script>
     export default {
-        props: ['homelink', 'title', 'user', 'links'],
+        props: ['homelink', 'user', 'links'],
     }
 </script>

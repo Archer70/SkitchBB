@@ -49182,7 +49182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['homelink', 'title', 'user', 'links']
+    props: ['homelink', 'user', 'links']
 });
 
 /***/ }),
@@ -49199,7 +49199,7 @@ var render = function() {
     [
       _c("a", { staticClass: "navbar-brand", attrs: { href: _vm.homelink } }, [
         _c("i", { staticClass: "fas fa-balance-scale" }),
-        _vm._v("\n        " + _vm._s(_vm.title) + "\n    ")
+        _vm._v("\n        " + _vm._s(_vm.$t("SkitchBB")) + "\n    ")
       ]),
       _vm._v(" "),
       _vm._m(0),
