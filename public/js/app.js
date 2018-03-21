@@ -49182,7 +49182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['homelink', 'user', 'links']
+    props: ['user', 'links']
 });
 
 /***/ }),
@@ -49197,10 +49197,14 @@ var render = function() {
     "div",
     { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" },
     [
-      _c("a", { staticClass: "navbar-brand", attrs: { href: _vm.homelink } }, [
-        _c("i", { staticClass: "fas fa-balance-scale" }),
-        _vm._v("\n        " + _vm._s(_vm.$t("SkitchBB")) + "\n    ")
-      ]),
+      _c(
+        "a",
+        { staticClass: "navbar-brand", attrs: { href: _vm.route("home") } },
+        [
+          _c("i", { staticClass: "fas fa-comment" }),
+          _vm._v("\n        " + _vm._s(_vm.$t("SkitchBB")) + "\n    ")
+        ]
+      ),
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),

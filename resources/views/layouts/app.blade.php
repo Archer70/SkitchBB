@@ -23,7 +23,6 @@
 <body>
     <div id="app">
         <global-menu
-                homelink="{{ route('home') }}"
                 :user="{{ json_encode(Auth::user()) }}"
                 links=""
         ></global-menu>
