@@ -766,7 +766,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Component style. */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Component style. */\n", ""]);
 
 // exports
 
@@ -778,6 +778,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -844,13 +845,22 @@ var render = function() {
       _c(
         "ul",
         { staticClass: "list-group list-group-flush" },
-        _vm._l(_vm.board.topics, function(topic) {
-          return _c("li", { staticClass: "list-group-item" }, [
-            _c("a", { attrs: { href: topic.link } }, [
-              _vm._v(_vm._s(topic.title))
+        [
+          _vm._l(_vm.board.topics, function(topic) {
+            return _c("li", { staticClass: "list-group-item" }, [
+              _c("a", { attrs: { href: topic.link } }, [
+                _vm._v(_vm._s(topic.title))
+              ])
             ])
-          ])
-        })
+          }),
+          _vm._v(" "),
+          _vm.board.topics.length == 0
+            ? _c("li", { staticClass: "list-group-item text-secondary" }, [
+                _vm._v(_vm._s(_vm.$t("No topics to show!")))
+              ])
+            : _vm._e()
+        ],
+        2
       )
     ])
   ])

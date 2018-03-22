@@ -12,6 +12,7 @@
                 <li v-for="topic in board.topics" class="list-group-item">
                     <a v-bind:href="topic.link">{{ topic.title }}</a>
                 </li>
+                <li v-if="board.topics.length == 0" class="list-group-item text-secondary">{{ $t('No topics to show!') }}</li>
             </ul>
         </div>
     </div>
