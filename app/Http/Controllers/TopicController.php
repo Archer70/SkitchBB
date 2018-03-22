@@ -54,6 +54,8 @@ class TopicController extends Controller
 
         $post = new Post();
         $post->user_id = 1;
+        $post->category_id = $board->category->id;
+        $post->board_id = $board->id;
         $post->topic_id = $topic->id;
         $post->body = $request->body;
         $post->save();
