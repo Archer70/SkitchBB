@@ -877,7 +877,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "list-group-item" }, [
       _c("strong", [_vm._v("Group: ")]),
-      _vm._v(" Admin\n        ")
+      _vm._v(" N/A\n        ")
     ])
   }
 ]

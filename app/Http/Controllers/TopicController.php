@@ -48,7 +48,7 @@ class TopicController extends Controller
         $topic = new Topic();
         $topic->slug = str_slug($request->title);
         $topic->board_id = $board->id;
-        $topic->user_id = 1;
+        $topic->user_id = $request->user()->id;
         $topic->title = $request->title;
         $topic->save();
 

@@ -6,7 +6,7 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <strong>Group: </strong> Admin
+                <strong>Group: </strong> N/A
             </li>
             <li class="list-group-item">
                 <strong>Title: </strong> {{ user.title }}
