@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTopicsTable extends Migration
+class CreateTopicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,7 @@ class AddTopicsTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('slug');
             $table->integer('board_id')->unsigned();
             $table->integer('first_post_id')->unsigned()->nullable();
             $table->integer('last_post_id')->unsigned()->nullable();
