@@ -603,9 +603,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['link', 'title', 'description']
+    props: ['link', 'title', 'description', 'last_post', 'last_topic']
 });
 
 /***/ }),
@@ -629,7 +638,32 @@ var render = function() {
               _vm._v(_vm._s(_vm.description))
             ])
           : _vm._e()
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.last_topic
+        ? _c("div", { staticClass: "card-footer" }, [
+            _c("div", { staticClass: "float-right justify-content-end" }, [
+              _c("span", [_vm._v(_vm._s(_vm.last_post.created_at))])
+            ]),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.$t("Last post in")) +
+                  "\n                "
+              ),
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href: _vm.route("topic.show", { slug: _vm.last_topic.slug })
+                  }
+                },
+                [_vm._v(_vm._s(_vm.last_topic.title))]
+              )
+            ])
+          ])
+        : _vm._e()
     ])
   ])
 }

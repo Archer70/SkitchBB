@@ -15,6 +15,8 @@ class AddPostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('category_id')->unsigned();
+            $table->integer('board_id')->unsigned();
             $table->integer('topic_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('body');

@@ -10,4 +10,13 @@ class Category extends Model
     {
         return $this->hasMany('App\\Board');
     }
+
+    public function lastPost()
+    {
+        return Post::where('category_id', $this->id)
+            ->orderBy('id', 'desc')
+            ->limit(1)
+            ->get()
+            ->last();
+    }
 }

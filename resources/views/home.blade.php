@@ -22,6 +22,8 @@
                                     link="{{ route('board.show', ['slug' => $board->slug]) }}"
                                     title="{{ $board->title }}"
                                     description="{{ $board->description }}"
+                                    :last_post="{{ json_encode($board->lastPost()) }}"
+                                    :last_topic="{{ json_encode($board->lastPost() ? $board->lastPost()->topic : null) }}"
                             ></board-block>
                     @endforeach
                     </div>

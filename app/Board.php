@@ -15,4 +15,18 @@ class Board extends Model
     {
         return $this->hasMany('App\\Topic');
     }
+
+    public function posts()
+    {
+        return $this->hasMany('App\\Post');
+    }
+
+    public function lastPost()
+    {
+        return Post::where('board_id', $this->id)
+            ->orderBy('id', 'desc')
+            ->limit(1)
+            ->get()
+            ->last();
+    }
 }

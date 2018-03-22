@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show', 'feed', 'index']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,15 +42,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $topic = Topic::find($request->topic_id);
+
         $post = new Post();
         $post->topic_id = $request->topic_id;
-        $post->user_id = 1;
+        $post->board_id = $topic->board_id;
+        $post->user_id = $request->user()->id;
         $post->likes = 0;
         $post->approved = 1;
         $post->body = $request->body;
         $post->save();
 
-        $topic = Topic::find($request->topic_id);
 
         if ($request->ajax()) {
             return response()->json($post);
