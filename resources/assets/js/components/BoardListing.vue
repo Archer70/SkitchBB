@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h5 class="card-title">
                     {{ board.title }}
-                    <a class="btn btn-primary float-right" :href="route('topics.create', {'slug': board.slug})">{{ $t('New Topic') }}</a>
+                    <a v-if="user" class="btn btn-primary float-right" :href="route('topics.create', {'slug': board.slug})">{{ $t('New Topic') }}</a>
                 </h5>
                 <h6 v-if="board.description" class="card-subtitle">{{ board.description }}</h6>
             </div>
@@ -19,7 +19,7 @@
 
 <script>
     export default {
-        props: ['board'],
+        props: ['board', 'user'],
     }
 </script>
 

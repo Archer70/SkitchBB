@@ -49180,9 +49180,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'links']
+    props: ['user', 'links'],
+    data: function data() {
+        return {
+            'window': window
+        };
+    },
+
+    methods: {
+        logoutEvent: function logoutEvent(event) {
+            console.log('test');
+            event.preventDefault();
+            axios.post(route('logout')).then(function (response) {
+                window.location = route('home');
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -49279,6 +49297,20 @@ var render = function() {
                       attrs: { href: _vm.route("register") }
                     },
                     [_vm._v(_vm._s(_vm.$t("Register")))]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.user
+              ? _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#" },
+                      on: { click: _vm.logoutEvent }
+                    },
+                    [_vm._v(_vm._s(_vm.$t("Logout")))]
                   )
                 ])
               : _vm._e()

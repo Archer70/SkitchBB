@@ -799,7 +799,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['board']
+    props: ['board', 'user']
 });
 
 /***/ }),
@@ -820,16 +820,18 @@ var render = function() {
               _vm._s(_vm.board.title) +
               "\n                "
           ),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary float-right",
-              attrs: {
-                href: _vm.route("topics.create", { slug: _vm.board.slug })
-              }
-            },
-            [_vm._v(_vm._s(_vm.$t("New Topic")))]
-          )
+          _vm.user
+            ? _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  attrs: {
+                    href: _vm.route("topics.create", { slug: _vm.board.slug })
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("New Topic")))]
+              )
+            : _vm._e()
         ]),
         _vm._v(" "),
         _vm.board.description

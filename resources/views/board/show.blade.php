@@ -7,5 +7,6 @@
 @section('content')
     <board-listing
             :board="{{ json_encode($board) }}"
+            :user="{{ json_encode(Auth::user()) }}"
     ></board-listing>
 @endsection

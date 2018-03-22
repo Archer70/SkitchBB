@@ -27,6 +27,9 @@
                 <li class="nav-item" v-if="!user">
                     <a class="nav-link" :href="route('register')">{{ $t('Register') }}</a>
                 </li>
+                <li class="nav-item" v-if="user">
+                    <a class="nav-link" v-on:click="logoutEvent" href="#">{{ $t('Logout') }}</a>
+                </li>
             </ul>
         </div>
         <form class="form-inline justify-content-end">
@@ -45,5 +48,19 @@
 <script>
     export default {
         props: ['user', 'links'],
+        data() {
+            return {
+                'window': window
+            }
+        },
+        methods: {
+            logoutEvent(event) {
+                console.log('test')
+                event.preventDefault();
+                axios.post(route('logout')).then((response) => {
+                    window.location = route('home');
+                });
+            }
+        }
     }
 </script>
