@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Category;
 
 class CategorySeeder extends Seeder
 {
@@ -11,6 +12,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Category::class, 1)->create();
+        $category = new Category();
+        $category->title = 'General';
+        $category->description = 'General discussion category.';
+        $category->save();
     }
 }
