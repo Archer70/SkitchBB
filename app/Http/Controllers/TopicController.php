@@ -32,7 +32,7 @@ class TopicController extends Controller
     public function create($slug)
     {
         $board = Board::where('slug', $slug)->first();
-        return view('topics.create', ['board' => $board]);
+        return view('topic_create', ['board' => $board]);
     }
 
     /**
@@ -76,7 +76,7 @@ class TopicController extends Controller
     public function show($slug)
     {
         $topic = Topic::where('slug', $slug)->with('posts')->first();
-        return view('topics.show', ['topic' => $topic]);
+        return view('topic', ['topic' => $topic]);
     }
 
     /**

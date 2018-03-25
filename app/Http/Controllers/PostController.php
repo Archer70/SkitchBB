@@ -73,7 +73,7 @@ class PostController extends Controller
             ->orderBy('id', 'desc')
             ->take(20)
             ->get();
-        return view('posts.feed', ['posts' => $posts]);
+        return view('post_feed', ['posts' => $posts]);
     }
 
     /**

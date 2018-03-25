@@ -49,7 +49,7 @@ class BoardController extends Controller
         $board = Board::where('slug', $slug)
             ->with(['topics.user', 'topics.firstPost', 'topics.lastPost'])
             ->first();
-        return view('board.show', ['board' => $board]);
+        return view('board', ['board' => $board]);
     }
 
     /**

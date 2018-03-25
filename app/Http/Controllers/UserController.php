@@ -47,7 +47,7 @@ class UserController extends Controller
     public function show($name)
     {
         $user = User::where('name', $name)->first();
-        return view('users.show', ['user' => $user]);
+        return view('profile', ['user' => $user]);
     }
 
     /**
