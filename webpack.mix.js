@@ -12,8 +12,4 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .js('resources/assets/js/board.js', 'public/js')
-   .js('resources/assets/js/topic.js', 'public/js')
-   .js('resources/assets/js/post.js', 'public/js')
-   .js('resources/assets/js/profile.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

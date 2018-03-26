@@ -1,13 +1,10 @@
 @extends('layouts.app')
 
-@section('components')
-    <script src="{{ asset('js/topic.js') }}"></script>
-    <script src="{{ asset('js/post.js') }}"></script>
-@endsection
-
 @section('content')
     <div class="container">
-        <h2 class="m-4">@lang('Post Feed')</h2>
-        <post v-for="post in {{ json_encode($posts) }}" :post="post" :key="post.id"></post>
+        <h2 class="m-4">{{ __('Post Feed') }}</h2>
+        @foreach($posts as $count => $post)
+            @component('components.post', ['count' => $count+1, 'post' => $post, 'showTitle' => true]) @endcomponent
+        @endforeach
     </div>
 @endsection

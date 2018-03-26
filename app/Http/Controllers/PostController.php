@@ -46,9 +46,9 @@ class PostController extends Controller
 
         $post = new Post();
         $post->topic_id = $request->topic_id;
+        $post->category_id = $topic->board->category->id;
         $post->board_id = $topic->board_id;
         $post->user_id = $request->user()->id;
-        $post->likes = 0;
         $post->approved = 1;
         $post->body = $request->body;
         $post->save();

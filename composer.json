@@ -9,8 +9,7 @@
         "fideloper/proxy": "~4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
-        "martinlindhe/laravel-vue-i18n-generator": "^0.1.23",
-        "tightenco/ziggy": "^0.6.2"
+        "yohang88/letter-avatar": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

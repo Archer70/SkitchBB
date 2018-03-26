@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('components')
-    <script src="{{ asset('js/board.js') }}"></script>
-@endsection
-
 @section('content')
     <div class="container-fluid">
     @foreach($categories as $category)
@@ -18,13 +14,8 @@
                 @if ($category->boards)
                     <div class="row">
                     @foreach ($category->boards as $board)
-                            <board-block
-                                    link="{{ route('board.show', ['slug' => $board->slug]) }}"
-                                    title="{{ $board->title }}"
-                                    description="{{ $board->description }}"
-                                    :last_post="{{ json_encode($board->lastPost()) }}"
-                                    :last_topic="{{ json_encode($board->lastPost() ? $board->lastPost()->topic : null) }}"
-                            ></board-block>
+                            @component('components.board_block', ['board' => $board])
+                            @endcomponent
                     @endforeach
                     </div>
                 @endif

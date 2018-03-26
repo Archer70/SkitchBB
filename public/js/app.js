@@ -60,127 +60,18 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bind = __webpack_require__(9);
-var isBuffer = __webpack_require__(26);
+var bind = __webpack_require__(5);
+var isBuffer = __webpack_require__(22);
 
 /*global toString:true*/
 
@@ -483,9 +374,7 @@ module.exports = {
 
 
 /***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */
+/* 1 */
 /***/ (function(module, exports) {
 
 var g;
@@ -512,15 +401,14 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */,
-/* 6 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(28);
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(24);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -536,10 +424,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(7);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(7);
   }
   return adapter;
 }
@@ -614,10 +502,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 7 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3134,10 +3022,10 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 8 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13508,7 +13396,7 @@ return jQuery;
 
 
 /***/ }),
-/* 9 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13526,7 +13414,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 10 */
+/* 6 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -13716,19 +13604,19 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 11 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
-var settle = __webpack_require__(29);
-var buildURL = __webpack_require__(31);
-var parseHeaders = __webpack_require__(32);
-var isURLSameOrigin = __webpack_require__(33);
-var createError = __webpack_require__(12);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(34);
+var utils = __webpack_require__(0);
+var settle = __webpack_require__(25);
+var buildURL = __webpack_require__(27);
+var parseHeaders = __webpack_require__(28);
+var isURLSameOrigin = __webpack_require__(29);
+var createError = __webpack_require__(8);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(30);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13825,7 +13713,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(35);
+      var cookies = __webpack_require__(31);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13903,13 +13791,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 12 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(30);
+var enhanceError = __webpack_require__(26);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13928,7 +13816,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 13 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13940,7 +13828,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 14 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13966,35 +13854,21 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 15 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
-module.exports = __webpack_require__(49);
+__webpack_require__(12);
+module.exports = __webpack_require__(42);
 
 
 /***/ }),
-/* 16 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex_i18n__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vue_i18n_locales_generated_js__ = __webpack_require__(19);
+__webpack_require__(16);
 
-
-
-
-__webpack_require__(20);
-
-window.Vue = __webpack_require__(43);
-
-var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store();
-Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuex_i18n__["a" /* default */].plugin, store);
-
-Vue.i18n.add('en', __WEBPACK_IMPORTED_MODULE_2__vue_i18n_locales_generated_js__["a" /* default */].en);
-Vue.i18n.set('en');
+window.Vue = __webpack_require__(39);
 
 Vue.mixin({
     methods: {
@@ -14002,1886 +13876,16 @@ Vue.mixin({
     }
 });
 
-Vue.component('global-menu', __webpack_require__(46));
-
 /***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export Store */
-/* unused harmony export install */
-/* unused harmony export mapState */
-/* unused harmony export mapMutations */
-/* unused harmony export mapGetters */
-/* unused harmony export mapActions */
-/* unused harmony export createNamespacedHelpers */
-/**
- * vuex v3.0.1
- * (c) 2017 Evan You
- * @license MIT
- */
-var applyMixin = function (Vue) {
-  var version = Number(Vue.version.split('.')[0]);
-
-  if (version >= 2) {
-    Vue.mixin({ beforeCreate: vuexInit });
-  } else {
-    // override init and inject vuex init procedure
-    // for 1.x backwards compatibility.
-    var _init = Vue.prototype._init;
-    Vue.prototype._init = function (options) {
-      if ( options === void 0 ) options = {};
-
-      options.init = options.init
-        ? [vuexInit].concat(options.init)
-        : vuexInit;
-      _init.call(this, options);
-    };
-  }
-
-  /**
-   * Vuex init hook, injected into each instances init hooks list.
-   */
-
-  function vuexInit () {
-    var options = this.$options;
-    // store injection
-    if (options.store) {
-      this.$store = typeof options.store === 'function'
-        ? options.store()
-        : options.store;
-    } else if (options.parent && options.parent.$store) {
-      this.$store = options.parent.$store;
-    }
-  }
-};
-
-var devtoolHook =
-  typeof window !== 'undefined' &&
-  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
-
-function devtoolPlugin (store) {
-  if (!devtoolHook) { return }
-
-  store._devtoolHook = devtoolHook;
-
-  devtoolHook.emit('vuex:init', store);
-
-  devtoolHook.on('vuex:travel-to-state', function (targetState) {
-    store.replaceState(targetState);
-  });
-
-  store.subscribe(function (mutation, state) {
-    devtoolHook.emit('vuex:mutation', mutation, state);
-  });
-}
-
-/**
- * Get the first item that pass the test
- * by second argument function
- *
- * @param {Array} list
- * @param {Function} f
- * @return {*}
- */
-/**
- * Deep copy the given object considering circular structure.
- * This function caches all nested objects and its copies.
- * If it detects circular structure, use cached copy to avoid infinite loop.
- *
- * @param {*} obj
- * @param {Array<Object>} cache
- * @return {*}
- */
-
-
-/**
- * forEach for object
- */
-function forEachValue (obj, fn) {
-  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
-}
-
-function isObject (obj) {
-  return obj !== null && typeof obj === 'object'
-}
-
-function isPromise (val) {
-  return val && typeof val.then === 'function'
-}
-
-function assert (condition, msg) {
-  if (!condition) { throw new Error(("[vuex] " + msg)) }
-}
-
-var Module = function Module (rawModule, runtime) {
-  this.runtime = runtime;
-  this._children = Object.create(null);
-  this._rawModule = rawModule;
-  var rawState = rawModule.state;
-  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
-};
-
-var prototypeAccessors$1 = { namespaced: { configurable: true } };
-
-prototypeAccessors$1.namespaced.get = function () {
-  return !!this._rawModule.namespaced
-};
-
-Module.prototype.addChild = function addChild (key, module) {
-  this._children[key] = module;
-};
-
-Module.prototype.removeChild = function removeChild (key) {
-  delete this._children[key];
-};
-
-Module.prototype.getChild = function getChild (key) {
-  return this._children[key]
-};
-
-Module.prototype.update = function update (rawModule) {
-  this._rawModule.namespaced = rawModule.namespaced;
-  if (rawModule.actions) {
-    this._rawModule.actions = rawModule.actions;
-  }
-  if (rawModule.mutations) {
-    this._rawModule.mutations = rawModule.mutations;
-  }
-  if (rawModule.getters) {
-    this._rawModule.getters = rawModule.getters;
-  }
-};
-
-Module.prototype.forEachChild = function forEachChild (fn) {
-  forEachValue(this._children, fn);
-};
-
-Module.prototype.forEachGetter = function forEachGetter (fn) {
-  if (this._rawModule.getters) {
-    forEachValue(this._rawModule.getters, fn);
-  }
-};
-
-Module.prototype.forEachAction = function forEachAction (fn) {
-  if (this._rawModule.actions) {
-    forEachValue(this._rawModule.actions, fn);
-  }
-};
-
-Module.prototype.forEachMutation = function forEachMutation (fn) {
-  if (this._rawModule.mutations) {
-    forEachValue(this._rawModule.mutations, fn);
-  }
-};
-
-Object.defineProperties( Module.prototype, prototypeAccessors$1 );
-
-var ModuleCollection = function ModuleCollection (rawRootModule) {
-  // register root module (Vuex.Store options)
-  this.register([], rawRootModule, false);
-};
-
-ModuleCollection.prototype.get = function get (path) {
-  return path.reduce(function (module, key) {
-    return module.getChild(key)
-  }, this.root)
-};
-
-ModuleCollection.prototype.getNamespace = function getNamespace (path) {
-  var module = this.root;
-  return path.reduce(function (namespace, key) {
-    module = module.getChild(key);
-    return namespace + (module.namespaced ? key + '/' : '')
-  }, '')
-};
-
-ModuleCollection.prototype.update = function update$1 (rawRootModule) {
-  update([], this.root, rawRootModule);
-};
-
-ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
-    var this$1 = this;
-    if ( runtime === void 0 ) runtime = true;
-
-  if (true) {
-    assertRawModule(path, rawModule);
-  }
-
-  var newModule = new Module(rawModule, runtime);
-  if (path.length === 0) {
-    this.root = newModule;
-  } else {
-    var parent = this.get(path.slice(0, -1));
-    parent.addChild(path[path.length - 1], newModule);
-  }
-
-  // register nested modules
-  if (rawModule.modules) {
-    forEachValue(rawModule.modules, function (rawChildModule, key) {
-      this$1.register(path.concat(key), rawChildModule, runtime);
-    });
-  }
-};
-
-ModuleCollection.prototype.unregister = function unregister (path) {
-  var parent = this.get(path.slice(0, -1));
-  var key = path[path.length - 1];
-  if (!parent.getChild(key).runtime) { return }
-
-  parent.removeChild(key);
-};
-
-function update (path, targetModule, newModule) {
-  if (true) {
-    assertRawModule(path, newModule);
-  }
-
-  // update target module
-  targetModule.update(newModule);
-
-  // update nested modules
-  if (newModule.modules) {
-    for (var key in newModule.modules) {
-      if (!targetModule.getChild(key)) {
-        if (true) {
-          console.warn(
-            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
-            'manual reload is needed'
-          );
-        }
-        return
-      }
-      update(
-        path.concat(key),
-        targetModule.getChild(key),
-        newModule.modules[key]
-      );
-    }
-  }
-}
-
-var functionAssert = {
-  assert: function (value) { return typeof value === 'function'; },
-  expected: 'function'
-};
-
-var objectAssert = {
-  assert: function (value) { return typeof value === 'function' ||
-    (typeof value === 'object' && typeof value.handler === 'function'); },
-  expected: 'function or object with "handler" function'
-};
-
-var assertTypes = {
-  getters: functionAssert,
-  mutations: functionAssert,
-  actions: objectAssert
-};
-
-function assertRawModule (path, rawModule) {
-  Object.keys(assertTypes).forEach(function (key) {
-    if (!rawModule[key]) { return }
-
-    var assertOptions = assertTypes[key];
-
-    forEachValue(rawModule[key], function (value, type) {
-      assert(
-        assertOptions.assert(value),
-        makeAssertionMessage(path, key, type, value, assertOptions.expected)
-      );
-    });
-  });
-}
-
-function makeAssertionMessage (path, key, type, value, expected) {
-  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
-  if (path.length > 0) {
-    buf += " in module \"" + (path.join('.')) + "\"";
-  }
-  buf += " is " + (JSON.stringify(value)) + ".";
-  return buf
-}
-
-var Vue; // bind on install
-
-var Store = function Store (options) {
-  var this$1 = this;
-  if ( options === void 0 ) options = {};
-
-  // Auto install if it is not done yet and `window` has `Vue`.
-  // To allow users to avoid auto-installation in some cases,
-  // this code should be placed here. See #731
-  if (!Vue && typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue);
-  }
-
-  if (true) {
-    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
-    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
-    assert(this instanceof Store, "Store must be called with the new operator.");
-  }
-
-  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
-  var strict = options.strict; if ( strict === void 0 ) strict = false;
-
-  var state = options.state; if ( state === void 0 ) state = {};
-  if (typeof state === 'function') {
-    state = state() || {};
-  }
-
-  // store internal state
-  this._committing = false;
-  this._actions = Object.create(null);
-  this._actionSubscribers = [];
-  this._mutations = Object.create(null);
-  this._wrappedGetters = Object.create(null);
-  this._modules = new ModuleCollection(options);
-  this._modulesNamespaceMap = Object.create(null);
-  this._subscribers = [];
-  this._watcherVM = new Vue();
-
-  // bind commit and dispatch to self
-  var store = this;
-  var ref = this;
-  var dispatch = ref.dispatch;
-  var commit = ref.commit;
-  this.dispatch = function boundDispatch (type, payload) {
-    return dispatch.call(store, type, payload)
-  };
-  this.commit = function boundCommit (type, payload, options) {
-    return commit.call(store, type, payload, options)
-  };
-
-  // strict mode
-  this.strict = strict;
-
-  // init root module.
-  // this also recursively registers all sub-modules
-  // and collects all module getters inside this._wrappedGetters
-  installModule(this, state, [], this._modules.root);
-
-  // initialize the store vm, which is responsible for the reactivity
-  // (also registers _wrappedGetters as computed properties)
-  resetStoreVM(this, state);
-
-  // apply plugins
-  plugins.forEach(function (plugin) { return plugin(this$1); });
-
-  if (Vue.config.devtools) {
-    devtoolPlugin(this);
-  }
-};
-
-var prototypeAccessors = { state: { configurable: true } };
-
-prototypeAccessors.state.get = function () {
-  return this._vm._data.$$state
-};
-
-prototypeAccessors.state.set = function (v) {
-  if (true) {
-    assert(false, "Use store.replaceState() to explicit replace store state.");
-  }
-};
-
-Store.prototype.commit = function commit (_type, _payload, _options) {
-    var this$1 = this;
-
-  // check object-style commit
-  var ref = unifyObjectStyle(_type, _payload, _options);
-    var type = ref.type;
-    var payload = ref.payload;
-    var options = ref.options;
-
-  var mutation = { type: type, payload: payload };
-  var entry = this._mutations[type];
-  if (!entry) {
-    if (true) {
-      console.error(("[vuex] unknown mutation type: " + type));
-    }
-    return
-  }
-  this._withCommit(function () {
-    entry.forEach(function commitIterator (handler) {
-      handler(payload);
-    });
-  });
-  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
-
-  if (
-    "development" !== 'production' &&
-    options && options.silent
-  ) {
-    console.warn(
-      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
-      'Use the filter functionality in the vue-devtools'
-    );
-  }
-};
-
-Store.prototype.dispatch = function dispatch (_type, _payload) {
-    var this$1 = this;
-
-  // check object-style dispatch
-  var ref = unifyObjectStyle(_type, _payload);
-    var type = ref.type;
-    var payload = ref.payload;
-
-  var action = { type: type, payload: payload };
-  var entry = this._actions[type];
-  if (!entry) {
-    if (true) {
-      console.error(("[vuex] unknown action type: " + type));
-    }
-    return
-  }
-
-  this._actionSubscribers.forEach(function (sub) { return sub(action, this$1.state); });
-
-  return entry.length > 1
-    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
-    : entry[0](payload)
-};
-
-Store.prototype.subscribe = function subscribe (fn) {
-  return genericSubscribe(fn, this._subscribers)
-};
-
-Store.prototype.subscribeAction = function subscribeAction (fn) {
-  return genericSubscribe(fn, this._actionSubscribers)
-};
-
-Store.prototype.watch = function watch (getter, cb, options) {
-    var this$1 = this;
-
-  if (true) {
-    assert(typeof getter === 'function', "store.watch only accepts a function.");
-  }
-  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
-};
-
-Store.prototype.replaceState = function replaceState (state) {
-    var this$1 = this;
-
-  this._withCommit(function () {
-    this$1._vm._data.$$state = state;
-  });
-};
-
-Store.prototype.registerModule = function registerModule (path, rawModule, options) {
-    if ( options === void 0 ) options = {};
-
-  if (typeof path === 'string') { path = [path]; }
-
-  if (true) {
-    assert(Array.isArray(path), "module path must be a string or an Array.");
-    assert(path.length > 0, 'cannot register the root module by using registerModule.');
-  }
-
-  this._modules.register(path, rawModule);
-  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
-  // reset store to update getters...
-  resetStoreVM(this, this.state);
-};
-
-Store.prototype.unregisterModule = function unregisterModule (path) {
-    var this$1 = this;
-
-  if (typeof path === 'string') { path = [path]; }
-
-  if (true) {
-    assert(Array.isArray(path), "module path must be a string or an Array.");
-  }
-
-  this._modules.unregister(path);
-  this._withCommit(function () {
-    var parentState = getNestedState(this$1.state, path.slice(0, -1));
-    Vue.delete(parentState, path[path.length - 1]);
-  });
-  resetStore(this);
-};
-
-Store.prototype.hotUpdate = function hotUpdate (newOptions) {
-  this._modules.update(newOptions);
-  resetStore(this, true);
-};
-
-Store.prototype._withCommit = function _withCommit (fn) {
-  var committing = this._committing;
-  this._committing = true;
-  fn();
-  this._committing = committing;
-};
-
-Object.defineProperties( Store.prototype, prototypeAccessors );
-
-function genericSubscribe (fn, subs) {
-  if (subs.indexOf(fn) < 0) {
-    subs.push(fn);
-  }
-  return function () {
-    var i = subs.indexOf(fn);
-    if (i > -1) {
-      subs.splice(i, 1);
-    }
-  }
-}
-
-function resetStore (store, hot) {
-  store._actions = Object.create(null);
-  store._mutations = Object.create(null);
-  store._wrappedGetters = Object.create(null);
-  store._modulesNamespaceMap = Object.create(null);
-  var state = store.state;
-  // init all modules
-  installModule(store, state, [], store._modules.root, true);
-  // reset vm
-  resetStoreVM(store, state, hot);
-}
-
-function resetStoreVM (store, state, hot) {
-  var oldVm = store._vm;
-
-  // bind store public getters
-  store.getters = {};
-  var wrappedGetters = store._wrappedGetters;
-  var computed = {};
-  forEachValue(wrappedGetters, function (fn, key) {
-    // use computed to leverage its lazy-caching mechanism
-    computed[key] = function () { return fn(store); };
-    Object.defineProperty(store.getters, key, {
-      get: function () { return store._vm[key]; },
-      enumerable: true // for local getters
-    });
-  });
-
-  // use a Vue instance to store the state tree
-  // suppress warnings just in case the user has added
-  // some funky global mixins
-  var silent = Vue.config.silent;
-  Vue.config.silent = true;
-  store._vm = new Vue({
-    data: {
-      $$state: state
-    },
-    computed: computed
-  });
-  Vue.config.silent = silent;
-
-  // enable strict mode for new vm
-  if (store.strict) {
-    enableStrictMode(store);
-  }
-
-  if (oldVm) {
-    if (hot) {
-      // dispatch changes in all subscribed watchers
-      // to force getter re-evaluation for hot reloading.
-      store._withCommit(function () {
-        oldVm._data.$$state = null;
-      });
-    }
-    Vue.nextTick(function () { return oldVm.$destroy(); });
-  }
-}
-
-function installModule (store, rootState, path, module, hot) {
-  var isRoot = !path.length;
-  var namespace = store._modules.getNamespace(path);
-
-  // register in namespace map
-  if (module.namespaced) {
-    store._modulesNamespaceMap[namespace] = module;
-  }
-
-  // set state
-  if (!isRoot && !hot) {
-    var parentState = getNestedState(rootState, path.slice(0, -1));
-    var moduleName = path[path.length - 1];
-    store._withCommit(function () {
-      Vue.set(parentState, moduleName, module.state);
-    });
-  }
-
-  var local = module.context = makeLocalContext(store, namespace, path);
-
-  module.forEachMutation(function (mutation, key) {
-    var namespacedType = namespace + key;
-    registerMutation(store, namespacedType, mutation, local);
-  });
-
-  module.forEachAction(function (action, key) {
-    var type = action.root ? key : namespace + key;
-    var handler = action.handler || action;
-    registerAction(store, type, handler, local);
-  });
-
-  module.forEachGetter(function (getter, key) {
-    var namespacedType = namespace + key;
-    registerGetter(store, namespacedType, getter, local);
-  });
-
-  module.forEachChild(function (child, key) {
-    installModule(store, rootState, path.concat(key), child, hot);
-  });
-}
-
-/**
- * make localized dispatch, commit, getters and state
- * if there is no namespace, just use root ones
- */
-function makeLocalContext (store, namespace, path) {
-  var noNamespace = namespace === '';
-
-  var local = {
-    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
-      var args = unifyObjectStyle(_type, _payload, _options);
-      var payload = args.payload;
-      var options = args.options;
-      var type = args.type;
-
-      if (!options || !options.root) {
-        type = namespace + type;
-        if ("development" !== 'production' && !store._actions[type]) {
-          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
-          return
-        }
-      }
-
-      return store.dispatch(type, payload)
-    },
-
-    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
-      var args = unifyObjectStyle(_type, _payload, _options);
-      var payload = args.payload;
-      var options = args.options;
-      var type = args.type;
-
-      if (!options || !options.root) {
-        type = namespace + type;
-        if ("development" !== 'production' && !store._mutations[type]) {
-          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
-          return
-        }
-      }
-
-      store.commit(type, payload, options);
-    }
-  };
-
-  // getters and state object must be gotten lazily
-  // because they will be changed by vm update
-  Object.defineProperties(local, {
-    getters: {
-      get: noNamespace
-        ? function () { return store.getters; }
-        : function () { return makeLocalGetters(store, namespace); }
-    },
-    state: {
-      get: function () { return getNestedState(store.state, path); }
-    }
-  });
-
-  return local
-}
-
-function makeLocalGetters (store, namespace) {
-  var gettersProxy = {};
-
-  var splitPos = namespace.length;
-  Object.keys(store.getters).forEach(function (type) {
-    // skip if the target getter is not match this namespace
-    if (type.slice(0, splitPos) !== namespace) { return }
-
-    // extract local getter type
-    var localType = type.slice(splitPos);
-
-    // Add a port to the getters proxy.
-    // Define as getter property because
-    // we do not want to evaluate the getters in this time.
-    Object.defineProperty(gettersProxy, localType, {
-      get: function () { return store.getters[type]; },
-      enumerable: true
-    });
-  });
-
-  return gettersProxy
-}
-
-function registerMutation (store, type, handler, local) {
-  var entry = store._mutations[type] || (store._mutations[type] = []);
-  entry.push(function wrappedMutationHandler (payload) {
-    handler.call(store, local.state, payload);
-  });
-}
-
-function registerAction (store, type, handler, local) {
-  var entry = store._actions[type] || (store._actions[type] = []);
-  entry.push(function wrappedActionHandler (payload, cb) {
-    var res = handler.call(store, {
-      dispatch: local.dispatch,
-      commit: local.commit,
-      getters: local.getters,
-      state: local.state,
-      rootGetters: store.getters,
-      rootState: store.state
-    }, payload, cb);
-    if (!isPromise(res)) {
-      res = Promise.resolve(res);
-    }
-    if (store._devtoolHook) {
-      return res.catch(function (err) {
-        store._devtoolHook.emit('vuex:error', err);
-        throw err
-      })
-    } else {
-      return res
-    }
-  });
-}
-
-function registerGetter (store, type, rawGetter, local) {
-  if (store._wrappedGetters[type]) {
-    if (true) {
-      console.error(("[vuex] duplicate getter key: " + type));
-    }
-    return
-  }
-  store._wrappedGetters[type] = function wrappedGetter (store) {
-    return rawGetter(
-      local.state, // local state
-      local.getters, // local getters
-      store.state, // root state
-      store.getters // root getters
-    )
-  };
-}
-
-function enableStrictMode (store) {
-  store._vm.$watch(function () { return this._data.$$state }, function () {
-    if (true) {
-      assert(store._committing, "Do not mutate vuex store state outside mutation handlers.");
-    }
-  }, { deep: true, sync: true });
-}
-
-function getNestedState (state, path) {
-  return path.length
-    ? path.reduce(function (state, key) { return state[key]; }, state)
-    : state
-}
-
-function unifyObjectStyle (type, payload, options) {
-  if (isObject(type) && type.type) {
-    options = payload;
-    payload = type;
-    type = type.type;
-  }
-
-  if (true) {
-    assert(typeof type === 'string', ("Expects string as the type, but found " + (typeof type) + "."));
-  }
-
-  return { type: type, payload: payload, options: options }
-}
-
-function install (_Vue) {
-  if (Vue && _Vue === Vue) {
-    if (true) {
-      console.error(
-        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
-      );
-    }
-    return
-  }
-  Vue = _Vue;
-  applyMixin(Vue);
-}
-
-var mapState = normalizeNamespace(function (namespace, states) {
-  var res = {};
-  normalizeMap(states).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    res[key] = function mappedState () {
-      var state = this.$store.state;
-      var getters = this.$store.getters;
-      if (namespace) {
-        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
-        if (!module) {
-          return
-        }
-        state = module.context.state;
-        getters = module.context.getters;
-      }
-      return typeof val === 'function'
-        ? val.call(this, state, getters)
-        : state[val]
-    };
-    // mark vuex getter for devtools
-    res[key].vuex = true;
-  });
-  return res
-});
-
-var mapMutations = normalizeNamespace(function (namespace, mutations) {
-  var res = {};
-  normalizeMap(mutations).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    res[key] = function mappedMutation () {
-      var args = [], len = arguments.length;
-      while ( len-- ) args[ len ] = arguments[ len ];
-
-      var commit = this.$store.commit;
-      if (namespace) {
-        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
-        if (!module) {
-          return
-        }
-        commit = module.context.commit;
-      }
-      return typeof val === 'function'
-        ? val.apply(this, [commit].concat(args))
-        : commit.apply(this.$store, [val].concat(args))
-    };
-  });
-  return res
-});
-
-var mapGetters = normalizeNamespace(function (namespace, getters) {
-  var res = {};
-  normalizeMap(getters).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    val = namespace + val;
-    res[key] = function mappedGetter () {
-      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
-        return
-      }
-      if ("development" !== 'production' && !(val in this.$store.getters)) {
-        console.error(("[vuex] unknown getter: " + val));
-        return
-      }
-      return this.$store.getters[val]
-    };
-    // mark vuex getter for devtools
-    res[key].vuex = true;
-  });
-  return res
-});
-
-var mapActions = normalizeNamespace(function (namespace, actions) {
-  var res = {};
-  normalizeMap(actions).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    res[key] = function mappedAction () {
-      var args = [], len = arguments.length;
-      while ( len-- ) args[ len ] = arguments[ len ];
-
-      var dispatch = this.$store.dispatch;
-      if (namespace) {
-        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
-        if (!module) {
-          return
-        }
-        dispatch = module.context.dispatch;
-      }
-      return typeof val === 'function'
-        ? val.apply(this, [dispatch].concat(args))
-        : dispatch.apply(this.$store, [val].concat(args))
-    };
-  });
-  return res
-});
-
-var createNamespacedHelpers = function (namespace) { return ({
-  mapState: mapState.bind(null, namespace),
-  mapGetters: mapGetters.bind(null, namespace),
-  mapMutations: mapMutations.bind(null, namespace),
-  mapActions: mapActions.bind(null, namespace)
-}); };
-
-function normalizeMap (map) {
-  return Array.isArray(map)
-    ? map.map(function (key) { return ({ key: key, val: key }); })
-    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
-}
-
-function normalizeNamespace (fn) {
-  return function (namespace, map) {
-    if (typeof namespace !== 'string') {
-      map = namespace;
-      namespace = '';
-    } else if (namespace.charAt(namespace.length - 1) !== '/') {
-      namespace += '/';
-    }
-    return fn(namespace, map)
-  }
-}
-
-function getModuleByNamespace (store, helper, namespace) {
-  var module = store._modulesNamespaceMap[namespace];
-  if ("development" !== 'production' && !module) {
-    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
-  }
-  return module
-}
-
-var index_esm = {
-  Store: Store,
-  install: install,
-  version: '3.0.1',
-  mapState: mapState,
-  mapMutations: mapMutations,
-  mapGetters: mapGetters,
-  mapActions: mapActions,
-  createNamespacedHelpers: createNamespacedHelpers
-};
-
-
-/* harmony default export */ __webpack_exports__["a"] = (index_esm);
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-/* vuex-i18n-store defines a vuex module to store locale translations. Make sure
-** to also include the file vuex-i18n.js to enable easy access to localized
-** strings in your vue components.
-*/
-
-// define a simple vuex module to handle locale translations
-var i18nVuexModule = {
-	namespaced: true,
-	state: {
-		locale: null,
-		fallback: null,
-		translations: {}
-	},
-	mutations: {
-
-		// set the current locale
-		SET_LOCALE: function SET_LOCALE(state, payload) {
-			state.locale = payload.locale;
-		},
-
-
-		// add a new locale
-		ADD_LOCALE: function ADD_LOCALE(state, payload) {
-
-			// reduce the given translations to a single-depth tree
-			var translations = flattenTranslations(payload.translations);
-
-			if (state.translations.hasOwnProperty(payload.locale)) {
-				// get the existing translations
-				var existingTranslations = state.translations[payload.locale];
-				// merge the translations
-				state.translations[payload.locale] = Object.assign({}, existingTranslations, translations);
-			} else {
-				// just set the locale if it does not yet exist
-				state.translations[payload.locale] = translations;
-			}
-
-			// make sure to notify vue of changes (this might break with new vue versions)
-			try {
-				if (state.translations.__ob__) {
-					state.translations.__ob__.dep.notify();
-				}
-			} catch (ex) {}
-		},
-
-
-		// replace existing locale information with new translations
-		REPLACE_LOCALE: function REPLACE_LOCALE(state, payload) {
-
-			// reduce the given translations to a single-depth tree
-			var translations = flattenTranslations(payload.translations);
-
-			// replace the translations entirely
-			state.translations[payload.locale] = translations;
-
-			// make sure to notify vue of changes (this might break with new vue versions)
-			try {
-				if (state.translations.__ob__) {
-					state.translations.__ob__.dep.notify();
-				}
-			} catch (ex) {}
-		},
-
-
-		// remove a locale from the store
-		REMOVE_LOCALE: function REMOVE_LOCALE(state, payload) {
-
-			// check if the given locale is present in the state
-			if (state.translations.hasOwnProperty(payload.locale)) {
-
-				// check if the current locale is the given locale to remvoe
-				if (state.locale === payload.locale) {
-					// reset the current locale
-					state.locale = null;
-				}
-
-				// create a copy of the translations object
-				var translationCopy = Object.assign({}, state.translations);
-
-				// remove the given locale
-				delete translationCopy[payload.locale];
-
-				// set the state to the new object
-				state.translations = translationCopy;
-			}
-		},
-		SET_FALLBACK_LOCALE: function SET_FALLBACK_LOCALE(state, payload) {
-			state.fallback = payload.locale;
-		}
-	},
-	actions: {
-
-		// set the current locale
-		setLocale: function setLocale(context, payload) {
-			context.commit({
-				type: 'SET_LOCALE',
-				locale: payload.locale
-			});
-		},
-
-
-		// add or extend a locale with translations
-		addLocale: function addLocale(context, payload) {
-			context.commit({
-				type: 'ADD_LOCALE',
-				locale: payload.locale,
-				translations: payload.translations
-			});
-		},
-
-
-		// replace locale information
-		replaceLocale: function replaceLocale(context, payload) {
-			context.commit({
-				type: 'REPLACE_LOCALE',
-				locale: payload.locale,
-				translations: payload.translations
-			});
-		},
-
-
-		// remove the given locale translations
-		removeLocale: function removeLocale(context, payload) {
-			context.commit({
-				type: 'REMOVE_LOCALE',
-				locale: payload.locale,
-				translations: payload.translations
-			});
-		},
-		setFallbackLocale: function setFallbackLocale(context, payload) {
-			context.commit({
-				type: 'SET_FALLBACK_LOCALE',
-				locale: payload.locale
-			});
-		}
-	}
-};
-
-// flattenTranslations will convert object trees for translations into a
-// single-depth object tree
-var flattenTranslations = function flattenTranslations(translations) {
-
-	var toReturn = {};
-
-	for (var i in translations) {
-
-		// check if the property is present
-		if (!translations.hasOwnProperty(i)) {
-			continue;
-		}
-
-		// get the type of the property
-		var objType = _typeof(translations[i]);
-
-		// allow unflattened array of strings
-		if (isArray(translations[i])) {
-
-			var count = translations[i].length;
-
-			for (var index = 0; index < count; index++) {
-				var itemType = _typeof(translations[i][index]);
-
-				if (itemType !== 'string') {
-					console.warn('i18n:', 'currently only arrays of strings are fully supported', translations[i]);
-					break;
-				}
-			}
-
-			toReturn[i] = translations[i];
-		} else if (objType == 'object' && objType !== null) {
-
-			var flatObject = flattenTranslations(translations[i]);
-
-			for (var x in flatObject) {
-				if (!flatObject.hasOwnProperty(x)) continue;
-
-				toReturn[i + '.' + x] = flatObject[x];
-			}
-		} else {
-			toReturn[i] = translations[i];
-		}
-	}
-	return toReturn;
-};
-
-// check if the given object is an array
-function isArray(obj) {
-	return !!obj && Array === obj.constructor;
-}
-
-var plurals = {
-	getTranslationIndex: function getTranslationIndex(languageCode, n) {
-		switch (languageCode) {
-			case 'ay': // Aymará
-			case 'bo': // Tibetan
-			case 'cgg': // Chiga
-			case 'dz': // Dzongkha
-			case 'fa': // Persian
-			case 'id': // Indonesian
-			case 'ja': // Japanese
-			case 'jbo': // Lojban
-			case 'ka': // Georgian
-			case 'kk': // Kazakh
-			case 'km': // Khmer
-			case 'ko': // Korean
-			case 'ky': // Kyrgyz
-			case 'lo': // Lao
-			case 'ms': // Malay
-			case 'my': // Burmese
-			case 'sah': // Yakut
-			case 'su': // Sundanese
-			case 'th': // Thai
-			case 'tt': // Tatar
-			case 'ug': // Uyghur
-			case 'vi': // Vietnamese
-			case 'wo': // Wolof
-			case 'zh':
-				// Chinese
-				// 1 form
-				return 0;
-			case 'is':
-				// Icelandic
-				// 2 forms
-				return n % 10 !== 1 || n % 100 === 11 ? 1 : 0;
-			case 'jv':
-				// Javanese
-				// 2 forms
-				return n !== 0 ? 1 : 0;
-			case 'mk':
-				// Macedonian
-				// 2 forms
-				return n === 1 || n % 10 === 1 ? 0 : 1;
-			case 'ach': // Acholi
-			case 'ak': // Akan
-			case 'am': // Amharic
-			case 'arn': // Mapudungun
-			case 'br': // Breton
-			case 'fil': // Filipino
-			case 'fr': // French
-			case 'gun': // Gun
-			case 'ln': // Lingala
-			case 'mfe': // Mauritian Creole
-			case 'mg': // Malagasy
-			case 'mi': // Maori
-			case 'oc': // Occitan
-			case 'pt_BR': // Brazilian Portuguese
-			case 'tg': // Tajik
-			case 'ti': // Tigrinya
-			case 'tr': // Turkish
-			case 'uz': // Uzbek
-			case 'wa': // Walloon
-			/* eslint-disable */
-			/* Disable "Duplicate case label" because there are 2 forms of Chinese plurals */
-			case 'zh':
-				// Chinese
-				/* eslint-enable */
-				// 2 forms
-				return n > 1 ? 1 : 0;
-			case 'lv':
-				// Latvian
-				// 3 forms
-				return n % 10 === 1 && n % 100 !== 11 ? 0 : n !== 0 ? 1 : 2;
-			case 'lt':
-				// Lithuanian
-				// 3 forms
-				return n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
-			case 'be': // Belarusian
-			case 'bs': // Bosnian
-			case 'hr': // Croatian
-			case 'ru': // Russian
-			case 'sr': // Serbian
-			case 'uk':
-				// Ukrainian
-				// 3 forms
-				return n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
-			case 'mnk':
-				// Mandinka
-				// 3 forms
-				return n === 0 ? 0 : n === 1 ? 1 : 2;
-			case 'ro':
-				// Romanian
-				// 3 forms
-				return n === 1 ? 0 : n === 0 || n % 100 > 0 && n % 100 < 20 ? 1 : 2;
-			case 'pl':
-				// Polish
-				// 3 forms
-				return n === 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
-			case 'cs': // Czech
-			case 'sk':
-				// Slovak
-				// 3 forms
-				return n === 1 ? 0 : n >= 2 && n <= 4 ? 1 : 2;
-			case 'csb':
-				// Kashubian
-				// 3 forms
-				return n === 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2;
-			case 'sl':
-				// Slovenian
-				// 4 forms
-				return n % 100 === 1 ? 0 : n % 100 === 2 ? 1 : n % 100 === 3 || n % 100 === 4 ? 2 : 3;
-			case 'mt':
-				// Maltese
-				// 4 forms
-				return n === 1 ? 0 : n === 0 || n % 100 > 1 && n % 100 < 11 ? 1 : n % 100 > 10 && n % 100 < 20 ? 2 : 3;
-			case 'gd':
-				// Scottish Gaelic
-				// 4 forms
-				return n === 1 || n === 11 ? 0 : n === 2 || n === 12 ? 1 : n > 2 && n < 20 ? 2 : 3;
-			case 'cy':
-				// Welsh
-				// 4 forms
-				return n === 1 ? 0 : n === 2 ? 1 : n !== 8 && n !== 11 ? 2 : 3;
-			case 'kw':
-				// Cornish
-				// 4 forms
-				return n === 1 ? 0 : n === 2 ? 1 : n === 3 ? 2 : 3;
-			case 'ga':
-				// Irish
-				// 5 forms
-				return n === 1 ? 0 : n === 2 ? 1 : n > 2 && n < 7 ? 2 : n > 6 && n < 11 ? 3 : 4;
-			case 'ar':
-				// Arabic
-				// 6 forms
-				return n === 0 ? 0 : n === 1 ? 1 : n === 2 ? 2 : n % 100 >= 3 && n % 100 <= 10 ? 3 : n % 100 >= 11 ? 4 : 5;
-			default:
-				// Everything else
-				return n !== 1 ? 1 : 0;
-		}
-	}
-};
-
-/* vuex-i18n defines the Vuexi18nPlugin to enable localization using a vuex
-** module to store the translation information. Make sure to also include the
-** file vuex-i18n-store.js to include a respective vuex module.
-*/
-
-// initialize the plugin object
-var VuexI18nPlugin = {};
-
-// internationalization plugin for vue js using vuex
-VuexI18nPlugin.install = function install(Vue, store, config) {
-
-	// TODO: remove this block for next major update (API break)
-	if (typeof arguments[2] === 'string' || typeof arguments[3] === 'string') {
-		console.warn('i18n: Registering the plugin vuex-i18n with a string for `moduleName` or `identifiers` is deprecated. Use a configuration object instead.', 'https://github.com/dkfbasel/vuex-i18n#setup');
-		config = {
-			moduleName: arguments[2],
-			identifiers: arguments[3]
-		};
-	}
-
-	// merge default options with user supplied options
-	var mergedConfig = Object.assign({
-		moduleName: 'i18n',
-		identifiers: ['{', '}'],
-		preserveState: false,
-		onTranslationNotFound: function onTranslationNotFound() {}
-	}, config);
-
-	// define module name and identifiers as constants to prevent any changes
-	var moduleName = mergedConfig.moduleName;
-	var identifiers = mergedConfig.identifiers;
-
-	// initialize the onTranslationNotFound function and make sure it is actually
-	// a function
-	var onTranslationNotFound = mergedConfig.onTranslationNotFound;
-	if (typeof onTranslationNotFound !== 'function') {
-		console.error('i18n: i18n config option onTranslationNotFound must be a function');
-		onTranslationNotFound = function onTranslationNotFound() {};
-	}
-
-	// register the i18n module in the vuex store
-	// preserveState can be used via configuration if server side rendering is used
-	store.registerModule(moduleName, i18nVuexModule, { preserveState: mergedConfig.preserveState });
-
-	// check if the plugin was correctly initialized
-	if (store.state.hasOwnProperty(moduleName) === false) {
-		console.error('i18n: i18n vuex module is not correctly initialized. Please check the module name:', moduleName);
-
-		// always return the key if module is not initialized correctly
-		Vue.prototype.$i18n = function (key) {
-			return key;
-		};
-
-		Vue.prototype.$getLanguage = function () {
-			return null;
-		};
-
-		Vue.prototype.$setLanguage = function () {
-			console.error('i18n: i18n vuex module is not correctly initialized');
-		};
-
-		return;
-	}
-
-	// initialize the replacement function
-	var render = renderFn(identifiers);
-
-	// get localized string from store. note that we pass the arguments passed
-	// to the function directly to the translateInLanguage function
-	var translate = function $t() {
-
-		// get the current language from the store
-		var locale = store.state[moduleName].locale;
-
-		return translateInLanguage.apply(undefined, [locale].concat(Array.prototype.slice.call(arguments)));
-	};
-
-	// get localized string from store in a given language if available.
-	// there are two possible signatures for the function.
-	// we will check the arguments to make up the options passed.
-	// 1: locale, key, options, pluralization
-	// 2: locale, key, defaultValue, options, pluralization
-	var translateInLanguage = function translateInLanguage(locale) {
-
-		// read the function arguments
-		var args = arguments;
-
-		// initialize options
-		var key = '';
-		var defaultValue = '';
-		var options = {};
-		var pluralization = null;
-
-		var count = args.length;
-
-		// check if a default value was specified and fill options accordingly
-		if (count >= 3 && typeof args[2] === 'string') {
-
-			key = args[1];
-			defaultValue = args[2];
-
-			if (count > 3) {
-				options = args[3];
-			}
-
-			if (count > 4) {
-				pluralization = args[4];
-			}
-		} else {
-
-			key = args[1];
-
-			// default value was not specified and is therefore the same as the key
-			defaultValue = key;
-
-			if (count > 2) {
-				options = args[2];
-			}
-
-			if (count > 3) {
-				pluralization = args[3];
-			}
-		}
-
-		// return the default value if the locale is not set (could happen on initialization)
-		if (!locale) {
-			console.warn('i18n: i18n locale is not set when trying to access translations:', key);
-			return defaultValue;
-		}
-
-		// get the translations from the store
-		var translations = store.state[moduleName].translations;
-
-		// get the last resort fallback from the store
-		var fallback = store.state[moduleName].fallback;
-
-		// split locale by - to support partial fallback for regional locales
-		// like de-CH, en-UK
-		var localeRegional = locale.split('-');
-
-		// flag for translation to exist or not
-		var translationExists = true;
-
-		// check if the language exists in the store. return the key if not
-		if (translations.hasOwnProperty(locale) === false) {
-			translationExists = false;
-
-			// check if the key exists in the store. return the key if not
-		} else if (translations[locale].hasOwnProperty(key) === false) {
-			translationExists = false;
-		}
-
-		// return the value from the store
-		if (translationExists === true) {
-			return render(locale, translations[locale][key], options, pluralization);
-		}
-
-		// check if a regional locale translation would be available for the key
-		// i.e. de for de-CH
-		if (localeRegional.length > 1 && translations.hasOwnProperty(localeRegional[0]) === true && translations[localeRegional[0]].hasOwnProperty(key) === true) {
-			return render(localeRegional[0], translations[localeRegional[0]][key], options, pluralization);
-		}
-
-		// invoke a method if a translation is not found
-		var asyncTranslation = onTranslationNotFound(locale, key, defaultValue);
-
-		// resolve async translations by updating the store
-		if (asyncTranslation) {
-			Promise.resolve(asyncTranslation).then(function (value) {
-				var additionalTranslations = {};
-				additionalTranslations[key] = value;
-				addLocale(locale, additionalTranslations);
-			});
-		}
-
-		// check if a vaild fallback exists in the store.
-		// return the default value if not
-		if (translations.hasOwnProperty(fallback) === false) {
-			return render(locale, defaultValue, options, pluralization);
-		}
-
-		// check if the key exists in the fallback locale in the store.
-		// return the default value if not
-		if (translations[fallback].hasOwnProperty(key) === false) {
-			return render(fallback, defaultValue, options, pluralization);
-		}
-
-		return render(locale, translations[fallback][key], options, pluralization);
-	};
-
-	// check if the given key exists in the current locale
-	var checkKeyExists = function checkKeyExists(key) {
-		var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'fallback';
-
-
-		// get the current language from the store
-		var locale = store.state[moduleName].locale;
-		var fallback = store.state[moduleName].fallback;
-		var translations = store.state[moduleName].translations;
-
-		// check the current translation
-		if (translations.hasOwnProperty(locale) && translations[locale].hasOwnProperty(key)) {
-			return true;
-		}
-
-		if (scope == 'strict') {
-			return false;
-		}
-
-		// check any localized translations
-		var localeRegional = locale.split('-');
-
-		if (localeRegional.length > 1 && translations.hasOwnProperty(localeRegional[0]) && translations[localeRegional[0]].hasOwnProperty(key)) {
-			return true;
-		}
-
-		if (scope == 'locale') {
-			return false;
-		}
-
-		// check if a fallback locale exists
-		if (translations.hasOwnProperty(fallback) && translations[fallback].hasOwnProperty(key)) {
-			return true;
-		}
-
-		// key does not exist in the store
-		return false;
-	};
-
-	// set fallback locale
-	var setFallbackLocale = function setFallbackLocale(locale) {
-		store.dispatch({
-			type: moduleName + '/setFallbackLocale',
-			locale: locale
-		});
-	};
-
-	// set the current locale
-	var setLocale = function setLocale(locale) {
-		store.dispatch({
-			type: moduleName + '/setLocale',
-			locale: locale
-		});
-	};
-
-	// get the current locale
-	var getLocale = function getLocale() {
-		return store.state[moduleName].locale;
-	};
-
-	// get all available locales
-	var getLocales = function getLocales() {
-		return Object.keys(store.state[moduleName].translations);
-	};
-
-	// add predefined translations to the store (keeping existing information)
-	var addLocale = function addLocale(locale, translations) {
-		return store.dispatch({
-			type: moduleName + '/addLocale',
-			locale: locale,
-			translations: translations
-		});
-	};
-
-	// replace all locale information in the store
-	var replaceLocale = function replaceLocale(locale, translations) {
-		return store.dispatch({
-			type: moduleName + '/replaceLocale',
-			locale: locale,
-			translations: translations
-		});
-	};
-
-	// remove the givne locale from the store
-	var removeLocale = function removeLocale(locale) {
-		if (store.state[moduleName].translations.hasOwnProperty(locale)) {
-			store.dispatch({
-				type: moduleName + '/removeLocale',
-				locale: locale
-			});
-		}
-	};
-
-	// we are phasing out the exists function
-	var phaseOutExistsFn = function phaseOutExistsFn(locale) {
-		console.warn('i18n: $i18n.exists is depreceated. Please use $i18n.localeExists instead. It provides exatly the same functionality.');
-		return checkLocaleExists(locale);
-	};
-
-	// check if the given locale is already loaded
-	var checkLocaleExists = function checkLocaleExists(locale) {
-		return store.state[moduleName].translations.hasOwnProperty(locale);
-	};
-
-	// register vue prototype methods
-	Vue.prototype.$i18n = {
-		locale: getLocale,
-		locales: getLocales,
-		set: setLocale,
-		add: addLocale,
-		replace: replaceLocale,
-		remove: removeLocale,
-		fallback: setFallbackLocale,
-		localeExists: checkLocaleExists,
-		keyExists: checkKeyExists,
-
-		translate: translate,
-		translateIn: translateInLanguage,
-
-		exists: phaseOutExistsFn
-	};
-
-	// register global methods
-	Vue.i18n = {
-		locale: getLocale,
-		locales: getLocales,
-		set: setLocale,
-		add: addLocale,
-		replace: replaceLocale,
-		remove: removeLocale,
-		fallback: setFallbackLocale,
-		translate: translate,
-		translateIn: translateInLanguage,
-		localeExists: checkLocaleExists,
-		keyExists: checkKeyExists,
-
-		exists: phaseOutExistsFn
-	};
-
-	// register the translation function on the vue instance directly
-	Vue.prototype.$t = translate;
-
-	// register the specific language translation function on the vue instance directly
-	Vue.prototype.$tlang = translateInLanguage;
-
-	// register a filter function for translations
-	Vue.filter('translate', translate);
-};
-
-// renderFn will initialize a function to render the variable substitutions in
-// the translation string. identifiers specify the tags will be used to find
-// variable substitutions, i.e. {test} or {{test}}, note that we are using a
-// closure to avoid recompilation of the regular expression to match tags on
-// every render cycle.
-var renderFn = function renderFn(identifiers) {
-
-	if (identifiers == null || identifiers.length != 2) {
-		console.warn('i18n: You must specify the start and end character identifying variable substitutions');
-	}
-
-	// construct a regular expression ot find variable substitutions, i.e. {test}
-	var matcher = new RegExp('' + identifiers[0] + '\\w+' + identifiers[1], 'g');
-
-	// define the replacement function
-	var replace = function replace(translation, replacements) {
-		var warn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-
-		// check if the object has a replace property
-		if (!translation.replace) {
-			return translation;
-		}
-
-		return translation.replace(matcher, function (placeholder) {
-
-			// remove the identifiers (can be set on the module level)
-			var key = placeholder.replace(identifiers[0], '').replace(identifiers[1], '');
-
-			if (replacements[key] !== undefined) {
-				return replacements[key];
-			}
-
-			// warn user that the placeholder has not been found
-			if (warn === true) {
-				console.group ? console.group('i18n: Not all placeholders found') : console.warn('i18n: Not all placeholders found');
-				console.warn('Text:', translation);
-				console.warn('Placeholder:', placeholder);
-				if (console.groupEnd) {
-					console.groupEnd();
-				}
-			}
-
-			// return the original placeholder
-			return placeholder;
-		});
-	};
-
-	// the render function will replace variable substitutions and prepare the
-	// translations for rendering
-	var render = function render(locale, translation) {
-		var replacements = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-		var pluralization = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-		// get the type of the property
-		var objType = typeof translation === 'undefined' ? 'undefined' : _typeof(translation);
-		var pluralizationType = typeof pluralization === 'undefined' ? 'undefined' : _typeof(pluralization);
-
-		var resolvePlaceholders = function resolvePlaceholders() {
-
-			if (isArray$1(translation)) {
-
-				// replace the placeholder elements in all sub-items
-				return translation.map(function (item) {
-					return replace(item, replacements, false);
-				});
-			} else if (objType === 'string') {
-				return replace(translation, replacements, true);
-			}
-		};
-
-		// return translation item directly
-		if (pluralization === null) {
-			return resolvePlaceholders();
-		}
-
-		// check if pluralization value is countable
-		if (pluralizationType !== 'number') {
-			console.warn('i18n: pluralization is not a number');
-			return resolvePlaceholders();
-		}
-
-		// --- handle pluralizations ---
-
-		// replace all placeholders
-		var resolvedTranslation = resolvePlaceholders();
-
-		// initialize pluralizations
-		var pluralizations = null;
-
-		// if translations are already an array and have more than one entry,
-		// we will not perform a split operation on :::
-		if (isArray$1(resolvedTranslation) && resolvedTranslation.length > 0) {
-			pluralizations = resolvedTranslation;
-		} else {
-			// split translation strings by ::: to find create the pluralization array
-			pluralizations = resolvedTranslation.split(':::');
-		}
-
-		// determine the pluralization version to use by locale
-		var index = plurals.getTranslationIndex(locale, pluralization);
-
-		// check if the specified index is present in the pluralization
-		if (typeof pluralizations[index] === 'undefined') {
-			console.warn('i18n: pluralization not provided in locale', translation, locale, index);
-
-			// return the first element of the pluralization by default
-			return pluralizations[0].trim();
-		}
-
-		// return the requested item from the pluralizations
-		return pluralizations[index].trim();
-	};
-
-	// return the render function to the caller
-	return render;
-};
-
-// check if the given object is an array
-function isArray$1(obj) {
-	return !!obj && Array === obj.constructor;
-}
-
-// import the vuex module for localization
-// import the corresponding plugin for vue
-// export both modules as one file
-var index = {
-	store: i18nVuexModule,
-	plugin: VuexI18nPlugin
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (index);
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    "en": {
-        "Home": "Home",
-        "Admin": "Admin",
-        "Profile": "Profile",
-        "Search": "Search",
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
-        },
-        "pagination": {
-            "previous": "&laquo; Previous",
-            "next": "Next &raquo;"
-        },
-        "auth": {
-            "failed": "These credentials do not match our records.",
-            "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-        },
-        "validation": {
-            "accepted": "The {attribute} must be accepted.",
-            "active_url": "The {attribute} is not a valid URL.",
-            "after": "The {attribute} must be a date after {date}.",
-            "after_or_equal": "The {attribute} must be a date after or equal to {date}.",
-            "alpha": "The {attribute} may only contain letters.",
-            "alpha_dash": "The {attribute} may only contain letters, numbers, and dashes.",
-            "alpha_num": "The {attribute} may only contain letters and numbers.",
-            "array": "The {attribute} must be an array.",
-            "before": "The {attribute} must be a date before {date}.",
-            "before_or_equal": "The {attribute} must be a date before or equal to {date}.",
-            "between": {
-                "numeric": "The {attribute} must be between {min} and {max}.",
-                "file": "The {attribute} must be between {min} and {max} kilobytes.",
-                "string": "The {attribute} must be between {min} and {max} characters.",
-                "array": "The {attribute} must have between {min} and {max} items."
-            },
-            "boolean": "The {attribute} field must be true or false.",
-            "confirmed": "The {attribute} confirmation does not match.",
-            "date": "The {attribute} is not a valid date.",
-            "date_format": "The {attribute} does not match the format {format}.",
-            "different": "The {attribute} and {other} must be different.",
-            "digits": "The {attribute} must be {digits} digits.",
-            "digits_between": "The {attribute} must be between {min} and {max} digits.",
-            "dimensions": "The {attribute} has invalid image dimensions.",
-            "distinct": "The {attribute} field has a duplicate value.",
-            "email": "The {attribute} must be a valid email address.",
-            "exists": "The selected {attribute} is invalid.",
-            "file": "The {attribute} must be a file.",
-            "filled": "The {attribute} field must have a value.",
-            "image": "The {attribute} must be an image.",
-            "in": "The selected {attribute} is invalid.",
-            "in_array": "The {attribute} field does not exist in {other}.",
-            "integer": "The {attribute} must be an integer.",
-            "ip": "The {attribute} must be a valid IP address.",
-            "ipv4": "The {attribute} must be a valid IPv4 address.",
-            "ipv6": "The {attribute} must be a valid IPv6 address.",
-            "json": "The {attribute} must be a valid JSON string.",
-            "max": {
-                "numeric": "The {attribute} may not be greater than {max}.",
-                "file": "The {attribute} may not be greater than {max} kilobytes.",
-                "string": "The {attribute} may not be greater than {max} characters.",
-                "array": "The {attribute} may not have more than {max} items."
-            },
-            "mimes": "The {attribute} must be a file of type: {values}.",
-            "mimetypes": "The {attribute} must be a file of type: {values}.",
-            "min": {
-                "numeric": "The {attribute} must be at least {min}.",
-                "file": "The {attribute} must be at least {min} kilobytes.",
-                "string": "The {attribute} must be at least {min} characters.",
-                "array": "The {attribute} must have at least {min} items."
-            },
-            "not_in": "The selected {attribute} is invalid.",
-            "numeric": "The {attribute} must be a number.",
-            "present": "The {attribute} field must be present.",
-            "regex": "The {attribute} format is invalid.",
-            "required": "The {attribute} field is required.",
-            "required_if": "The {attribute} field is required when {other} is {value}.",
-            "required_unless": "The {attribute} field is required unless {other} is in {values}.",
-            "required_with": "The {attribute} field is required when {values} is present.",
-            "required_with_all": "The {attribute} field is required when {values} is present.",
-            "required_without": "The {attribute} field is required when {values} is not present.",
-            "required_without_all": "The {attribute} field is required when none of {values} are present.",
-            "same": "The {attribute} and {other} must match.",
-            "size": {
-                "numeric": "The {attribute} must be {size}.",
-                "file": "The {attribute} must be {size} kilobytes.",
-                "string": "The {attribute} must be {size} characters.",
-                "array": "The {attribute} must contain {size} items."
-            },
-            "string": "The {attribute} must be a string.",
-            "timezone": "The {attribute} must be a valid zone.",
-            "unique": "The {attribute} has already been taken.",
-            "uploaded": "The {attribute} failed to upload.",
-            "url": "The {attribute} format is invalid.",
-            "custom": {
-                "attribute-name": {
-                    "rule-name": "custom-message"
-                }
-            },
-            "attributes": []
-        }
-    }
-});
-
-/***/ }),
-/* 20 */
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(21);
-window.Popper = __webpack_require__(7).default;
+window._ = __webpack_require__(17);
+window.Popper = __webpack_require__(3).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -15890,9 +13894,9 @@ window.Popper = __webpack_require__(7).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(8);
+  window.$ = window.jQuery = __webpack_require__(4);
 
-  __webpack_require__(23);
+  __webpack_require__(19);
 } catch (e) {}
 
 /**
@@ -15901,7 +13905,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(24);
+window.axios = __webpack_require__(20);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -15937,7 +13941,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 21 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33039,10 +31043,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(22)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(18)(module)))
 
 /***/ }),
-/* 22 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -33070,7 +31074,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 23 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -33079,7 +31083,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(8), __webpack_require__(7)) :
+	 true ? factory(exports, __webpack_require__(4), __webpack_require__(3)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -36970,22 +34974,22 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 
 /***/ }),
-/* 24 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(25);
+module.exports = __webpack_require__(21);
 
 /***/ }),
-/* 25 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
-var bind = __webpack_require__(9);
-var Axios = __webpack_require__(27);
-var defaults = __webpack_require__(6);
+var utils = __webpack_require__(0);
+var bind = __webpack_require__(5);
+var Axios = __webpack_require__(23);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -37018,15 +35022,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(14);
-axios.CancelToken = __webpack_require__(41);
-axios.isCancel = __webpack_require__(13);
+axios.Cancel = __webpack_require__(10);
+axios.CancelToken = __webpack_require__(37);
+axios.isCancel = __webpack_require__(9);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(42);
+axios.spread = __webpack_require__(38);
 
 module.exports = axios;
 
@@ -37035,7 +35039,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 26 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /*!
@@ -37062,16 +35066,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 27 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(6);
-var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(36);
-var dispatchRequest = __webpack_require__(37);
+var defaults = __webpack_require__(2);
+var utils = __webpack_require__(0);
+var InterceptorManager = __webpack_require__(32);
+var dispatchRequest = __webpack_require__(33);
 
 /**
  * Create a new instance of Axios
@@ -37148,13 +35152,13 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 28 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(0);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -37167,13 +35171,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 29 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(12);
+var createError = __webpack_require__(8);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -37200,7 +35204,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 30 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37228,13 +35232,13 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 31 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(0);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -37301,13 +35305,13 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 32 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(0);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -37361,13 +35365,13 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 33 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(0);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -37436,7 +35440,7 @@ module.exports = (
 
 
 /***/ }),
-/* 34 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37479,13 +35483,13 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 35 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(0);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -37539,13 +35543,13 @@ module.exports = (
 
 
 /***/ }),
-/* 36 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(0);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -37598,18 +35602,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 37 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
-var transformData = __webpack_require__(38);
-var isCancel = __webpack_require__(13);
-var defaults = __webpack_require__(6);
-var isAbsoluteURL = __webpack_require__(39);
-var combineURLs = __webpack_require__(40);
+var utils = __webpack_require__(0);
+var transformData = __webpack_require__(34);
+var isCancel = __webpack_require__(9);
+var defaults = __webpack_require__(2);
+var isAbsoluteURL = __webpack_require__(35);
+var combineURLs = __webpack_require__(36);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -37691,13 +35695,13 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 38 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(0);
 
 /**
  * Transform the data for a request or a response
@@ -37718,7 +35722,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 39 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37739,7 +35743,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 40 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37760,13 +35764,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 41 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(14);
+var Cancel = __webpack_require__(10);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -37824,7 +35828,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 42 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37858,7 +35862,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 43 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48821,10 +46825,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(44).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(40).setImmediate))
 
 /***/ }),
-/* 44 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
@@ -48877,7 +46881,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(45);
+__webpack_require__(41);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -48888,10 +46892,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 45 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -49081,305 +47085,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
 
 /***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(47)
-/* template */
-var __vue_template__ = __webpack_require__(48)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/GlobalMenu.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a6589fce", Component.options)
-  } else {
-    hotAPI.reload("data-v-a6589fce", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'links'],
-    data: function data() {
-        return {
-            'window': window
-        };
-    },
-
-    methods: {
-        logoutEvent: function logoutEvent(event) {
-            console.log('test');
-            event.preventDefault();
-            axios.post(route('logout')).then(function (response) {
-                window.location = route('home');
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" },
-    [
-      _c(
-        "a",
-        { staticClass: "navbar-brand", attrs: { href: _vm.route("home") } },
-        [
-          _c("i", { staticClass: "fas fa-comment" }),
-          _vm._v("\n        " + _vm._s(_vm.$t("SkitchBB")) + "\n    ")
-        ]
-      ),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "collapse navbar-collapse", attrs: { id: "navbarNav" } },
-        [
-          _c("ul", { staticClass: "navbar-nav" }, [
-            _c("li", { staticClass: "nav-item active" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link", attrs: { href: _vm.route("home") } },
-                [_vm._v(_vm._s(_vm.$t("Home")))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link", attrs: { href: _vm.route("feed") } },
-                [_vm._v(_vm._s(_vm.$t("Post Feed")))]
-              )
-            ]),
-            _vm._v(" "),
-            _vm.user
-              ? _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: {
-                        href: _vm.route("users.show", { name: _vm.user.name })
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("Profile")))]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.user && _vm.user.admin
-              ? _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: _vm.route("home") }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("Admin")))]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.user
-              ? _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: _vm.route("login") }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("Login")))]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.user
-              ? _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: _vm.route("register") }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("Register")))]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.user
-              ? _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "#" },
-                      on: { click: _vm.logoutEvent }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("Logout")))]
-                  )
-                ])
-              : _vm._e()
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("form", { staticClass: "form-inline justify-content-end" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "search",
-              placeholder: _vm.$t("Search"),
-              "aria-label": _vm.$t("Search")
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(1)
-        ])
-      ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarNav",
-          "aria-controls": "navbarNav",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_c("i", { staticClass: "fas fa-search" })]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a6589fce", module.exports)
-  }
-}
-
-/***/ }),
-/* 49 */
+/* 42 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
