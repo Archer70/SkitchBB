@@ -150,7 +150,6 @@ return [
         /*
          * Package Service Providers...
          */
-        MartinLindhe\VueInternationalizationGenerator\GeneratorProvider::class,
 
         /*
          * Application Service Providers...
