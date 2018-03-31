@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
     @foreach($categories as $category)
-        <div class="card my-4">
+        <div class="card mb-4">
             <div class="card-header">
                 {{ $category->title }}
                 @if (!empty($category->description))
@@ -22,7 +21,6 @@
             </div>
         </div>
     @endforeach
-    </div>
 @endsection
 
 @section('footer')

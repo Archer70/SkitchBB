@@ -68,10 +68,13 @@
                 </div>
             </form>
         </div>
-        
-        @yield('content')
 
-        @yield('footer')
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col">@yield('content')</div>
+                <div class="col-4">@component('components.sidebar') @endcomponent</div>
+            </div>
+        </div>
     </div>
     <!-- Scripts -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
