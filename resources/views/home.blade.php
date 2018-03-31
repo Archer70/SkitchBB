@@ -24,3 +24,7 @@
     @endforeach
     </div>
 @endsection
+
+@section('footer')
+    test footer
+@endsection

@@ -70,15 +70,11 @@
         </div>
         
         @yield('content')
+
+        @yield('footer')
     </div>
     <!-- Scripts -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    @yield('components')
-    <script>
-        var app = new Vue({
-            el: '#app',
-        });
-    </script>
 </body>
 </html>
