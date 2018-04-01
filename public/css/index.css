@@ -1,7 +1,8 @@
 /* Note to developers or anyone bored to read this, colors are kinda PH */
 /* Index;
     1. Generic Rules
-    1.2. NavBar
+        1.2. NavBar
+        1.3. Sidebar
     2. BoardIndex
     3. MessageIndex
     4. Topic
@@ -23,11 +24,17 @@ html {
     height: 100%;
     width: 100%;
 }
-body {
-
-}
+body {}
 /* This requires some discussion between my paws */
 #app {}
+#main_content,
+#header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 90%;
+}
 /* 1.2. NavBar */
 nav {
     background: #0a2463;
@@ -54,10 +61,30 @@ nav ul li a:focus, nav ul li a:hover {
     text-decoration: none;
     transition: all 0.5s;
 }
+/* 1.3. Sidebar */
+#sidebar {
+    width: 25%;
+}
+.side_header {
+    background: #FFF;
+    border-top: 1px solid orange;
+    border-bottom: 1px solid red;
+}
+.side_header h4 {
+    padding: 5px;
+}
+.side_container {
+    background: #FAFAFA;
+    padding: 5px;
+}
+.side_container ul {
+    list-style: none;
+}
+.side_container ul li {
+    padding: 0 0 0 10px;
+}
 /* 2. BoardIndex */
 #cat_container {
-    display: inline-block;
-    padding: 10px 0 10px 0;
     width: 70%;
 }
 .cat_header {

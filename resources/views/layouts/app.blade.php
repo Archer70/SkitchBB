@@ -46,11 +46,13 @@
                 @endif
             </ul>
         </nav>
-        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="fas fa-comment"></i>
-                {{ __('SkitchBB') }}
-            </a>
+        <div id="header">
+            <h2>
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <i class="fas fa-comment"></i>
+                    {{ __('SkitchBB') }}
+                </a>
+            </h2>
             <form class="form-inline justify-content-end">
                 <div class="input-group">
                     <input class="form-control" type="search" placeholder="{{ __('Search') }}" aria-label="{{ __('Search') }}">
@@ -62,20 +64,12 @@
                 </div>
             </form>
         </div>
-
-    <!-- No more huge stats... none cares! -->
-        @yield('sidebar')
-    <!-- Load the thing -->
-        @yield('content')
-    </div>
+        <div id="main_content">
+            @component('components.sidebar') @endcomponent
+            @yield('content')
+        </div>
     <!-- Scripts -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    @yield('components')
-    <script>
-        var app = new Vue({
-            el: '#app',
-        });
-    </script>
 </body>
 </html>

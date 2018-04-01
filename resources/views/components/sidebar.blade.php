@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('sidebar')
+<div id="sidebar">
     <div class="side_header">
         <h4>(PH) Sidebar Header</h4>
     </div>
@@ -12,4 +10,6 @@
             <li>Post: X</li>
         </ul>
     </div>
-@endsection
+</div>
+
+@yield('sidebar')
