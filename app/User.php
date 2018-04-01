@@ -10,16 +10,6 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function avatarUrl()
-    {
-        if (!empty($this->avatar_url)) {
-            return $this->avatar_url;
-        }
-
-        $avatar = new LetterAvatar($this->name, 'square', 128);
-        return $avatar->__toString();
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -37,4 +27,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function group()
+    {
+        return $this->belongsTo('App\\Group');
+    }
+
+    public function avatarUrl()
+    {
+        if (!empty($this->avatar_url)) {
+            return $this->avatar_url;
+        }
+
+        $avatar = new LetterAvatar($this->name, 'square', 128);
+        return $avatar->__toString();
+    }
 }
