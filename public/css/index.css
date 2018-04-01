@@ -1,0 +1,74 @@
+/* Note to developers or anyone bored to read this, colors are kinda PH */
+/* Index;
+    1. Generic Rules
+    1.2. NavBar
+    2. BoardIndex
+    3. MessageIndex
+    4. Topic
+    5. Profile
+    6. <TBD>
+*/
+
+/* 1. Generic Rules */
+/* Lets start with very basic rule... unless stated you are nothing! */
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-family: 'Times New Roman', Times, serif; /* Because why not? */
+    background: #005AA7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #FFFDE4, #005AA7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100%;
+    width: 100%;
+}
+body {
+
+}
+/* This requires some discussion between my paws */
+#app {}
+/* 1.2. NavBar */
+nav {
+    background: #0a2463;
+    display: block;
+    width: 100%;
+}
+nav ul {
+    list-style: none;
+    width: 90%;
+    margin: 0 auto;
+}
+nav ul li {
+    display: inline-block;
+    padding: 15px 0;
+}
+nav ul li a {
+    padding: 15px 7px;
+    color: #FFF;
+    text-decoration: none;
+}
+nav ul li a:focus, nav ul li a:hover {
+    background: #003f74;
+    color: #F2F2F2;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+/* 2. BoardIndex */
+#cat_container {
+    display: inline-block;
+    padding: 10px 0 10px 0;
+    width: 70%;
+}
+.cat_header {
+    background: #e2e2e2;
+    padding: 5px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.cat_container {
+    background: #819FF7;
+    padding: 5px;
+    border-top: 1px solid #FFF;
+    line-height: 1.5em;
+}
