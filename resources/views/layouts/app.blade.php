@@ -14,9 +14,6 @@
         window.csrf_token = '{!! csrf_token() !!}';
     </script>
 
-    <!-- Routes -->
-    @routes()
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

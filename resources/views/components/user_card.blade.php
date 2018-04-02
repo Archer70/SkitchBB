@@ -5,7 +5,7 @@
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <strong>{{ __('Group:') }} </strong> N/A
+            <strong>{{ __('Group:') }} </strong> {{ $user->group->name }}
         </li>
         <li class="list-group-item">
             <strong>{{ __('Title:') }} </strong> {{ $user->title }}
