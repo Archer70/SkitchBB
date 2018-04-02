@@ -25,6 +25,7 @@ class CreateGroupsTable extends Migration
         {
             $table->unsignedInteger('group_id')->after('id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups');
+            $table->dropColumn(['admin']);
         });
     }
 
@@ -37,6 +38,7 @@ class CreateGroupsTable extends Migration
     {
         Schema::table('users', function(Blueprint $table)
         {
+            $table->boolean('admin')->default(false);
             $table->dropForeign(['group_id']);
             $table->dropColumn('group_id');
         });

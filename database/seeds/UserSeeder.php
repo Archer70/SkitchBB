@@ -6,6 +6,8 @@ use App\User;
 
 class UserSeeder extends Seeder
 {
+    const ADMIN_GROUP = 2;
+
     /**
      * Run the database seeds.
      *
@@ -14,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->admin = true;
+        $user->group_id = self::ADMIN_GROUP;
         $user->name = 'Admin';
         $user->email = 'admin@skitchbb.net';
         $user->password = Hash::make('admin');

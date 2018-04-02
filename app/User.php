@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ADMIN_GROUP = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,5 +43,10 @@ class User extends Authenticatable
 
         $avatar = new LetterAvatar($this->name, 'square', 128);
         return $avatar->__toString();
+    }
+
+    public function isAdmin()
+    {
+        return $this->group->id === self::ADMIN_GROUP;
     }
 }
