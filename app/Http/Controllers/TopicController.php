@@ -44,10 +44,11 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $board = Board::find($request->board_id);
+        $user = $request->user();
 
         $topic = new Topic();
         $topic->board_id = $board->id;
-        $topic->user_id = $request->user()->id;
+        $topic->user_id = $user->id;
         $topic->title = $request->title;
         $topic->save();
 
@@ -62,6 +63,9 @@ class TopicController extends Controller
         $topic->first_post_id = $post->id;
         $topic->last_post_id = $post->id;
         $topic->save();
+
+        $user->post_count++;
+        $user->save();
 
         return Redirect::route('topic.show', ['slug' => $topic->slug]);
     }

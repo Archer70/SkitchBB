@@ -43,15 +43,19 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $topic = Topic::find($request->topic_id);
+        $user = $request->user();
 
         $post = new Post();
         $post->topic_id = $request->topic_id;
         $post->category_id = $topic->board->category->id;
         $post->board_id = $topic->board_id;
-        $post->user_id = $request->user()->id;
+        $post->user_id = $user->id;
         $post->approved = 1;
         $post->body = $request->body;
         $post->save();
+
+        $user->post_count++;
+        $user->save();
 
 
         if ($request->ajax()) {
