@@ -46,7 +46,6 @@ class TopicController extends Controller
         $board = Board::find($request->board_id);
 
         $topic = new Topic();
-        $topic->slug = str_slug($request->title);
         $topic->board_id = $board->id;
         $topic->user_id = $request->user()->id;
         $topic->title = $request->title;
