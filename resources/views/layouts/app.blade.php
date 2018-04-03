@@ -19,10 +19,9 @@
 </head>
 <body>
     <div id="app">
-        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="fas fa-comment"></i>
-                {{ __('SkitchBB') }}
+                <img src="{{ asset('images/logo.png') }}"  style="max-height: 24px;"/>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
