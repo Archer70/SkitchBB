@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -56,9 +57,10 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($name)
     {
-        //
+        $user = User::where('name', $name)->first();
+        return view('profile_edit', ['user' => $user]);
     }
 
     /**
@@ -70,7 +72,19 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:users,id,' . $user->id,
+            'email' => 'required|email|unique:users,id,'  . $user->id,
+            'avatar_url' => 'nullable|url'
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->title = $request->title;
+        $user->avatar_url = $request->avatar_url;
+        $user->save();
+
+        return Redirect::route('users.show', ['name' => $user->name]);
     }
 
     /**

@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/users/{name}', 'UserController@show')->name('users.show');
+Route::get('/users/{name}/edit', 'UserController@edit')->name('users.edit');
+Route::post('/users/{user}/update', 'UserController@update')->name('users.update');
 
 Route::get('/boards/{slug}', 'BoardController@show')->name('board.show');
 Route::get('/boards/{slug}/topics/create', 'TopicController@create')->name('topics.create');
