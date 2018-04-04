@@ -10,6 +10,7 @@
         @endif
     </div>
     <div class="card-body">
+        @component('components.user_card', ['user' => $post->user, 'small' => true]) @endcomponent
         {{ $post->body }}
     </div>
 </div>

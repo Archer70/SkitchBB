@@ -10001,3 +10001,8 @@ a.text-dark:focus {
   margin-right: 20px;
 }
 
+.user-card-small {
+  max-width: 120px;
+  margin-right: 20px;
+}
+
