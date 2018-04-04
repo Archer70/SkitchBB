@@ -28,29 +28,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('feed') }}">{{ __('Post Feed') }}</a>
-                    </li>
-                    @if (Auth::user())
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.show', ['name' => Auth::user()->name]) }}">{{ __('Profile') }}</a>
+                    @foreach (\App\Utils\Menu::buttons() as $id => $button)
+                        <li class="nav-item {{$button['current'] ? 'active border-bottom border-primary' : ''}}">
+                            @if (isset($button['type']) && $button['type'] == 'form')
+                                <form method="post" action="{{ $button['href'] }}" id="{{ $id }}">
+                                    <a class="nav-link" onclick="document.getElementById('{{ $id }}').submit()" href="#">{{ $button['title'] }}</a>
+                                </form>
+                            @else
+                                <a class="nav-link" href="{{ $button['href'] }}">{{ $button['title'] }}</a>
+                            @endif
                         </li>
-                        <li class="nav-item">
-                            <form id="logout" method="post" action="{{ route('logout') }}">
-                                <a class="nav-link" onclick="document.getElementById('logout').submit()" href="#">{{ __('Logout') }}</a>
-                            </form>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
+                    @endforeach
                 </ul>
             </div>
             <form class="form-inline justify-content-end">
