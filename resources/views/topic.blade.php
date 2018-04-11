@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="m-4">{{ $topic->title }}</h2>
+    <h2>{{ $topic->title }}</h2>
     @foreach($topic->posts as $count => $post)
         @component('components.post', ['count' => $count+1, 'post' => $post, 'showTitle' => false]) @endcomponent
     @endforeach
 
-    <div class="card m-4">
+    <div class="card mb-4">
         <div class="card-body">
             <form method="post" action="{{ route('posts.store') }}">
                 <div class="form-group">

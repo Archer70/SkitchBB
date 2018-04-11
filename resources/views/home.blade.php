@@ -6,7 +6,7 @@
             <div class="card-header">
                 {{ $category->title }}
                 @if (!empty($category->description))
-                    - <span class="text-secondary">{{ $category->description }}</span>
+                    - <span class="text-muted">{{ $category->description }}</span>
                 @endif
             </div>
             <div class="card-body">

@@ -1,16 +1,22 @@
-<div class="card m-4">
-    <div class="card-header">
-        <div class="justify-content-end float-right">
-            <span>{{ $post->updated_at }}</span>
+    <div class="card mb-4 post">
+        <div class="card-header">
+            <div class="justify-content-end float-right">
+                <span>{{ $post->updated_at }}</span>
+            </div>
+            @if($showTitle)
+                <a href="{{  route('topic.show', ['slug' => $post->topic->slug]) }}">{{ $post->topic->title }}</a>
+            @else
+                <a href="{{  route('topic.show', ['slug' => $post->topic->slug]) }}">#{{ $count }}</a>
+            @endif
         </div>
-        @if($showTitle)
-            <a href="{{  route('topic.show', ['slug' => $post->topic->slug]) }}">{{ $post->topic->title }}</a>
-        @else
-            <a href="{{  route('topic.show', ['slug' => $post->topic->slug]) }}">#{{ $count }}</a>
-        @endif
+        <div class="card-body post-area">
+            <div class="row">
+                <div class="col-3">
+                    @component('components.user_card', ['user' => $post->user, 'small' => true]) @endcomponent
+                </div>
+                <div class="col-9">
+                    {!! Markdown::bootstrapConvert(Markdown::render($post->body)) !!}
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        @component('components.user_card', ['user' => $post->user, 'small' => true]) @endcomponent
-        {{ $post->body }}
-    </div>
-</div>

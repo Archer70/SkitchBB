@@ -55,8 +55,8 @@
 
         <div class="container">
             <div class="row mt-4">
-                <div class="col">@yield('content')</div>
-                <div class="col-4">@component('components.sidebar') @endcomponent</div>
+                <div class="col-md-8">@yield('content')</div>
+                <div class="col-md-4">@component('components.sidebar') @endcomponent</div>
             </div>
         </div>
     </div>

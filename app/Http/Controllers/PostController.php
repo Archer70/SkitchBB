@@ -51,7 +51,7 @@ class PostController extends Controller
         $post->board_id = $topic->board_id;
         $post->user_id = $user->id;
         $post->approved = 1;
-        $post->body = $request->body;
+        $post->body = $_POST['body'];
         $post->save();
 
         $user->post_count++;
