@@ -15,7 +15,7 @@
             {{ $user->title }}
         </li>
         <li class="list-group-item">
-            {{ __('Posts:') }} {{ $user->post_count }}
+            @lang('Posts:') {{ $user->post_count }}
         </li>
     </ul>
 </div>

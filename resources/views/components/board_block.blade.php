@@ -12,7 +12,7 @@
                     <span>{{ $board->lastPost()->created_at }}</span>
                 </div>
                 <span>
-                    {{ __('Last post in') }}
+                    @lang('Last post in')
                     <a href="{{ route('topic.show', ['slug' => $board->lastPost()->topic->slug]) }}">
                         {{ $board->lastPost()->topic->title }}
                     </a>

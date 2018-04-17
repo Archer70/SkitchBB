@@ -7,7 +7,7 @@
                 {{ $board->title }}
                 @if(Auth::user())
                     <a class="btn btn-primary float-right" href="{{ route('topics.create', ['slug' => $board->slug]) }}">
-                        {{ __('New Topic') }}
+                        @lang('New Topic')
                     </a>
                 @endif
             </h5>
@@ -23,7 +23,7 @@
             @endforeach
 
             @if(!$board->topics)
-                <li class="list-group-item text-secondary">{{ __('No topics to show!') }}</li>
+                <li class="list-group-item text-secondary">@lang('No topics to show!')</li>
             @endif
         </ul>
     </div>
