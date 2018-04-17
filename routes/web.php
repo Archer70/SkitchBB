@@ -23,6 +23,9 @@ Route::get('/users/{name}', 'UserController@show')->name('users.show');
 Route::get('/users/{name}/edit', 'UserController@edit')->name('users.edit');
 Route::post('/users/{user}/update', 'UserController@update')->name('users.update');
 
+Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+Route::post('/categories/store', 'CategoryController@store')->name('categories.store');
+
 Route::get('/boards/{slug}', 'BoardController@show')->name('board.show');
 Route::get('/boards/{slug}/topics/create', 'TopicController@create')->name('topics.create');
 Route::post('/boards/{slug}/topics/store', 'TopicController@store')->name('topics.store');
@@ -30,5 +33,4 @@ Route::post('/boards/{slug}/topics/store', 'TopicController@store')->name('topic
 Route::get('/topics/{slug}', 'TopicController@show')->name('topic.show');
 
 Route::post('/posts/store', 'PostController@store')->name('posts.store');
-
 Route::get('/posts/feed', 'PostController@feed')->name('feed');

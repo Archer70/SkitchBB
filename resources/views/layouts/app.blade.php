@@ -43,7 +43,7 @@
             </div>
             <form class="form-inline justify-content-end">
                 <div class="input-group">
-                    <input class="form-control" type="search" placeholder="@lang('Search') }}" aria-label="{{ __('Search')">
+                    <input class="form-control" type="search" placeholder="@lang('Search')" aria-label="search">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search"></i>
