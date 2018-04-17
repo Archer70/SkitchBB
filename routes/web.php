@@ -26,10 +26,12 @@ Route::post('/users/{user}/update', 'UserController@update')->name('users.update
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
 Route::post('/categories/store', 'CategoryController@store')->name('categories.store');
 
+Route::get('/categories/{category}/boards/create', 'BoardController@create')->name('boards.create');
+Route::post('/categories/{category}/boards/store', 'BoardController@store')->name('boards.store');
 Route::get('/boards/{slug}', 'BoardController@show')->name('board.show');
+
 Route::get('/boards/{slug}/topics/create', 'TopicController@create')->name('topics.create');
 Route::post('/boards/{slug}/topics/store', 'TopicController@store')->name('topics.store');
-
 Route::get('/topics/{slug}', 'TopicController@show')->name('topic.show');
 
 Route::post('/posts/store', 'PostController@store')->name('posts.store');

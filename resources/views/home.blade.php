@@ -4,6 +4,9 @@
     @foreach($categories as $category)
         <div class="card mb-4">
             <div class="card-header">
+                <a class="btn btn-primary btn-sm float-right" href="{{ route('boards.create', ['category' => $category]) }}">
+                    @lang('Create Board')
+                </a>
                 {{ $category->title }}
                 @if (!empty($category->description))
                     - <span class="text-muted">{{ $category->description }}</span>

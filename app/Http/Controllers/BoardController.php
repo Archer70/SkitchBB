@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Board;
+use App\Category;
+use Illuminate\Support\Facades\Redirect;
 
 class BoardController extends Controller
 {
@@ -20,22 +22,35 @@ class BoardController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param \App\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Category $category)
     {
-        //
+        return view('board_create', ['category' => $category]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param \App\Category $category
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Category $category, Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $board = new Board();
+        $board->title = $request->title;
+        $board->description = $request->description;
+        $board->category()->associate($category);
+        $board->save();
+
+        return Redirect::route('home');
     }
 
     /**
