@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>{{ $topic->title }}</h2>
+    @component('components.linktree', [
+        'items' => [
+            ['href' => route('home'), 'title' => __('Home')],
+            ['href' => route('board.show', ['slug' => $topic->board->slug]), 'title' => $topic->board->title],
+            ['title' => $topic->title]
+        ]
+    ]) @endcomponent
+
     @foreach($topic->posts as $count => $post)
         @component('components.post', ['count' => $count+1, 'post' => $post, 'showTitle' => false]) @endcomponent
     @endforeach

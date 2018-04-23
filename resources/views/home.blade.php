@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    @component('components.linktree', [
+        'items' => [
+            ['href' => route('home'), 'title' => __('Home')],
+        ]
+    ]) @endcomponent
     @foreach($categories as $category)
         <div class="card mb-4">
             <div class="card-header">

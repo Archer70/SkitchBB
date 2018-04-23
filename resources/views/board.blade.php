@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @component('components.linktree', [
+        'items' => [
+            ['href' => route('home'), 'title' => __('Home')],
+            ['title' => $board->title]
+        ]
+    ]) @endcomponent
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">

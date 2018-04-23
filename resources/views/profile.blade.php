@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @component('components.linktree', [
+        'items' => [
+            ['href' => route('home'), 'title' => __('Home')],
+            ['title' => __('Profile')]
+        ]
+    ]) @endcomponent
     <div class="card">
         <img id="profile-header" class="card-img-top" src="{{ asset('images/default-profile-header.png') }}" alt="">
         <div class="card-body">

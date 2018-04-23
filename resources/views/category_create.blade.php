@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @component('components.linktree', [
+        'items' => [
+            ['href' => route('home'), 'title' => __('Home')],
+            ['title' => __('Create Category')]
+        ]
+    ]) @endcomponent
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">@lang('Create Category')</h4>
