@@ -12,7 +12,7 @@
         <div class="card-body post-area">
             <div class="row">
                 <div class="col-3">
-                    @component('components.user_card', ['user' => $post->user, 'small' => true]) @endcomponent
+                    @component('components.user_card', ['user' => $post->user]) @endcomponent
                 </div>
                 <div class="col-9">
                     {!! Markdown::bootstrapConvert(Markdown::render($post->body)) !!}

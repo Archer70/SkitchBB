@@ -1,13 +1,13 @@
-<div class="card {{ isset($small) ? 'user-card-small' : 'user-card' }}">
-    <img class="card-img-top" src="{{ $user->avatarUrl() }}" alt="avatar">
+<div class="card">
     <div class="card-body">
-        <h5 class="card-title mb-0">
+        <img class="card-avatar" src="{{ $user->avatarUrl() }}" alt="">
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
             <a href="{{ route('users.show', ['name' => $user->name]) }}">
                 {{ $user->name }}
             </a>
-        </h5>
-    </div>
-    <ul class="list-group list-group-flush">
+        </li>
         <li class="list-group-item">
             {{ $user->group->name }}
         </li>
