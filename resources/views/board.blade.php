@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@if (Auth::user())
+    @section('page_actions')
+        <a class="btn btn-outline-primary btn-block" href="{{ route('topics.create', ['slug' => $board->slug]) }}">
+            @lang('New Topic')
+        </a>
+    @endsection
+@endif
+
 @section('content')
     @component('components.linktree', [
         'items' => [
@@ -11,11 +19,7 @@
         <div class="card-body">
             <h5 class="card-title">
                 {{ $board->title }}
-                @if(Auth::user())
-                    <a class="btn btn-primary float-right" href="{{ route('topics.create', ['slug' => $board->slug]) }}">
-                        @lang('New Topic')
-                    </a>
-                @endif
+
             </h5>
             @if($board->description)
                 <h6 class="card-subtitle">{{ $board->description }}</h6>

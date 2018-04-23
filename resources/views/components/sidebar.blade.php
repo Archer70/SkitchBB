@@ -1,9 +1,11 @@
-<div class="card mb-4">
-    <div class="card-body">
-        <h5 class="card-title">@lang('Quick Admin')</h5>
-        <a href="{{ route('categories.create') }}" class="btn btn-secondary btn-block text-light">@lang('Create Category')</a>
+@if (View::hasSection('page_actions'))
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">@lang('Page Actions')</h5>
+            @yield('page_actions')
+        </div>
     </div>
-</div>
+@endif
 
 <div class="card mb-4">
     <div class="card-body">

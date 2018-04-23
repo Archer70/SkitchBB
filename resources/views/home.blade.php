@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_actions')
+    <a href="{{ route('categories.create') }}" class="btn btn-outline-primary btn-block">@lang('Create Category')</a>
+@endsection
+
 @section('content')
     @component('components.linktree', [
         'items' => [
