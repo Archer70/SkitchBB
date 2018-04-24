@@ -42,7 +42,7 @@
                             type="text"
                             name="avatar_url"
                             placeholder="@lang('Avatar URL')"
-                            @if (!empty($user->avatarUrl())) value="{{ $user->avatarUrl() }}" @endif
+                            @if (!empty($user->avatarUrl()) && strpos($user->avatarUrl(), 'data:image') === false) value="{{ $user->avatarUrl() }}" @endif
                     >
                 </div>
                 @csrf
