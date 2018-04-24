@@ -33,6 +33,7 @@ Route::get('/boards/{slug}', 'BoardController@show')->name('board.show');
 Route::get('/boards/{slug}/topics/create', 'TopicController@create')->name('topics.create');
 Route::post('/boards/{slug}/topics/store', 'TopicController@store')->name('topics.store');
 Route::get('/topics/{slug}', 'TopicController@show')->name('topic.show');
+Route::post('/topics/{slug}', 'TopicController@destroy')->name('topics.destroy');
 
 Route::post('/posts/store', 'PostController@store')->name('posts.store');
 Route::get('/posts/feed', 'PostController@feed')->name('feed');

@@ -111,8 +111,13 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug, Request $request)
     {
-        //
+        $topic = Topic::where('slug', $slug)->first();
+        $redirectSlug = $topic->board->slug;
+        $topic->posts()->delete();
+        $topic->delete();
+
+        return Redirect::route('board.show', ['slug' => $redirectSlug]);
     }
 }

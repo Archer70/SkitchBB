@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('page_actions')
+    <form action="{{ route('topics.destroy', ['slug' => $topic->slug]) }}" method="post">
+        @csrf
+        <input type="submit" class="btn btn-outline-primary btn-block" value="@lang('Delete Topic')">
+    </form>
+@endsection
+
 @section('content')
     @component('components.linktree', [
         'items' => [
