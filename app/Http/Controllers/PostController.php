@@ -61,7 +61,7 @@ class PostController extends Controller
         if ($request->ajax()) {
             return response()->json($post);
         }
-        return Redirect::route('topic.show', ['slug' => $topic->slug]);
+        return Redirect::route('topics.show', ['slug' => $topic->slug]);
     }
 
     /**

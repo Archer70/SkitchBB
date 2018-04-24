@@ -28,11 +28,11 @@ Route::post('/categories/store', 'CategoryController@store')->name('categories.s
 
 Route::get('/categories/{category}/boards/create', 'BoardController@create')->name('boards.create');
 Route::post('/categories/{category}/boards/store', 'BoardController@store')->name('boards.store');
-Route::get('/boards/{slug}', 'BoardController@show')->name('board.show');
+Route::get('/boards/{slug}', 'BoardController@show')->name('boards.show');
 
 Route::get('/boards/{slug}/topics/create', 'TopicController@create')->name('topics.create');
 Route::post('/boards/{slug}/topics/store', 'TopicController@store')->name('topics.store');
-Route::get('/topics/{slug}', 'TopicController@show')->name('topic.show');
+Route::get('/topics/{slug}', 'TopicController@show')->name('topics.show');
 Route::post('/topics/{slug}', 'TopicController@destroy')->name('topics.destroy');
 
 Route::post('/posts/store', 'PostController@store')->name('posts.store');

@@ -11,7 +11,7 @@
     @component('components.linktree', [
         'items' => [
             ['href' => route('home'), 'title' => __('Home')],
-            ['href' => route('board.show', ['slug' => $topic->board->slug]), 'title' => $topic->board->title],
+            ['href' => route('boards.show', ['slug' => $topic->board->slug]), 'title' => $topic->board->title],
             ['title' => $topic->title]
         ]
     ]) @endcomponent

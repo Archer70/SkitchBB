@@ -67,7 +67,7 @@ class TopicController extends Controller
         $user->post_count++;
         $user->save();
 
-        return Redirect::route('topic.show', ['slug' => $topic->slug]);
+        return Redirect::route('topics.show', ['slug' => $topic->slug]);
     }
 
     /**
@@ -118,6 +118,6 @@ class TopicController extends Controller
         $topic->posts()->delete();
         $topic->delete();
 
-        return Redirect::route('board.show', ['slug' => $redirectSlug]);
+        return Redirect::route('boards.show', ['slug' => $redirectSlug]);
     }
 }

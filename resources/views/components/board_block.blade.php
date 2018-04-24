@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ route('board.show', ['slug' => $board->slug]) }}">{{ $board->title }}</a>
+                <a href="{{ route('boards.show', ['slug' => $board->slug]) }}">{{ $board->title }}</a>
             </h5>
             <h6 class="card-subtitle">{{ $board->description }}</h6>
         </div>
@@ -13,7 +13,7 @@
                 </div>
                 <span>
                     @lang('Last post in')
-                    <a href="{{ route('topic.show', ['slug' => $board->lastPost()->topic->slug]) }}">
+                    <a href="{{ route('topics.show', ['slug' => $board->lastPost()->topic->slug]) }}">
                         {{ $board->lastPost()->topic->title }}
                     </a>
                 </span>
