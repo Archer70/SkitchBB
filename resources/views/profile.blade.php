@@ -18,10 +18,8 @@
                     @component('components.user_card', ['user' => $user]) @endcomponent
                 </div>
                 <div class="col-9">
-                    <h4>Bio</h4>
-                    <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
-                    </p>
+                    <h4>@lang('Bio')</h4>
+                    {!! Markdown::render($user->bio) !!}
                 </div>
             </div>
         </div>

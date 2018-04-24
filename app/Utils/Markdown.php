@@ -35,9 +35,10 @@ class Markdown
         return '';
     }
 
-    public static function render($text)
+    public static function render($text, $bootstrapConvert=true)
     {
-        return self::transformer()->transform($text);
+        $markdown = self::transformer()->transform($text);
+        return $bootstrapConvert ? self::bootstrapConvert($markdown) : $markdown;
     }
 
     public static function bootstrapConvert($text)

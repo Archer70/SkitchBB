@@ -15,7 +15,7 @@
                     @component('components.user_card', ['user' => $post->user]) @endcomponent
                 </div>
                 <div class="col-9">
-                    {!! Markdown::bootstrapConvert(Markdown::render($post->body)) !!}
+                    {!! Markdown::render($post->body) !!}
                 </div>
             </div>
         </div>

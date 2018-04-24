@@ -82,6 +82,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->title = $request->title;
         $user->avatar_url = $request->avatar_url;
+        $user->bio = $request->bio;
         $user->save();
 
         return Redirect::route('users.show', ['name' => $user->name]);
