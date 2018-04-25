@@ -29,9 +29,8 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($slug)
+    public function create(Board $board)
     {
-        $board = Board::where('slug', $slug)->first();
         return view('topic_create', ['board' => $board]);
     }
 
@@ -41,9 +40,8 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Board $board, Request $request)
     {
-        $board = Board::find($request->board_id);
         $user = $request->user();
 
         $topic = new Topic();
@@ -67,7 +65,7 @@ class TopicController extends Controller
         $user->post_count++;
         $user->save();
 
-        return Redirect::route('topics.show', ['slug' => $topic->slug]);
+        return Redirect::route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
     }
 
     /**
@@ -76,9 +74,8 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Topic $topic)
     {
-        $topic = Topic::where('slug', $slug)->with('posts')->first();
         return view('topic', ['topic' => $topic]);
     }
 
@@ -111,13 +108,13 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug, Request $request)
+    public function destroy(Topic $topic)
     {
-        $topic = Topic::where('slug', $slug)->first();
+        $redirectBoard = $topic->board->id;
         $redirectSlug = $topic->board->slug;
         $topic->posts()->delete();
         $topic->delete();
 
-        return Redirect::route('boards.show', ['slug' => $redirectSlug]);
+        return Redirect::route('boards.show', ['board' => $redirectBoard, 'slug' => $redirectSlug]);
     }
 }

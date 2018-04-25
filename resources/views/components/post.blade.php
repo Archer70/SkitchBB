@@ -4,9 +4,9 @@
                 <span>{{ $post->updated_at }}</span>
             </div>
             @if($showTitle)
-                <a href="{{  route('topics.show', ['slug' => $post->topic->slug]) }}">{{ $post->topic->title }}</a>
+                <a href="{{  route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}">{{ $post->topic->title }}</a>
             @else
-                <a href="{{  route('topics.show', ['slug' => $post->topic->slug]) }}">#{{ $count }}</a>
+                <a href="{{  route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}">#{{ $count }}</a>
             @endif
         </div>
         <div class="card-body post-area">

@@ -2,7 +2,7 @@
 
 @if (Auth::user())
     @section('page_actions')
-        <a class="btn btn-outline-primary btn-block" href="{{ route('topics.create', ['slug' => $board->slug]) }}">
+        <a class="btn btn-outline-primary btn-block" href="{{ route('topics.create', ['board' => $board, 'slug' => $board->slug]) }}">
             @lang('New Topic')
         </a>
     @endsection

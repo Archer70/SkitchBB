@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_actions')
-    <form action="{{ route('topics.destroy', ['slug' => $topic->slug]) }}" method="post">
+    <form action="{{ route('topics.destroy', ['topic' => $topic, 'slug' => $topic->slug]) }}" method="post">
         @csrf
         <input type="submit" class="btn btn-outline-primary btn-block" value="@lang('Delete Topic')">
     </form>
@@ -11,7 +11,7 @@
     @component('components.linktree', [
         'items' => [
             ['href' => route('home'), 'title' => __('Home')],
-            ['href' => route('boards.show', ['slug' => $topic->board->slug]), 'title' => $topic->board->title],
+            ['href' => route('boards.show', ['board' => $topic->board, 'slug' => $topic->board->slug]), 'title' => $topic->board->title],
             ['title' => $topic->title]
         ]
     ]) @endcomponent

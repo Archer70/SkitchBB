@@ -59,11 +59,8 @@ class BoardController extends Controller
      * @param  int  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Board $board)
     {
-        $board = Board::where('slug', $slug)
-            ->with(['topics.user', 'topics.firstPost', 'topics.lastPost'])
-            ->first();
         return view('board', ['board' => $board]);
     }
 

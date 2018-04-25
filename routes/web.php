@@ -19,21 +19,32 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+// USERS
 Route::get('/users/{user}', 'UserController@show')->name('users.show');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::post('/users/{user}/update', 'UserController@update')->name('users.update');
 
+// CATEGORIES
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
 Route::post('/categories/store', 'CategoryController@store')->name('categories.store');
 
+// BOARDS
 Route::get('/categories/{category}/boards/create', 'BoardController@create')->name('boards.create');
 Route::post('/categories/{category}/boards/store', 'BoardController@store')->name('boards.store');
-Route::get('/boards/{slug}', 'BoardController@show')->name('boards.show');
+Route::get('/boards/{board}/{slug?}', 'BoardController@show')->name('boards.show');
 
-Route::get('/boards/{slug}/topics/create', 'TopicController@create')->name('topics.create');
-Route::post('/boards/{slug}/topics/store', 'TopicController@store')->name('topics.store');
-Route::get('/topics/{slug}', 'TopicController@show')->name('topics.show');
-Route::post('/topics/{slug}', 'TopicController@destroy')->name('topics.destroy');
+// TOPICS
+Route::get('/topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');
 
+Route::get('/boards/{board}/topics/create', 'TopicController@create')->name('topics.create');
+Route::get('/boards/{board}/{slug}/topics/create', 'TopicController@create')->name('topics.create');
+
+Route::post('/boards/{board}/topics/store', 'TopicController@store')->name('topics.store');
+Route::post('/boards/{board}/{slug}/topics/store', 'TopicController@store')->name('topics.store');
+
+Route::post('/topics/{topic}/destroy', 'TopicController@destroy')->name('topics.destroy');
+Route::post('/topics/{topic}/{slug}/destroy', 'TopicController@destroy')->name('topics.destroy');
+
+// POSTS
 Route::post('/posts/store', 'PostController@store')->name('posts.store');
 Route::get('/posts/feed', 'PostController@feed')->name('feed');

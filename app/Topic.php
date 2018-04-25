@@ -22,7 +22,7 @@ class Topic extends Model
 
     public function getLinkAttribute()
     {
-        return route('topics.show', ['slug' => $this->slug]);
+        return route('topics.show', ['topic' => $this, 'slug' => $this->slug]);
     }
 
     public function board()
