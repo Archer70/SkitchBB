@@ -19,8 +19,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/users/{name}', 'UserController@show')->name('users.show');
-Route::get('/users/{name}/edit', 'UserController@edit')->name('users.edit');
+Route::get('/users/{user}', 'UserController@show')->name('users.show');
+Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::post('/users/{user}/update', 'UserController@update')->name('users.update');
 
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create');

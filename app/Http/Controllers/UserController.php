@@ -45,9 +45,8 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($name)
+    public function show(User $user)
     {
-        $user = User::where('name', $name)->first();
         return view('profile', ['user' => $user]);
     }
 
@@ -57,9 +56,8 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($name)
+    public function edit(User $user)
     {
-        $user = User::where('name', $name)->first();
         return view('profile_edit', ['user' => $user]);
     }
 
@@ -85,7 +83,7 @@ class UserController extends Controller
         $user->bio = $request->bio;
         $user->save();
 
-        return Redirect::route('users.show', ['name' => $user->name]);
+        return Redirect::route('users.show', ['user' => $user]);
     }
 
     /**

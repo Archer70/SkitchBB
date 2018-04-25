@@ -23,7 +23,7 @@ class Menu
         if (Auth::user()) {
             $buttons['users.show'] = [
                 'title' => __('Profile'),
-                'href' => route('users.show', ['name' => Auth::user()->name]),
+                'href' => route('users.show', ['user' => Auth::user()]),
             ];
 
             $buttons['logout'] = [

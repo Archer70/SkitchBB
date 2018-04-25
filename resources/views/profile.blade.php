@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_actions')
-    <a class="btn btn-outline-primary btn-block" href="{{ route('users.edit', ['name' => $user->name]) }}">@lang('Modify Profile')</a>
+    <a class="btn btn-outline-primary btn-block" href="{{ route('users.edit', ['user' => $user]) }}">@lang('Modify Profile')</a>
 @endsection
 
 @section('content')

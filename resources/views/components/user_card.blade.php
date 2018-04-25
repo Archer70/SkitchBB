@@ -4,7 +4,7 @@
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <a href="{{ route('users.show', ['name' => $user->name]) }}">
+            <a href="{{ route('users.show', ['user' => $user]) }}">
                 {{ $user->name }}
             </a>
         </li>
