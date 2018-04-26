@@ -48,3 +48,6 @@ Route::post('/topics/{topic}/{slug}/destroy', 'TopicController@destroy')->name('
 // POSTS
 Route::post('/posts/store', 'PostController@store')->name('posts.store');
 Route::get('/posts/feed', 'PostController@feed')->name('feed');
+
+// SEARCH
+Route::post('/searches/create', 'SearchController@create')->name('searches.create');
