@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Laravel\Scout\Searchable;
+
 
 class Topic extends Model
 {
     use Sluggable;
+    use Searchable;
 
     public function sluggable()
     {
@@ -48,5 +51,12 @@ class Topic extends Model
     public function posts()
     {
         return $this->hasMany('App\\Post');
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title
+        ];
     }
 }

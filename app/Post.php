@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
+    use Searchable;
+
     public function category()
     {
         return $this->belongsTo('App\\Category');
@@ -24,5 +27,12 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\\User');
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'body' => $this->body
+        ];
     }
 }

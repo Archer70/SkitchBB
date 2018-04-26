@@ -5,10 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use YoHang88\LetterAvatar\LetterAvatar;
+use Laravel\Scout\Searchable;
+
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Searchable;
 
     const ADMIN_GROUP = 2;
 
@@ -48,5 +51,13 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->group->id === self::ADMIN_GROUP;
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'email' => $this->email
+        ];
     }
 }
