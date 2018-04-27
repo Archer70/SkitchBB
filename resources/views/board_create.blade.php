@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', __('Create Board'))
+
 @section('content')
     @component('components.linktree', [
         'items' => [

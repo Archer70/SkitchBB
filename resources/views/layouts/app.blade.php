@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}{{ View::hasSection('page_title') ? ' - ' : '' }}@yield('page_title')</title>
 
     <script>
         window.csrf_token = '{!! csrf_token() !!}';

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', $topic->title)
+
 @section('page_actions')
     <form action="{{ route('topics.destroy', ['topic' => $topic, 'slug' => $topic->slug]) }}" method="post">
         @csrf

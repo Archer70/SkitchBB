@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', $board->title)
+
 @if (Auth::user())
     @section('page_actions')
         <a class="btn btn-outline-primary btn-block" href="{{ route('topics.create', ['board' => $board, 'slug' => $board->slug]) }}">
