@@ -12,8 +12,7 @@
         "laravel/scout": "^4.0",
         "laravel/tinker": "~1.0",
         "michelf/php-markdown": "^1.8",
-        "yab/laravel-scout-mysql-driver": "^2.0",
-        "yohang88/letter-avatar": "^1.0"
+        "yab/laravel-scout-mysql-driver": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

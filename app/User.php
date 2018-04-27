@@ -48,14 +48,18 @@ class User extends Authenticatable
         return $this->belongsTo('App\\Group');
     }
 
+    public function hasCustomAvatar()
+    {
+        return (bool)$this->avatar_url;
+    }
+
     public function avatarUrl()
     {
         if (!empty($this->avatar_url)) {
             return $this->avatar_url;
         }
 
-        $avatar = new LetterAvatar($this->name, 'square', 128);
-        return $avatar->__toString();
+        return sprintf('https://www.gravatar.com/avatar/%s?s=128&d=identicon&r=g', $this->email);
     }
 
     public function isAdmin()
