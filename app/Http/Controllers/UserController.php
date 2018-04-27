@@ -94,6 +94,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->posts()->delete();
+        $user->topics()->delete();
+        $user->delete();
+        return Redirect::route('home');
     }
 }

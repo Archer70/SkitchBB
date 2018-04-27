@@ -3,7 +3,11 @@
 @section('page_title', $user->name)
 
 @section('page_actions')
-    <a class="btn btn-outline-primary btn-block" href="{{ route('users.edit', ['user' => $user]) }}">@lang('Modify Profile')</a>
+    <a class="btn btn-outline-primary btn-block mb-2" href="{{ route('users.edit', ['user' => $user]) }}">@lang('Modify Profile')</a>
+    <form method="post" action="{{ route('users.destroy', ['user' => $user]) }}">
+        <input type="submit" class="btn btn-outline-danger btn-block" value="@lang('Delete User')">
+        @csrf
+    </form>
 @endsection
 
 @section('content')

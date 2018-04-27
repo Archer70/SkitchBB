@@ -23,6 +23,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/users/{user}', 'UserController@show')->name('users.show');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::post('/users/{user}/update', 'UserController@update')->name('users.update');
+Route::post('/users/{user}/destroy', 'UserController@destroy')->name('users.destroy');
 
 // CATEGORIES
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create');

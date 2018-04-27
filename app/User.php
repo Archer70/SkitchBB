@@ -33,6 +33,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function topics()
+    {
+        return $this->hasMany('App\\Topic');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\\Post');
+    }
+
     public function group()
     {
         return $this->belongsTo('App\\Group');
