@@ -1,6 +1,8 @@
 # SkitchBB
 A simple, open source bulletin board built with modern technologies.
 
+![Board Index](https://i.imgur.com/x12PECz.png)
+
 ## Installation
 ```bash
 # copy config file.
