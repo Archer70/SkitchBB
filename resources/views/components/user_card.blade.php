@@ -11,9 +11,11 @@
         <li class="list-group-item">
             {{ $user->group->name }}
         </li>
-        <li class="list-group-item">
-            {{ $user->title }}
-        </li>
+        @if ($user->title)
+            <li class="list-group-item">
+                {{ $user->title }}
+            </li>
+        @endif
         <li class="list-group-item">
             @lang('Posts:') {{ $user->post_count }}
         </li>

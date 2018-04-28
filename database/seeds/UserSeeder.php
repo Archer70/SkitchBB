@@ -20,7 +20,6 @@ class UserSeeder extends Seeder
         $user->name = 'Admin';
         $user->email = 'admin@skitchbb.net';
         $user->password = Hash::make('admin');
-        $user->title = 'Registered Member';
         $user->avatar_url = 'https://www.synbio.cam.ac.uk/images/avatar-generic.jpg/image';
         $user->save();
     }
