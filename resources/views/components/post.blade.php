@@ -14,7 +14,7 @@
                 <div class="col-3">
                     @component('components.user_card', ['user' => $post->user]) @endcomponent
                 </div>
-                <div class="col-9">
+                <div class="col-9 py-3">
                     {!! Markdown::render($post->body) !!}
                 </div>
             </div>
