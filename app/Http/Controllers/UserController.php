@@ -86,6 +86,22 @@ class UserController extends Controller
         return Redirect::route('users.show', ['user' => $user]);
     }
 
+    public function ban(User $user)
+    {
+        $user->banned = true;
+        $user->save();
+
+        return Redirect::route('users.show', ['user' => $user]);
+    }
+
+    public function unban(User $user)
+    {
+        $user->banned = false;
+        $user->save();
+
+        return Redirect::route('users.show', ['user' => $user]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
