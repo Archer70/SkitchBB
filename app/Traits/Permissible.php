@@ -14,7 +14,7 @@ trait Permissible
      */
     public function allowedTo($action, Model $entity)
     {
-        $groupPermissionSet = config('entity_permissions.'.$this->groupName());
+        $groupPermissionSet = $this->entityPermissions();
 
         if (!in_array(get_class($entity), $groupPermissionSet)) {
             return false;
@@ -33,6 +33,17 @@ trait Permissible
         } else { // own
             return $this->checkOwned($entity);
         }
+    }
+
+    /**
+     * Checks that a use can access a certain area or action.
+     *
+     * @param $action
+     */
+    public function accessTo($action)
+    {
+        $permissions = $this->accessPermissions();
+        return array_key_exists($action, $permissions) && $permissions[$action];
     }
 
     /**
@@ -85,5 +96,25 @@ trait Permissible
     protected function groupProperty()
     {
         return 'group_id';
+    }
+
+    /**
+     * Gets an array of entity permissions for the user's group.
+     *
+     * @return array
+     */
+    protected function entityPermissions()
+    {
+        return config('entity_permissions.'.$this->groupName());
+    }
+
+    /**
+     * Gets an array of access permissions for the user's group.
+     *
+     * @return array
+     */
+    protected function accessPermissions()
+    {
+        return config('access_permissions.'.$this->groupName());
     }
 }
