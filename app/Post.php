@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use App\Traits\Ownable;
 
 class Post extends Model
 {
     use Searchable;
+    use Ownable;
 
     public function category()
     {
