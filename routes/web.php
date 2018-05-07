@@ -59,4 +59,7 @@ Route::post('/posts/store', 'PostController@store')->name('posts.store');
 Route::get('/posts/feed', 'PostController@feed')->name('feed');
 
 // SEARCH
-Route::post('/searches/create', 'SearchController@create')->name('searches.create');
+
+Route::post('/searches/create', 'SearchController@create')
+    ->name('searches.create')
+    ->middleware('throttle:30,1'); // Thirty searches a minute per user.
