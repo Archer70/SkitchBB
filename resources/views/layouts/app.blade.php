@@ -42,7 +42,7 @@
                     @endforeach
                 </ul>
             </div>
-            <form method="post" action="{{ route('searches.create') }}" class="form-inline justify-content-end">
+            <form id="search-form" method="post" action="{{ route('searches.create') }}" class="form-inline justify-content-end">
                 <div class="input-group">
                     <input name="search" class="form-control" type="search" placeholder="@lang('Search')" aria-label="search">
                     <div class="input-group-append">
@@ -57,8 +57,8 @@
 
         <div class="container">
             <div class="row mt-4">
-                <div class="col-md-8">@yield('content')</div>
-                <div class="col-md-4">@component('components.sidebar') @endcomponent</div>
+                <div class="col-md-9">@yield('content')</div>
+                <div class="col-md-3">@component('components.sidebar') @endcomponent</div>
             </div>
         </div>
     </div>

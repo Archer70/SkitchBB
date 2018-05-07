@@ -10011,3 +10011,9 @@ a.text-dark:focus {
   border-radius: 0;
 }
 
+@media (max-width: 575.98px) {
+  #search-form {
+    display: none;
+  }
+}
+
