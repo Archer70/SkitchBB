@@ -1,4 +1,4 @@
-@if (!Auth::check())
+@guest
     <div class="card mb-4">
         <div class="card-body">
             <h5 class="card-title">@lang('Login')</h5>
@@ -25,9 +25,9 @@
             </form>
         </div>
     </div>
-@endif
+@endguest
 
-@if (View::hasSection('page_actions'))
+@hassection('page_actions')
     <div class="card mb-4">
         <div class="card-body">
             <h5 class="card-title">@lang('Page Actions')</h5>
@@ -36,8 +36,8 @@
     </div>
 @endif
 
-@if (Auth::check())
+@auth
     @component('components.user_card', ['user' => Auth::user()]) @endcomponent
-@endif
+@endauth
 
 @yield('sidebar')
