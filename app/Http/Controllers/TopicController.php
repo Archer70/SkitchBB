@@ -31,6 +31,9 @@ class TopicController extends Controller
      */
     public function create(Board $board)
     {
+        if (auth()->user()->cant('create', Topic::class)) {
+            return Redirect::route('users.permission_denied');
+        }
         return view('topic_create', ['board' => $board]);
     }
 
@@ -42,6 +45,14 @@ class TopicController extends Controller
      */
     public function store(Board $board, Request $request)
     {
+        if (auth()->user()->cant('create', Topic::class)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         $user = $request->user();
 
         $topic = new Topic();
@@ -76,6 +87,9 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
+        if (auth()->user()->cant('view', $topic)) {
+            return Redirect::route('users.permission_denied');
+        }
         return view('topic', ['topic' => $topic]);
     }
 
@@ -110,6 +124,9 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic)
     {
+        if (auth()->user()->cant('delete', $topic)) {
+            return Redirect::route('users.permission_denied');
+        }
         $redirectBoard = $topic->board->id;
         $redirectSlug = $topic->board->slug;
         $topic->posts()->delete();

@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec2badade6a6416fcc3c61e31d2b4aa4",
+    "content-hash": "878f4713e88d7a2591e9322a80214586",
     "packages": [
+        {
+            "name": "agilesdesign/pseudo",
+            "version": "v1.0.0-rc.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/agilesdesign/pseudo.git",
+                "reference": "51345cbda2d38235b83e0573ef277e0cf1306718"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/agilesdesign/pseudo/zipball/51345cbda2d38235b83e0573ef277e0cf1306718",
+                "reference": "51345cbda2d38235b83e0573ef277e0cf1306718",
+                "shasum": ""
+            },
+            "require": {
+                "php": "7.*"
+            },
+            "require-dev": {
+                "laravel/laravel": "^5.4",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "^6.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pseudo\\Providers\\PseudoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pseudo\\": "src/Pseudo"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Seliga",
+                    "email": "jseliga@agilesdesign.com"
+                }
+            ],
+            "description": "Guest user library for Laravel",
+            "time": "2017-07-29T23:03:37+00:00"
+        },
         {
             "name": "cocur/slugify",
             "version": "v3.1",
@@ -4608,7 +4656,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "agilesdesign/pseudo": 5
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

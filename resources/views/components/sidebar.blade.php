@@ -7,7 +7,7 @@
     </div>
 @endif
 
-@if (Auth::user())
+@if (Auth::check())
     @component('components.user_card', ['user' => Auth::user()]) @endcomponent
 @endif
 

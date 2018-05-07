@@ -25,6 +25,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->cant('create', Category::class)) {
+            return Redirect::route('users.permission_denied');
+        }
         return view('category_create');
     }
 
@@ -36,6 +39,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->cant('create', Board::class)) {
+            return Redirect::route('users.permission_denied');
+        }
         $request->validate([
             'title' => 'required',
             'description' => 'nullable'

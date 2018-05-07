@@ -32,6 +32,7 @@
                         <li class="nav-item {{$button['current'] ? 'active border-bottom border-primary' : ''}}">
                             @if (isset($button['type']) && $button['type'] == 'form')
                                 <form method="post" action="{{ $button['href'] }}" id="{{ $id }}">
+                                    @csrf
                                     <a class="nav-link" onclick="document.getElementById('{{ $id }}').submit()" href="#">{{ $button['title'] }}</a>
                                 </form>
                             @else

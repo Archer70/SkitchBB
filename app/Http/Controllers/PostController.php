@@ -42,6 +42,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->cant('create', Post::class)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $request->validate([
+            'topic_id' => 'required',
+            'body' => 'required'
+        ]);
+
         $topic = Topic::find($request->topic_id);
         $user = $request->user();
 
@@ -51,16 +59,12 @@ class PostController extends Controller
         $post->board_id = $topic->board_id;
         $post->user_id = $user->id;
         $post->approved = 1;
-        $post->body = $_POST['body'];
+        $post->body = $_POST['body']; // Because $request->body is apparently a "special" attribute. !TODO Rename this.
         $post->save();
 
         $user->post_count++;
         $user->save();
 
-
-        if ($request->ajax()) {
-            return response()->json($post);
-        }
         return Redirect::route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
     }
 
@@ -72,8 +76,11 @@ class PostController extends Controller
      */
     public function feed(Request $request)
     {
+        if (auth()->user()->cant('viewFeed', Post::class)) {
+            return Redirect::route('users.permission_denied');
+        }
+
         $posts = Post::where('approved', 1)
-            ->with('topic')
             ->orderBy('id', 'desc')
             ->take(20)
             ->get();

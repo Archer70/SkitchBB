@@ -29,6 +29,9 @@ Route::post('/users/{user}/unban', 'UserController@unban')->name('users.unban');
 Route::get('/banned', function() {
     return view('banned');
 })->name('users.banned');
+Route::get('/permission-denied', function() {
+    return view('permission_denied');
+})->name('users.permission_denied');
 
 // CATEGORIES
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create');

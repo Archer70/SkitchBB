@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Board;
 use App\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class BoardController extends Controller
@@ -27,6 +28,9 @@ class BoardController extends Controller
      */
     public function create(Category $category)
     {
+        if (auth()->user()->cant('create', Board::class)) {
+            return Redirect::route('users.permission_denied');
+        }
         return view('board_create', ['category' => $category]);
     }
 
@@ -39,6 +43,9 @@ class BoardController extends Controller
      */
     public function store(Category $category, Request $request)
     {
+        if (auth()->user()->cant('create', Board::class)) {
+            return Redirect::route('users.permission_denied');
+        }
         $request->validate([
             'title' => 'required',
             'description' => 'nullable',
@@ -56,11 +63,14 @@ class BoardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $slug
+     * @param  Board $board
      * @return \Illuminate\Http\Response
      */
     public function show(Board $board)
     {
+        if (auth()->user()->cant('view', $board)) {
+            return Redirect::route('users.permission_denied');
+        }
         return view('board', ['board' => $board]);
     }
 

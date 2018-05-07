@@ -3,22 +3,30 @@
 @section('page_title', $user->name)
 
 @section('page_actions')
-    <a class="btn btn-outline-primary btn-block mb-2" href="{{ route('users.edit', ['user' => $user]) }}">@lang('Modify Profile')</a>
-    <form method="post" action="{{ route('users.destroy', ['user' => $user]) }}">
-        <input type="submit" class="btn btn-outline-danger btn-block mb-2" value="@lang('Delete User')">
-        @csrf
-    </form>
-    @if (!$user->banned)
-        <form method="post" action="{{ route('users.ban', ['user' => $user]) }}">
-            <input type="submit" class="btn btn-outline-danger btn-block" value="@lang('Ban User')">
+    @can('update', $user)
+        <a class="btn btn-outline-primary btn-block mb-2" href="{{ route('users.edit', ['user' => $user]) }}">@lang('Modify Profile')</a>
+    @endcan
+
+    @can('delete', $user)
+        <form method="post" action="{{ route('users.destroy', ['user' => $user]) }}">
+            <input type="submit" class="btn btn-outline-danger btn-block mb-2" value="@lang('Delete Profile')">
             @csrf
         </form>
-    @else
-        <form method="post" action="{{ route('users.unban', ['user' => $user]) }}">
-            <input type="submit" class="btn btn-outline-danger btn-block" value="@lang('Unban User')">
-            @csrf
-        </form>
-    @endif
+    @endcan
+
+    @can('ban', $user)
+        @if (!$user->banned)
+            <form method="post" action="{{ route('users.ban', ['user' => $user]) }}">
+                <input type="submit" class="btn btn-outline-danger btn-block" value="@lang('Ban User')">
+                @csrf
+            </form>
+        @else
+            <form method="post" action="{{ route('users.unban', ['user' => $user]) }}">
+                <input type="submit" class="btn btn-outline-danger btn-block" value="@lang('Unban User')">
+                @csrf
+            </form>
+        @endif
+    @endcan
 @endsection
 
 @section('content')

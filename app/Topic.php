@@ -5,14 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Laravel\Scout\Searchable;
-use App\Traits\Ownable;
-
 
 class Topic extends Model
 {
     use Sluggable;
     use Searchable;
-    use Ownable;
 
     public function sluggable()
     {

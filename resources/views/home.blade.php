@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('page_actions')
-    <a href="{{ route('categories.create') }}" class="btn btn-outline-primary btn-block">@lang('Create Category')</a>
+    @can('create', App\Category::class)
+        <a href="{{ route('categories.create') }}" class="btn btn-outline-primary btn-block">@lang('Create Category')</a>
+    @endcan
 @endsection
 
 @section('content')
@@ -13,9 +15,11 @@
     @foreach($categories as $category)
         <div class="card mb-4">
             <div class="card-header">
-                <a class="btn btn-primary btn-sm float-right" href="{{ route('boards.create', ['category' => $category]) }}">
-                    @lang('Create Board')
-                </a>
+                @can('create', App\Board::class)
+                    <a class="btn btn-primary btn-sm float-right" href="{{ route('boards.create', ['category' => $category]) }}">
+                        @lang('Create Board')
+                    </a>
+                @endcan
                 {{ $category->title }}
                 @if (!empty($category->description))
                     - <span class="text-muted">{{ $category->description }}</span>

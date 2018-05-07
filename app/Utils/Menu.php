@@ -20,7 +20,7 @@ class Menu
             ],
         ];
 
-        if (Auth::user()) {
+        if (Auth::check()) {
             $buttons['users.show'] = [
                 'title' => __('Profile'),
                 'href' => route('users.show', ['user' => Auth::user()]),

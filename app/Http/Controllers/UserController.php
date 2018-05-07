@@ -47,6 +47,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        if (auth()->user()->cant('view', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
         return view('profile', ['user' => $user]);
     }
 
@@ -58,6 +61,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (auth()->user()->cant('update', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
         return view('profile_edit', ['user' => $user]);
     }
 
@@ -70,6 +76,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (auth()->user()->cant('update', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
         $request->validate([
             'name' => 'required|unique:users,id,' . $user->id,
             'email' => 'required|email|unique:users,id,'  . $user->id,
@@ -88,6 +97,10 @@ class UserController extends Controller
 
     public function ban(User $user)
     {
+        if (auth()->user()->cant('ban', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
+
         $user->banned = true;
         $user->save();
 
@@ -96,6 +109,10 @@ class UserController extends Controller
 
     public function unban(User $user)
     {
+        if (auth()->user()->cant('ban', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
+
         $user->banned = false;
         $user->save();
 
@@ -110,6 +127,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if (auth()->user()->cant('delete', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
+
         $user->posts()->delete();
         $user->topics()->delete();
         $user->delete();
