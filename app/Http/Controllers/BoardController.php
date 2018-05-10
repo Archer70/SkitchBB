@@ -114,11 +114,17 @@ class BoardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Board  $board
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Board $board)
     {
-        //
+        if (auth()->user()->cant('delete', $board)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $board->posts()->delete();
+        $board->topics()->delete();
+        $board->delete();
+        return redirect()->route('home');
     }
 }
