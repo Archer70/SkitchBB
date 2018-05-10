@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Policies\CategoryPolicy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Category;
 
@@ -39,7 +41,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if (auth()->user()->cant('create', Board::class)) {
+        if (auth()->user()->cant('create', Category::class)) {
             return Redirect::route('users.permission_denied');
         }
         $request->validate([
@@ -71,31 +73,85 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('category_edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param Category $category
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Category $category, Request $request)
     {
-        //
+        if (auth()->user()->cant('update', $category)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $request->validate([
+            'title' => 'required',
+            'description' => 'nullable'
+        ]);
+        $category->title = $request->title;
+        $category->description = $request->description;
+        $category->save();
+        return redirect()->route('home');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        if (auth()->user()->cant('delete', $category)) {
+            return Redirect::route('users.permission_denied');
+        }
+
+        $boardIds = $this->getIdsFromDbResult(
+            DB::table('boards')
+                ->select('id')
+                ->where('category_id', $category->id)
+                ->get()
+        );
+        $topicIds = $this->getIdsFromDbResult(
+            DB::table('topics')
+                ->select('id')
+                ->whereIn('board_id', $boardIds)
+                ->get()
+        );
+        $postIds = $this->getIdsFromDbResult(
+            DB::table('posts')
+                ->select('id')
+                ->whereIn('topic_id', $topicIds)
+                ->get()
+        );
+
+        DB::table('posts')
+            ->whereIn('id', $postIds)
+            ->delete();
+        DB::table('topics')
+            ->whereIn('id', $topicIds)
+            ->delete();
+        DB::table('boards')
+            ->whereIn('id', $boardIds)
+            ->delete();
+
+        $category->delete();
+
+        return redirect()->route('home');
+    }
+
+    private function getIdsFromDbResult($result)
+    {
+        $ids = [];
+        foreach ($result as $item) {
+            $ids[] = $item->id;
+        }
+        return $ids;
     }
 }

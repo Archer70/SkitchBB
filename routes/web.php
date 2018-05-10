@@ -36,11 +36,15 @@ Route::get('/permission-denied', function() {
 // CATEGORIES
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
 Route::post('/categories/store', 'CategoryController@store')->name('categories.store');
+Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
+Route::post('/categories/{category}/update', 'CategoryController@update')->name('categories.update');
+Route::post('/categories/{category}/destroy', 'CategoryController@destroy')->name('categories.destroy');
 
 // BOARDS
 Route::get('/categories/{category}/boards/create', 'BoardController@create')->name('boards.create');
 Route::post('/categories/{category}/boards/store', 'BoardController@store')->name('boards.store');
 Route::get('/boards/{board}/{slug?}', 'BoardController@show')->name('boards.show');
+Route::post('/boards/{board}/edit', 'BoardController@edit')->name('boards.edit');
 
 // TOPICS
 Route::get('/topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');
