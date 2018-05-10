@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page_title', __('Create Board'))
+@section('page_title', __('Edit Post'))
 
 @section('content')
     @component('components.linktree', [

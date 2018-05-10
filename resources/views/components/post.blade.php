@@ -3,12 +3,16 @@
             <form method="post" action="{{ route('posts.destroy', ['post' => $post]) }}">
                 @csrf
                 <div class="btn-group btn-group-sm justify-content-end float-right">
-                    <a class="btn btn-secondary" href="{{ route('posts.edit', ['post' => $post]) }}">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <button type="submit" class="btn btn-danger">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
+                    @can('update', $post)
+                        <a class="btn btn-secondary" href="{{ route('posts.edit', ['post' => $post]) }}">
+                            <i class="far fa-edit"></i>
+                        </a>
+                    @endcan
+                    @can('delete', $post)
+                        <button type="submit" class="btn btn-danger">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    @endcan
                 </div>
             </form>
             @if($showTitle)

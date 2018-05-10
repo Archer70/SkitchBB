@@ -43,8 +43,10 @@ Route::post('/categories/{category}/destroy', 'CategoryController@destroy')->nam
 // BOARDS
 Route::get('/categories/{category}/boards/create', 'BoardController@create')->name('boards.create');
 Route::post('/categories/{category}/boards/store', 'BoardController@store')->name('boards.store');
+Route::get('/boards/{board}/edit', 'BoardController@edit')->name('boards.edit');
+Route::post('boards/{board}/update', 'BoardController@update')->name('boards.update');
+Route::post('boards/{board}/destroy', 'BoardController@destroy')->name('boards.destroy');
 Route::get('/boards/{board}/{slug?}', 'BoardController@show')->name('boards.show');
-Route::post('/boards/{board}/edit', 'BoardController@edit')->name('boards.edit');
 
 // TOPICS
 Route::get('/topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');

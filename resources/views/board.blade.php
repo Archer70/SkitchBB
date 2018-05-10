@@ -19,11 +19,26 @@
             ['title' => $board->title]
         ]
     ]) @endcomponent
+
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">
+                <form method="post" action="{{ route('boards.destroy', ['board' => $board]) }}">
+                    @csrf
+                    <div class="btn-group btn-group-sm justify-content-end float-right">
+                        @can('update', $board)
+                            <a class="btn btn-secondary" href="{{ route('boards.edit', ['board' => $board]) }}">
+                                <i class="far fa-edit"></i>
+                            </a>
+                        @endcan
+                        @can('delete', $board)
+                            <button type="submit" class="btn btn-danger">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        @endcan
+                    </div>
+                </form>
                 {{ $board->title }}
-
             </h5>
             @if($board->description)
                 <h6 class="card-subtitle">{{ $board->description }}</h6>

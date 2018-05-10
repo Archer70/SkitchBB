@@ -77,24 +77,38 @@ class BoardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Board  $board
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Board $board)
     {
-        //
+        if (auth()->user()->cant('update', $board)) {
+            return Redirect::route('users.permission_denied');
+        }
+        return view('board_edit', ['board' => $board]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Board  $board
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Board $board)
     {
-        //
+        if (auth()->user()->cant('update', $board)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $request->validate([
+            'title' => 'required'
+        ]);
+
+        $board->title = $request->title;
+        $board->description = $request->description;
+        $board->save();
+
+        return redirect()->route('boards.show', ['board' => $board]);
     }
 
     /**
