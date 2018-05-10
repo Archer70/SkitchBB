@@ -4,7 +4,7 @@
 
 @section('page_actions')
     @can('delete', $topic)
-        <form action="{{ route('topics.destroy', ['topic' => $topic, 'slug' => $topic->slug]) }}" method="post">
+        <form action="{{ route('topics.destroy', ['topic' => $topic]) }}" method="post">
             @csrf
             <input type="submit" class="btn btn-outline-primary btn-block" value="@lang('Delete Topic')">
         </form>

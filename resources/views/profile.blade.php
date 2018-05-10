@@ -43,8 +43,10 @@
                     @component('components.user_card', ['user' => $user]) @endcomponent
                 </div>
                 <div class="col-9">
-                    <h4>@lang('Bio')</h4>
-                    {!! Markdown::render($user->bio) !!}
+                    @if ($user->bio)
+                        <h4>@lang('Bio')</h4>
+                        {!! Markdown::render($user->bio) !!}
+                    @endif
                 </div>
             </div>
         </div>

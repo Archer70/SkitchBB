@@ -5,7 +5,7 @@
 @if (Auth::check())
     @section('page_actions')
         @can('create', App\Topic::class)
-            <a class="btn btn-outline-primary btn-block" href="{{ route('topics.create', ['board' => $board, 'slug' => $board->slug]) }}">
+            <a class="btn btn-outline-primary btn-block" href="{{ route('topics.create', ['board' => $board]) }}">
                 @lang('New Topic')
             </a>
         @endcan

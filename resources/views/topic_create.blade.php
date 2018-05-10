@@ -12,7 +12,7 @@
     ]) @endcomponent
     <div class="card">
         <div class="card-body">
-            <form method="post" action="{{ route('topics.store', ['board' => $board, 'slug' => $board->slug]) }}">
+            <form method="post" action="{{ route('topics.store', ['board' => $board]) }}">
                 <div class="form-group">
                     <input class="form-control" type="text" name="title" placeholder="@lang('Title')">
                 </div>

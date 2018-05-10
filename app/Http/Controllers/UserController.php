@@ -95,6 +95,16 @@ class UserController extends Controller
         return Redirect::route('users.show', ['user' => $user]);
     }
 
+    public function banned()
+    {
+        return view('banned');
+    }
+
+    public function permissionDenied()
+    {
+        return view('permission_denied');
+    }
+
     public function ban(User $user)
     {
         if (auth()->user()->cant('ban', $user)) {
