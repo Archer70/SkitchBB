@@ -6,8 +6,6 @@ use App\User;
 
 class UserSeeder extends Seeder
 {
-    const ADMIN_GROUP = 2;
-
     /**
      * Run the database seeds.
      *
@@ -16,11 +14,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->group_id = self::ADMIN_GROUP;
+        $user->group_id = env('USER_GROUP_ADMIN');
         $user->name = 'Admin';
         $user->email = 'admin@skitchbb.net';
         $user->password = Hash::make('admin');
-        $user->avatar_url = 'https://www.synbio.cam.ac.uk/images/avatar-generic.jpg/image';
         $user->save();
     }
 }
