@@ -59,7 +59,7 @@ class PostController extends Controller
         $post->board_id = $topic->board_id;
         $post->user_id = $user->id;
         $post->approved = 1;
-        $post->body = $_POST['body']; // Because $request->body is apparently a "special" attribute. !TODO Rename this.
+        $post->body = $request->input('body');
         $post->save();
 
         $user->post_count++;
@@ -101,34 +101,62 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        if (auth()->user()->cant('update', $post)) {
+            return Redirect::route('users.permission_denied');
+        }
+        return view('post_edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        if (auth()->user()->cant('update', $post)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $request->validate([
+            'body' => 'required'
+        ]);
+
+        $post->body = $request->input('body');
+        $post->save();
+        return redirect()->route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        if (auth()->user()->cant('delete', $post)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $topic = $post->topic;
+        $board = $post->board;
+
+        $post->delete();
+        $topicEmpty = count($topic->posts) == 0;
+        if ($topicEmpty) {
+            $topic->delete();
+        }
+
+        if ($topicEmpty) {
+            return redirect()->route('boards.show', ['board' => $board]);
+        } else {
+            return redirect()->route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
+        }
     }
 }

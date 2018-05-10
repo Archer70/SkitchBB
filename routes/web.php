@@ -60,6 +60,9 @@ Route::post('/topics/{topic}/{slug}/destroy', 'TopicController@destroy')->name('
 
 // POSTS
 Route::post('/posts/store', 'PostController@store')->name('posts.store');
+Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+Route::post('/posts/{post}/update', 'PostController@update')->name('posts.update');
+Route::post('/posts/{post}/destroy', 'PostController@destroy')->name('posts.destroy');
 Route::get('/posts/feed', 'PostController@feed')->name('feed');
 
 // SEARCH

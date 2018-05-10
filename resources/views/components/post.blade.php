@@ -1,13 +1,22 @@
     <div class="card mb-4 post">
         <div class="card-header">
-            <div class="justify-content-end float-right">
-                <span>{{ $post->updated_at }}</span>
-            </div>
+            <form method="post" action="{{ route('posts.destroy', ['post' => $post]) }}">
+                @csrf
+                <div class="btn-group btn-group-sm justify-content-end float-right">
+                    <a class="btn btn-secondary" href="{{ route('posts.edit', ['post' => $post]) }}">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </div>
+            </form>
             @if($showTitle)
                 <a href="{{  route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}">{{ $post->topic->title }}</a>
             @else
                 <a href="{{  route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}">#{{ $count }}</a>
             @endif
+            | <span>{{ $post->updated_at }}</span>
         </div>
         <div class="card-body post-area">
             <div class="row">
