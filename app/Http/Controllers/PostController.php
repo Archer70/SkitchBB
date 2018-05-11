@@ -82,8 +82,7 @@ class PostController extends Controller
 
         $posts = Post::where('approved', 1)
             ->orderBy('id', 'desc')
-            ->take(20)
-            ->get();
+            ->paginate(20);
         return view('post_feed', ['posts' => $posts]);
     }
 
