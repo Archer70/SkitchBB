@@ -79,6 +79,20 @@
                             @if (!empty($user->bio)) value="{{ $user->bio }}" @endif
                     ></textarea>
                 </div>
+                <hr>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password_old" placeholder="@lang('Old Password')">
+                    <small class="form-text text-muted">@lang('Only required if changing your password.')</small>
+                </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <input class="form-control" type="password" name="password" placeholder="@lang('New Password')">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="password" name="password_confirm" placeholder="@lang('Confirm New Password')">
+                    </div>
+                </div>
+                <hr>
                 @csrf
                 <button type="submit" class="btn btn-primary">@lang('Save')</button>
             </form>

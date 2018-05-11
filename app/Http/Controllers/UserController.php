@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -91,6 +93,26 @@ class UserController extends Controller
         $user->avatar_url = $request->avatar_url;
         $user->bio = $request->bio;
         $user->save();
+
+        // Password changing requires some extra logic, but still save the other stuff if it fails.
+        $passwordError = '';
+        if ($request->password) {
+            if ($request->password === $request->password_confirm) {
+                if (Hash::check($request->password_old, $user->password)) {
+                    $user->password = Hash::make($request->password);
+                    $user->save();
+                    // Changing the password logs the user out for some reason, so log them right back in.
+                    Auth::login($user);
+                } else {
+                    $passwordError = __('The current password you entered is incorrect.');
+                }
+            } else {
+                $passwordError = __('Your new password and the confirmation password are not the same.');
+            }
+            if ($passwordError) {
+                return Redirect::route('users.edit', ['user' => $user])->withErrors(['password' => $passwordError]);
+            }
+        }
 
         return Redirect::route('users.show', ['user' => $user]);
     }
