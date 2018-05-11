@@ -20,7 +20,8 @@
         ]
     ]) @endcomponent
 
-    <div class="card">
+    {{ $topics->links() }}
+    <div class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">
                 <form method="post" action="{{ route('boards.destroy', ['board' => $board]) }}">
@@ -44,8 +45,9 @@
                 <h6 class="card-subtitle">{{ $board->description }}</h6>
             @endif
         </div>
+
         <ul class="list-group list-group-flush">
-            @foreach ($board->topics as $topic)
+            @foreach ($topics as $topic)
                 <li class="list-group-item">
                     <a href="{{ $topic->link }}">{{ $topic->title }}</a>
                 </li>
@@ -56,6 +58,7 @@
             @endif
         </ul>
     </div>
+    {{ $topics->links() }}
 @endsection
 
 @section('sidebar')

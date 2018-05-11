@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Topic;
 use Illuminate\Http\Request;
 use App\Board;
 use App\Category;
@@ -71,7 +72,10 @@ class BoardController extends Controller
         if (auth()->user()->cant('view', $board)) {
             return Redirect::route('users.permission_denied');
         }
-        return view('board', ['board' => $board]);
+        $topics = Topic::where('board_id', $board->id)
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+        return view('board', ['board' => $board, 'topics' => $topics]);
     }
 
     /**
