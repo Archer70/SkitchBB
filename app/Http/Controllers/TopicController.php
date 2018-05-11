@@ -90,7 +90,8 @@ class TopicController extends Controller
         if (auth()->user()->cant('view', $topic)) {
             return Redirect::route('users.permission_denied');
         }
-        return view('topic', ['topic' => $topic]);
+        $posts = $topic->posts()->paginate(20);
+        return view('topic', ['topic' => $topic, 'posts' => $posts]);
     }
 
     /**

@@ -20,9 +20,11 @@
         ]
     ]) @endcomponent
 
-    @foreach($topic->posts as $count => $post)
+    {{ $posts->links() }}
+    @foreach($posts as $count => $post)
         @component('components.post', ['count' => $count+1, 'post' => $post, 'showTitle' => false]) @endcomponent
     @endforeach
+    {{ $posts->links() }}
 
     @can('create', \App\Post::class)
         <div class="card mb-4">
