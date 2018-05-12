@@ -16,9 +16,9 @@
                 </div>
             </form>
             @if($showTitle)
-                <a href="{{  route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}">{{ $post->topic->title }}</a>
+                <a href="{{ route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}">{{ $post->topic->title }}</a>
             @else
-                <a href="{{  route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}">#{{ $count }}</a>
+                <a name="{{ $post->id }}" href="{{ route('topics.show', ['topic' => $post->topic, 'slug' => $post->topic->slug]) }}?page={{ $currentPage }}#{{ $post->id }}">#{{ $post->id }}</a>
             @endif
             | <span>{{ $post->updated_at }}</span>
         </div>
