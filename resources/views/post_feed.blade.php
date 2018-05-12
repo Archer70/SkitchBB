@@ -12,7 +12,7 @@
 
     {{ $posts->links() }}
     @foreach($posts as $count => $post)
-        @component('components.post', ['count' => $count+1, 'post' => $post, 'showTitle' => true]) @endcomponent
+        @component('components.post', ['authUser' => $authUser, 'topic' => $post->topic, 'post' => $post, 'showTitle' => true]) @endcomponent
     @endforeach
     {{ $posts->links() }}
 

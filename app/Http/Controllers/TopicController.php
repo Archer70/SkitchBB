@@ -7,6 +7,7 @@ use App\Post;
 use App\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class TopicController extends Controller
 {
@@ -90,8 +91,9 @@ class TopicController extends Controller
         if (auth()->user()->cant('view', $topic)) {
             return Redirect::route('users.permission_denied');
         }
-        $posts = $topic->posts()->paginate(20);
-        return view('topic', ['topic' => $topic, 'posts' => $posts]);
+        
+        $posts = $topic->posts()->with(['board', 'user', 'user.group'])->paginate(20);
+        return view('topic', ['authUser' => auth()->user(), 'topic' => $topic, 'posts' => $posts]);
     }
 
     /**

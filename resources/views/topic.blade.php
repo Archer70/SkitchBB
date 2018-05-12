@@ -22,7 +22,13 @@
 
     {{ $posts->links() }}
     @foreach($posts as $count => $post)
-        @component('components.post', ['post' => $post, 'currentPage' => $posts->currentPage(), 'showTitle' => false]) @endcomponent
+        @component('components.post', [
+            'authUser' => $authUser,
+            'topic' => $topic,
+            'post' => $post,
+            'currentPage' => $posts->currentPage(),
+            'showTitle' => false
+        ]) @endcomponent
     @endforeach
     {{ $posts->links() }}
 

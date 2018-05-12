@@ -81,9 +81,10 @@ class PostController extends Controller
         }
 
         $posts = Post::where('approved', 1)
+            ->with('topic', 'user')
             ->orderBy('id', 'desc')
             ->paginate(20);
-        return view('post_feed', ['posts' => $posts]);
+        return view('post_feed', ['authUser' => auth()->user(), 'posts' => $posts]);
     }
 
     /**
