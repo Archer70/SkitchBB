@@ -11,15 +11,18 @@ class SearchController extends Controller
 {
     public function create(Request $request)
     {
-        $request->validate(['search' => 'required']);
+        if ($request->search) {
+            $searchTerm = $request->search;
+        } elseif ($request->session()->has('search')) {
+            $searchTerm = $request->session()->get('search');
+        } else {
+            return redirect()->back();
+        }
+        $request->session()->flash('search', $searchTerm);
 
-        $users = User::search($request->search)->get();
-        $topics = Topic::search($request->search)->get();
-        $posts = Post::search($request->search)->get();
+        $posts = Post::search($searchTerm)->paginate(20);
 
         return view('search_results', [
-            'users' => $users,
-            'topics' => $topics,
             'posts' => $posts
         ]);
     }

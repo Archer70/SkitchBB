@@ -55,6 +55,6 @@ Route::post('/posts/{post}/destroy', 'PostController@destroy')->name('posts.dest
 Route::get('/posts/feed', 'PostController@feed')->name('feed');
 
 // SEARCH
-Route::post('/searches/create', 'SearchController@create')
+Route::match(['post', 'get'], '/searches/create', 'SearchController@create')
     ->name('searches.create')
     ->middleware('throttle:30,1'); // Thirty searches per minute, per user.

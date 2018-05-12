@@ -13,25 +13,8 @@
         <div class="card-body">
             <h5 class="card-title">@lang('Search Results')</h5>
 
-            @if (count($users) != 0)
-                <h4>@lang('Users')</h4>
-                <ul>
-                    @foreach ($users as $user)
-                        <li><a href="{{ route('users.show', ['user' => $user]) }}">{{ $user->name }}</a></li>
-                    @endforeach
-                </ul>
-            @endif
-
-            @if (count($topics) != 0)
-                <h4>@lang('Topics')</h4>
-                <ul>
-                    @foreach ($topics as $topic)
-                        <li><a href="{{ route('topics.show', ['topic' => $topic]) }}">{{ $topic->title }}</a></li>
-                    @endforeach
-                </ul>
-            @endif
-
             @if (count($posts) != 0)
+                {{ $posts->links() }}
                 <h4>@lang('Posts')</h4>
                 <ul>
                     @foreach ($posts as $post)
@@ -41,6 +24,9 @@
                         </li>
                     @endforeach
                 </ul>
+                {{ $posts->links() }}
+            @else
+                <span>@lang('No results for that query.')</span>
             @endif
         </div>
     </div>
