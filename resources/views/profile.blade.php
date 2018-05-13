@@ -36,13 +36,13 @@
             ['title' => __('Profile')]
         ]
     ]) @endcomponent
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-body">
             <div class="row">
-                <div class="col-3">
+                <div class="col-sm-3">
                     @component('components.user_card', ['user' => $user]) @endcomponent
                 </div>
-                <div class="col-9">
+                <div class="col-sm-9">
                     @if ($user->bio)
                         <h4>@lang('Bio')</h4>
                         {!! Markdown::render($user->bio) !!}

@@ -8,6 +8,19 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+.sm-show {
+    display: none;
+}
+
+@include media-breakpoint-down(sm) {
+    .sm-hide {
+        display: none;
+    }
+    .sm-show {
+        display: block;
+    }
+}
+
 .card-avatar {
   display: block;
   max-width: 100%;
@@ -16,7 +29,12 @@
 }
 
 .post-area {
-  padding: 0 1em 0 0;
+  @include media-breakpoint-down(sm) {
+    padding: 0 1rem;
+  }
+  @include media-breakpoint-up(sm) {
+    padding: 0 1rem 0 0;
+  }
   .card {
     border-top: 0;
     border-left: 0;
@@ -24,6 +42,22 @@
     -moz-border-radius: 0;
     border-radius: 0;
   }
+}
+
+.user-card {
+    @include media-breakpoint-down(sm) {
+        border: none;
+        border-bottom: 1px solid $gray-300;
+        .card-body {
+            padding: 1rem 0;
+        }
+        .card-avatar.responsive {
+            max-width: 50px;
+            max-height: 50px;
+            margin: 0 1rem 0 0;
+            float: left;
+        }
+    }
 }
 
 @include media-breakpoint-only('xs') {
