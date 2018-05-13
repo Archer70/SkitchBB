@@ -43,7 +43,10 @@ class TopicPolicy
      */
     public function update(User $user, Topic $topic)
     {
-        //
+        if (!Auth::check()) {
+            return false;
+        }
+        return $user->isAdmin() || $user->id == $topic->user->id;
     }
 
     /**

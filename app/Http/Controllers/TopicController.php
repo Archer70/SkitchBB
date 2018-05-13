@@ -99,24 +99,40 @@ class TopicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Topic $topic
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Topic $topic)
     {
-        //
+        if (auth()->user()->cant('update', $topic)) {
+            return Redirect::route('users.permission_denied');
+        }
+
+        return view('topic_edit', ['topic' => $topic, 'board' => $topic->board]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param Topic $topic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Topic $topic)
     {
-        //
+        if (auth()->user()->cant('update', $topic)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        $topic->title = $request->title;
+        $topic->firstPost->update(['body' => $request->body]);
+        $topic->save();
+
+        return redirect()->route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
     }
 
     /**

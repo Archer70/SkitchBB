@@ -3,6 +3,9 @@
 @section('page_title', $topic->title)
 
 @section('page_actions')
+    @can('update', $topic)
+        <a class="btn btn-outline-primary btn-block mb-2" href="{{ route('topics.edit', ['topic' => $topic]) }}">@lang('Edit Topic')</a>
+    @endcan
     @can('delete', $topic)
         <form action="{{ route('topics.destroy', ['topic' => $topic]) }}" method="post">
             @csrf

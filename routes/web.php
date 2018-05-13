@@ -44,6 +44,8 @@ Route::get('/boards/{board}/{slug?}', 'BoardController@show')->name('boards.show
 
 Route::get('/boards/{board}/topics/create', 'TopicController@create')->name('topics.create');
 Route::post('/boards/{board}/topics/store', 'TopicController@store')->name('topics.store');
+Route::get('/topics/{topic}/edit', 'TopicController@edit')->name('topics.edit');
+Route::post('/topics/{topic}/update', 'TopicController@update')->name('topics.update');
 Route::post('/topics/{topic}/destroy', 'TopicController@destroy')->name('topics.destroy');
 Route::get('/topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');
 

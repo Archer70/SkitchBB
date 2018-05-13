@@ -37,14 +37,14 @@ class Topic extends Model
         return $this->belongsTo('App\\User');
     }
 
-    public function firstPost()
+    public function getFirstPostAttribute()
     {
-        return $this->hasOne('App\\Post', 'id', 'first_post_id');
+        return $this->posts()->orderBy('id', 'asc')->first();
     }
 
-    public function lastPost()
+    public function getLastPostAttribute()
     {
-        return $this->hasOne('App\\Post', 'id', 'last_post_id');
+        return $this->posts()->orderBy('id', 'desc')->first();
     }
 
     public function posts()

@@ -9,6 +9,8 @@ class Post extends Model
 {
     use Searchable;
 
+    protected $fillable = ['category_id', 'board_id', 'topic_id', 'user_id', 'body', 'likes', 'approved'];
+
     public function category()
     {
         return $this->belongsTo('App\\Category');

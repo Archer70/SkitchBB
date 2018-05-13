@@ -60,13 +60,3 @@
     </div>
     {{ $topics->links() }}
 @endsection
-
-@section('sidebar')
-    <div class="card mb-4">
-        <div class="card-body">
-            <h5 class="card-title">Special Board Block</h5>
-            <h6 class="card-subtitle mb-2 text-muted">subtitle</h6>
-            <p class="card-text">Some quick example text to build on the sidebar.</p>
-        </div>
-    </div>
-@endsection
