@@ -6,9 +6,12 @@ use App\Post;
 use App\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    private static $PAGINATION = 20;
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['show', 'feed', 'index']]);
@@ -83,19 +86,33 @@ class PostController extends Controller
         $posts = Post::where('approved', 1)
             ->with('topic', 'user')
             ->orderBy('id', 'desc')
-            ->paginate(20);
+            ->paginate(self::$PAGINATION);
         return view('post_feed', ['authUser' => auth()->user(), 'posts' => $posts]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        $posts = DB::table('posts')
+            ->select('id')
+            ->where('topic_id', $post->topic_id)
+            ->orderBy('id')
+            ->get()
+            ->all();
+        $indexInTopic = array_search($post->id, array_column($posts, 'id'));
+        $page = (int)(floor($indexInTopic/self::$PAGINATION) + 1);
+        
+        return redirect()->route('topics.show', [
+            'topic' => $post->topic,
+            'slug' => $post->topic->slug,
+            'page' => $page,
+            sprintf('#%d', $post->id)
+        ]);
     }
 
     /**
