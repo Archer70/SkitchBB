@@ -49,12 +49,12 @@ Route::post('/topics/{topic}/destroy', 'TopicController@destroy')->name('topics.
 Route::get('/topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');
 
 // POSTS
-Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
 Route::post('/posts/store', 'PostController@store')->name('posts.store');
 Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 Route::post('/posts/{post}/update', 'PostController@update')->name('posts.update');
 Route::post('/posts/{post}/destroy', 'PostController@destroy')->name('posts.destroy');
 Route::get('/posts/feed', 'PostController@feed')->name('feed');
+Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
 
 // SEARCH
 Route::match(['post', 'get'], '/searches/create', 'SearchController@create')

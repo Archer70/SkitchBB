@@ -15,11 +15,9 @@
                     @endif
                 </div>
             </form>
-            @if($showTitle)
-                <a href="{{ route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]) }}">{{ $topic->title }}</a>
-            @else
-                <a name="{{ $post->id }}" href="{{ route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]) }}?page={{ $currentPage }}#{{ $post->id }}">#{{ $post->id }}</a>
-            @endif
+            <a href="{{ route('posts.show', ['post' => $post]) }}">
+                {{ $showTitle ? $topic->title : '#'.$post->id }}
+            </a>
             | <span>{{ $post->updated_at }}</span>
         </div>
         <div class="card-body post-area">

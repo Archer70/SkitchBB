@@ -13,7 +13,7 @@
                 </div>
                 <span>
                     @lang('Last post in')
-                    <a href="{{ route('topics.show', ['topic' => $board->lastPost()->topic, 'slug' => $board->lastPost()->topic->slug]) }}">
+                    <a href="{{ route('posts.show', ['post' => $board->lastPost()]) }}">
                         {{ $board->lastPost()->topic->title }}
                     </a>
                 </span>

@@ -19,7 +19,7 @@
                 <ul>
                     @foreach ($posts as $post)
                         <li>
-                            <a href="{{ route('topics.show', ['topic' => $post->topic]) }}">{{ $post->topic->title }}</a>
+                            <a href="{{ route('posts.show', ['post' => $post]) }}">{{ $post->topic->title }}</a>
                             <blockquote>{{ $post->body }}</blockquote>
                         </li>
                     @endforeach
