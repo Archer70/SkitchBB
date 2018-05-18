@@ -55,6 +55,7 @@ Route::post('/posts/{post}/update', 'PostController@update')->name('posts.update
 Route::post('/posts/{post}/destroy', 'PostController@destroy')->name('posts.destroy');
 Route::get('/posts/feed', 'PostController@feed')->name('feed');
 Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+Route::get('/posts/newer-than/{lastPost}', 'PostController@loadNew')->name('posts.newer-than');
 
 // SEARCH
 Route::match(['post', 'get'], '/searches/create', 'SearchController@create')

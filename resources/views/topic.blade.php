@@ -25,13 +25,11 @@
 
     {{ $posts->links() }}
     @foreach($posts as $count => $post)
-        @component('components.post', [
-            'authUser' => $authUser,
-            'topic' => $topic,
-            'post' => $post,
-            'currentPage' => $posts->currentPage(),
-            'showTitle' => false
-        ]) @endcomponent
+        <post
+            :topic="{{ json_encode($topic) }}"
+            :post="{{ json_encode($post) }}"
+            :show_title="false"
+        ></post>
     @endforeach
     {{ $posts->links() }}
 

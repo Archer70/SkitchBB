@@ -40,7 +40,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    @component('components.user_card', ['user' => $user]) @endcomponent
+                    <user-card :user="{{ json_encode($user) }}" :responsive="false"></user-card>
                 </div>
                 <div class="col-sm-9">
                     @if ($user->bio)

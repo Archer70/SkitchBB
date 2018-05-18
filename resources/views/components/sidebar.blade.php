@@ -47,7 +47,7 @@
 @endif
 
 @auth
-    @component('components.user_card', ['user' => Auth::user()]) @endcomponent
+    <user-card :user="{{ json_encode(Auth::user()->with('group')->first()) }}" :responsive="false"></user-card>
 @endauth
 
 @yield('sidebar')

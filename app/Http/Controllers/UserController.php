@@ -52,6 +52,7 @@ class UserController extends Controller
         if (auth()->user()->cant('view', $user)) {
             return Redirect::route('users.permission_denied');
         }
+        $user->group; // get dat infoz
         return view('profile', ['user' => $user]);
     }
 

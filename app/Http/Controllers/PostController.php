@@ -79,14 +79,20 @@ class PostController extends Controller
      */
     public function feed(Request $request)
     {
-        if (auth()->user()->cant('viewFeed', Post::class)) {
+        $user = auth()->user();
+        if ($user->cant('viewFeed', Post::class)) {
             return Redirect::route('users.permission_denied');
         }
 
         $posts = Post::where('approved', 1)
             ->with('topic', 'user')
             ->orderBy('id', 'desc')
+            ->with(['board', 'user', 'user.group'])
             ->paginate(self::$PAGINATION);
+        foreach ($posts as $post) {
+            $post->can_update = $user->can('update', $post);
+            $post->can_delete = $user->can('delete', $post);
+        }
         return view('post_feed', ['authUser' => auth()->user(), 'posts' => $posts]);
     }
 
@@ -113,6 +119,33 @@ class PostController extends Controller
             'page' => $page,
             sprintf('#%d', $post->id)
         ]);
+    }
+
+    /**
+     * Loads new posts for a topic.
+     *
+     * @param Post $lastPost
+     * @return \Illuminate\Http\Response
+     */
+    public function loadNew(Post $lastPost)
+    {
+        $posts = DB::table('posts')
+            ->where([
+                ['topic_id', '=', $lastPost->topic->id],
+                ['id', '>', $lastPost->id]
+            ])
+            ->get();
+        $authUser = auth()->user();
+        $components = [];
+        foreach ($posts as $post) {
+            $components[] = [
+                'authUser' => $authUser,
+                'topic' => $lastPost->topic,
+                'post' => $post,
+                'showTitle' => false
+            ];
+        }
+        return view('component', ['name' => 'post', 'components' => $components]);
     }
 
     /**

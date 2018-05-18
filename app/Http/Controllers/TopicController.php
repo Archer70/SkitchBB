@@ -88,11 +88,16 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        if (auth()->user()->cant('view', $topic)) {
+        $user = auth()->user();
+        if ($user->cant('view', $topic)) {
             return Redirect::route('users.permission_denied');
         }
         
         $posts = $topic->posts()->with(['board', 'user', 'user.group'])->paginate(20);
+        foreach ($posts as $post) {
+            $post->can_update = $user->can('update', $post);
+            $post->can_delete = $user->can('delete', $post);
+        }
         return view('topic', ['authUser' => auth()->user(), 'topic' => $topic, 'posts' => $posts]);
     }
 

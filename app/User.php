@@ -31,6 +31,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['avatarUrl'];
+
     public function topics()
     {
         return $this->hasMany('App\\Topic');
@@ -58,6 +60,11 @@ class User extends Authenticatable
         }
 
         return sprintf('https://www.gravatar.com/avatar/%s?s=128&d=identicon&r=g', $this->email);
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->avatarUrl();
     }
 
     public function isAdmin()

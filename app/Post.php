@@ -4,12 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use App\Utils\Markdown;
 
 class Post extends Model
 {
     use Searchable;
 
     protected $fillable = ['category_id', 'board_id', 'topic_id', 'user_id', 'body', 'likes', 'approved'];
+
+    protected $appends = ['markdownBody'];
 
     public function category()
     {
@@ -29,6 +32,11 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\\User');
+    }
+
+    public function getMarkdownBodyAttribute()
+    {
+        return Markdown::render($this->body);
     }
 
     public function toSearchableArray()

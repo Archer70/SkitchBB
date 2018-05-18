@@ -13,6 +13,7 @@
         "laravel/scout": "^4.0",
         "laravel/tinker": "~1.0",
         "michelf/php-markdown": "^1.8",
+        "tightenco/ziggy": "^0.6.6",
         "yab/laravel-scout-mysql-driver": "^2.0"
     },
     "require-dev": {

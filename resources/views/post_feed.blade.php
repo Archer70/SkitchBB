@@ -12,7 +12,7 @@
 
     {{ $posts->links() }}
     @foreach($posts as $count => $post)
-        @component('components.post', ['authUser' => $authUser, 'topic' => $post->topic, 'post' => $post, 'showTitle' => true]) @endcomponent
+        <post :post="{{ json_encode($post) }}" :topic="{{ json_encode($post->topic) }}" :show_title="true"></post>
     @endforeach
     {{ $posts->links() }}
 
