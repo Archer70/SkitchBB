@@ -48,9 +48,10 @@ class CategoryController extends Controller
             'title' => 'required',
             'description' => 'nullable'
         ]);
-
+        
+        $lastCategory = Category::orderBy('order', 'desc')->first();
         Category::create([
-            'title' => $request->title, 'description' => $request->description
+            'title' => $request->title, 'description' => $request->description, 'order' => $lastCategory->order + 1
         ]);
 
         return Redirect::route('home');
