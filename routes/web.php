@@ -32,6 +32,7 @@ Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('cate
 Route::post('/categories/{category}/update', 'CategoryController@update')->name('categories.update');
 Route::post('/categories/{category}/destroy', 'CategoryController@destroy')->name('categories.destroy');
 Route::get('/categories/{category}/move-up', 'CategoryController@moveUp')->name('categories.move-up');
+Route::get('/categories/{category}/move-down', 'CategoryController@moveDown')->name('categories.move-down');
 
 // BOARDS
 Route::get('/categories/{category}/boards/create', 'BoardController@create')->name('boards.create');

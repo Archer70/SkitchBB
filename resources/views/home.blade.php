@@ -31,7 +31,7 @@
                                 </a>
                             @endif
                             @if ($category->id != $lastCategoryId)
-                                <a class="btn btn-primary" href="{{ route('categories.edit', ['category' => $category]) }}">
+                                <a class="btn btn-primary" href="{{ route('categories.move-down', ['category' => $category]) }}">
                                     <i class="fas fa-angle-down"></i>
                                 </a>
                             @endif

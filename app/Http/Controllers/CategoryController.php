@@ -118,6 +118,25 @@ class CategoryController extends Controller
         return redirect()->route('home');
     }
 
+    public function moveDown(Category $category)
+    {
+        if (auth()->user()->cant('update', $category)) {
+            return Redirect::route('users.permission_denied');
+        }
+        $lastCategory = Category::orderBy('order', 'desc')->first();
+        if ($category->order == $lastCategory->order) { // Don't be an idiot.
+            return redirect()->route('home');
+        }
+
+        $categoryToDecrement = Category::where('order', ++$category->order)->first();
+
+        $categoryToDecrement->order--;
+        $categoryToDecrement->save();
+        $category->save();
+
+        return redirect()->route('home');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
