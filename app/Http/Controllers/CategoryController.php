@@ -100,6 +100,24 @@ class CategoryController extends Controller
         return redirect()->route('home');
     }
 
+    public function moveUp(Category $category)
+    {
+        if (auth()->user()->cant('update', $category)) {
+            return Redirect::route('users.permission_denied');
+        }
+        if ($category->order == 1) { // Don't be an idiot.
+            return redirect()->route('home');
+        }
+
+        $categoryToIncrement = Category::where('order', --$category->order)->first();
+
+        $categoryToIncrement->order++;
+        $categoryToIncrement->save();
+        $category->save();
+
+        return redirect()->route('home');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

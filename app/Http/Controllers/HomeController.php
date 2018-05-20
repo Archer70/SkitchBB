@@ -14,6 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', ['categories' => Category::all()]);
+        $categories = Category::orderBy('order')->with(['boards'])->get();
+        return view('home', [
+            'categories' => Category::orderBy('order')->with(['boards'])->get(),
+            'authUser' => auth()->user(),
+            'lastCategoryId' => $categories->last()->id
+        ]);
     }
 }
