@@ -60,38 +60,23 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 60);
+/******/ 	return __webpack_require__(__webpack_require__.s = 47);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 60:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(48);
 
 
 /***/ }),
 
-/***/ 61:
-/***/ (function(module, exports, __webpack_require__) {
-
-Vue.component('topic', __webpack_require__(62));
-Vue.component('topic-form', __webpack_require__(67));
-
-/***/ }),
-
-/***/ 62:
+/***/ 48:
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/scotty/public_html/SimpleApparatus/resources/assets/js/components/Topic.vue'");
-
-/***/ }),
-
-/***/ 67:
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/scotty/public_html/SimpleApparatus/resources/assets/js/components/TopicForm.vue'");
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/scotty/public_html/SimpleApparatus/resources/assets/js/topic.js'");
 
 /***/ })
 

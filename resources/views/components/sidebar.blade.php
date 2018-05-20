@@ -47,7 +47,7 @@
 @endif
 
 @auth
-    <user-card :user="{{ json_encode(Auth::user()->with('group')->first()) }}" :responsive="false"></user-card>
+    <user-card :user="{{ json_encode(Auth::user()) }}" :responsive="false"></user-card>
 @endauth
 
 @yield('sidebar')

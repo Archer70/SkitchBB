@@ -129,23 +129,14 @@ class PostController extends Controller
      */
     public function loadNew(Post $lastPost)
     {
-        $posts = DB::table('posts')
-            ->where([
-                ['topic_id', '=', $lastPost->topic->id],
-                ['id', '>', $lastPost->id]
-            ])
-            ->get();
-        $authUser = auth()->user();
-        $components = [];
-        foreach ($posts as $post) {
-            $components[] = [
-                'authUser' => $authUser,
-                'topic' => $lastPost->topic,
-                'post' => $post,
-                'showTitle' => false
-            ];
-        }
-        return view('component', ['name' => 'post', 'components' => $components]);
+        $posts = Post::where([
+            ['topic_id', '=', $lastPost->topic->id],
+            ['id', '>', $lastPost->id]
+        ])
+        ->with(['topic', 'user', 'user.group'])
+        ->get();
+        header('Content-type: application/json');
+        return json_encode($posts);
     }
 
     /**

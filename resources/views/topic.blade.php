@@ -24,13 +24,11 @@
     ]) @endcomponent
 
     {{ $posts->links() }}
-    @foreach($posts as $count => $post)
-        <post
-            :topic="{{ json_encode($topic) }}"
-            :post="{{ json_encode($post) }}"
-            :show_title="false"
-        ></post>
-    @endforeach
+    <posts
+        :topic="{{ json_encode($topic) }}"
+        :posts="{{ json_encode($posts->items()) }}"
+        :is_last_page={{ $posts->lastPage() == $posts->currentPage() ? 'true' : 'false' }}
+    ></posts>
     {{ $posts->links() }}
 
     @can('create', \App\Post::class)
