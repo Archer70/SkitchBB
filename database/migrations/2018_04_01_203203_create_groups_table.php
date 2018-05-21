@@ -23,7 +23,7 @@ class CreateGroupsTable extends Migration
 
         Schema::table('users', function(Blueprint $table)
         {
-            $table->unsignedInteger('group_id')->after('id')->nullable();
+            $table->unsignedInteger('group_id')->after('id')->default(1);
             $table->foreign('group_id')->references('id')->on('groups');
             $table->dropColumn(['admin']);
         });

@@ -59,7 +59,7 @@ class User extends Authenticatable
             return $this->avatar_url;
         }
 
-        return sprintf('https://www.gravatar.com/avatar/%s?s=128&d=identicon&r=g', $this->email);
+        return sprintf('https://www.gravatar.com/avatar/%s?s=128&d=identicon&r=g', md5($this->email));
     }
 
     public function getAvatarUrlAttribute()
