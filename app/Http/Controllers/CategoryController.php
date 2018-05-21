@@ -111,9 +111,10 @@ class CategoryController extends Controller
         }
 
         $categoryToIncrement = Category::where('order', --$category->order)->first();
-
-        $categoryToIncrement->order++;
-        $categoryToIncrement->save();
+        if ($categoryToIncrement) {
+            $categoryToIncrement->order++;
+            $categoryToIncrement->save();
+        }
         $category->save();
 
         return redirect()->route('home');
@@ -130,9 +131,10 @@ class CategoryController extends Controller
         }
 
         $categoryToDecrement = Category::where('order', ++$category->order)->first();
-
-        $categoryToDecrement->order--;
-        $categoryToDecrement->save();
+        if ($categoryToDecrement) {
+            $categoryToDecrement->order--;
+            $categoryToDecrement->save();
+        }
         $category->save();
 
         return redirect()->route('home');
@@ -180,8 +182,19 @@ class CategoryController extends Controller
             ->delete();
 
         $category->delete();
-
+        $this->resetOrderNumbers();
+        
         return redirect()->route('home');
+    }
+
+    private function resetOrderNumbers()
+    {
+        $categories = Category::orderBy('order')->get();
+        for ($i=0; $i<count($categories); $i++) {
+            $category = $categories[$i];
+            $category->order = $i+1;
+            $category->save();
+        }
     }
 
     private function getIdsFromDbResult($result)
