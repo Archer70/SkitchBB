@@ -40,6 +40,8 @@ Route::post('/categories/{category}/boards/store', 'BoardController@store')->nam
 Route::get('/boards/{board}/edit', 'BoardController@edit')->name('boards.edit');
 Route::post('boards/{board}/update', 'BoardController@update')->name('boards.update');
 Route::post('boards/{board}/destroy', 'BoardController@destroy')->name('boards.destroy');
+Route::get('/boards/{board}/move-up', 'BoardController@moveUp')->name('boards.move-up');
+Route::get('/boards/{board}/move-down', 'BoardController@moveDown')->name('boards.move-down');
 Route::get('/boards/{board}/{slug?}', 'BoardController@show')->name('boards.show');
 
 // TOPICS

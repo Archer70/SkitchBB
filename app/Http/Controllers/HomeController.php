@@ -16,9 +16,11 @@ class HomeController extends Controller
     {
         $categories = Category::orderBy('order')->with(['boards'])->get();
         return view('home', [
-            'categories' => Category::orderBy('order')->with(['boards'])->get(),
+            'categories' => Category::orderBy('order')->with(['boards' => function($query) {
+                $query->orderBy('order');
+            }])->get(),
             'authUser' => auth()->user(),
-            'lastCategoryId' => $categories->last()->id
+            'lastCategory' => $categories->last()
         ]);
     }
 }

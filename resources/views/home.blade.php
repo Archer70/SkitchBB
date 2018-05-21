@@ -30,7 +30,7 @@
                                     <i class="fas fa-angle-up"></i>
                                 </a>
                             @endif
-                            @if ($category->id != $lastCategoryId)
+                            @if ($category->id != $lastCategory->id)
                                 <a class="btn btn-primary" href="{{ route('categories.move-down', ['category' => $category]) }}">
                                     <i class="fas fa-angle-down"></i>
                                 </a>
@@ -48,12 +48,11 @@
             </div>
             <div class="card-body">
                 @if ($category->boards)
-                    <div class="row">
                     @foreach ($category->boards as $board)
-                            @component('components.board_block', ['board' => $board])
-                            @endcomponent
+                        <div class="row">
+                            @component('components.board_block', ['board' => $board, 'isLast' => $board->id == $category->boards->last()->id]) @endcomponent
+                        </div>
                     @endforeach
-                    </div>
                 @endif
             </div>
         </div>
