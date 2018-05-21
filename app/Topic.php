@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Laravel\Scout\Searchable;
+use App\ReadTopic;
+use App\User;
 
 class Topic extends Model
 {
@@ -50,6 +52,19 @@ class Topic extends Model
     public function posts()
     {
         return $this->hasMany('App\\Post');
+    }
+
+    public function markRead(User $user)
+    {
+        $alreadyMarkedRead = ReadTopic::where([
+            ['user_id', '=', $user->id],
+            ['topic_id', '=', $this->id]
+        ])->first();
+        if ($alreadyMarkedRead) {
+            return;
+        }
+
+        ReadTopic::create(['user_id' => $user->id, 'topic_id' => $this->id]);
     }
 
     public function toSearchableArray()

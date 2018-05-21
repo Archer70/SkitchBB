@@ -98,6 +98,9 @@ class TopicController extends Controller
             $post->can_update = $user->can('update', $post);
             $post->can_delete = $user->can('delete', $post);
         }
+
+        $topic->markRead($user);
+        
         return view('topic', ['authUser' => auth()->user(), 'topic' => $topic, 'posts' => $posts]);
     }
 
