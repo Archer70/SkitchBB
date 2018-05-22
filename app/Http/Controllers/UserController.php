@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\ReadTopic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -164,6 +165,8 @@ class UserController extends Controller
             return Redirect::route('users.permission_denied');
         }
 
+        ReadTopic::where('user_id', $user->id)->delete();
+        
         $user->posts()->delete();
         $user->topics()->delete();
         $user->delete();
