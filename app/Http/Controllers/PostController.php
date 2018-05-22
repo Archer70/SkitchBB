@@ -68,6 +68,8 @@ class PostController extends Controller
         $user->post_count++;
         $user->save();
 
+        $topic->markUnread($user);
+
         return Redirect::route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
     }
 

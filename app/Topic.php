@@ -67,6 +67,14 @@ class Topic extends Model
         ReadTopic::create(['user_id' => $user->id, 'topic_id' => $this->id]);
     }
 
+    public function markUnread(User $user)
+    {
+        ReadTopic::where([
+            ['topic_id', '=', $this->id],
+            ['user_id', '<>', $user->id],
+        ])->delete();
+    }
+
     public function toSearchableArray()
     {
         return [
