@@ -100,10 +100,10 @@ class TopicController extends Controller
         }
 
         $topic->markRead($user);
-        
+
         return view('topic', ['authUser' => auth()->user(), 'topic' => $topic, 'posts' => $posts]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -156,6 +156,9 @@ class TopicController extends Controller
         }
         $redirectBoard = $topic->board->id;
         $redirectSlug = $topic->board->slug;
+
+        $topic->markUnread();
+
         $topic->posts()->delete();
         $topic->delete();
 
