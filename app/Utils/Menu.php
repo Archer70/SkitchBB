@@ -15,8 +15,13 @@ class Menu
                 'href' => route('home'),
             ],
             'feed' => [
-                'title' => __('Post Feed'),
+                'title' => __('Feed'),
                 'href' => route('feed'),
+                'type' => 'dropdown',
+                'sub_buttons' => [
+                    ['href' => route('feed'), 'title' => __('Latest Posts')],
+                    ['href' => route('topics.unread'), 'title' => __('Unread Topics')],
+                ]
             ],
         ];
 

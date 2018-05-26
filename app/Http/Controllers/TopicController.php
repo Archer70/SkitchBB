@@ -103,7 +103,22 @@ class TopicController extends Controller
 
         return view('topic', ['authUser' => auth()->user(), 'topic' => $topic, 'posts' => $posts]);
     }
-    
+
+    public function unread(Request $request)
+    {
+        $topics = DB::table('topics')
+            ->whereNotExists(function($query) {
+                $query->select(DB::raw(1))
+                    ->from('read_topics')
+                    ->whereRaw(
+                        'read_topics.user_id = :user and topics.id = read_topics.topic_id',
+                        ['user' => auth()->user()->id]
+                    );
+            })
+            ->get();
+        return view('unread_topics', ['topics' => $topics]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

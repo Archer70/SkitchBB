@@ -29,15 +29,27 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     @foreach (\App\Utils\Menu::buttons() as $id => $button)
-                        <li class="nav-item {{$button['current'] ? 'active border-bottom border-primary' : ''}}">
-                            @if (isset($button['type']) && $button['type'] == 'form')
+                        @if (isset($button['type']) && $button['type'] == 'form')
+                            <li class="nav-item {{$button['current'] ? 'active border-bottom border-primary' : ''}}">
                                 <form method="post" action="{{ $button['href'] }}" id="{{ $id }}">
                                     @csrf
                                     <a class="nav-link" onclick="document.getElementById('{{ $id }}').submit()" href="#">{{ $button['title'] }}</a>
                                 </form>
-                            @else
+                            </li>
+                        @elseif (isset($button['type']) && $button['type'] == 'dropdown')
+                            <li class="nav-item dropdown {{$button['current'] ? 'active border-bottom border-primary' : ''}}">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ $button['title'] }}</a>
+                                <div class="dropdown-menu">
+                                    @foreach ($button['sub_buttons'] as $subButton)
+                                        <a class="dropdown-item" href="{{ $subButton['href'] }}">{{ $subButton['title'] }}</a>
+                                    @endforeach
+                                </div>
+                            </li>
+                        @else
+                            <li class="nav-item {{$button['current'] ? 'active border-bottom border-primary' : ''}}">
                                 <a class="nav-link" href="{{ $button['href'] }}">{{ $button['title'] }}</a>
-                            @endif
+                            </li>
+                         @endif
                         </li>
                     @endforeach
                 </ul>
