@@ -115,7 +115,7 @@ class TopicController extends Controller
                         ['user' => auth()->user()->id]
                     );
             })
-            ->get();
+            ->paginate(20);
         return view('unread_topics', ['topics' => $topics]);
     }
 

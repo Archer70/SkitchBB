@@ -17,6 +17,7 @@
             </h5>
         </div>
 
+        {{ $topics->links() }}
         <ul class="list-group list-group-flush">
             @foreach ($topics as $topic)
                 <li class="list-group-item">
@@ -28,5 +29,6 @@
                 <li class="list-group-item text-secondary">@lang('No topics to show!')</li>
             @endif
         </ul>
+        {{ $topics->links() }}
     </div>
 @endsection
