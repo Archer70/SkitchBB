@@ -50,6 +50,8 @@ Route::post('/boards/{board}/topics/store', 'TopicController@store')->name('topi
 Route::get('/topics/{topic}/edit', 'TopicController@edit')->name('topics.edit');
 Route::post('/topics/{topic}/update', 'TopicController@update')->name('topics.update');
 Route::post('/topics/{topic}/destroy', 'TopicController@destroy')->name('topics.destroy');
+Route::post('/topics/{topic}/subscribe', 'TopicController@subscribe')->name('topics.subscribe');
+Route::post('/topics/{topic}/unsubscribe', 'TopicController@unsubscribe')->name('topics.unsubscribe');
 Route::get('/topics/unread', 'TopicController@unread')->name('topics.unread');
 //Route::get('/topics/unread-replies', 'TopicController@unreadReplies')->name('topics.unread-replies');
 Route::get('/topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');

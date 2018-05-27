@@ -54,6 +54,42 @@ class Topic extends Model
         return $this->hasMany('App\\Post');
     }
 
+    public function subscribe()
+    {
+        $exists = TopicSubscriptions::where([
+            ['user_id', '=', auth()->user()->id],
+            ['topic_id', '=', $this->id]
+        ])->first();
+        if ($exists) {
+            return;
+        }
+
+        TopicSubscriptions::create([
+            'user_id' => auth()->user()->id,
+            'topic_id' => $this->id
+        ]);
+    }
+
+    public function unsubscribe()
+    {
+        $exists = TopicSubscriptions::where([
+            ['user_id', '=', auth()->user()->id],
+            ['topic_id', '=', $this->id]
+        ])->delete();
+    }
+
+    public function subscribed()
+    {
+        if (!auth()->check()) {
+            return false;
+        }
+        $exists = TopicSubscriptions::where([
+            ['user_id', '=', auth()->user()->id],
+            ['topic_id', '=', $this->id]
+        ])->first();
+        return (boolean) $exists;
+    }
+
     public function markRead(User $user)
     {
         $alreadyMarkedRead = ReadTopic::where([

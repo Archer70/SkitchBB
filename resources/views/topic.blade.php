@@ -3,6 +3,19 @@
 @section('page_title', $topic->title)
 
 @section('page_actions')
+    @auth
+        @if ($topic->subscribed())
+            <form action="{{ route('topics.unsubscribe', ['topic' => $topic]) }}" method="post">
+                @csrf
+                <input type="submit" class="btn btn-outline-primary btn-block mb-2" value="@lang('Unsubscribe')">
+            </form>
+        @else
+            <form action="{{ route('topics.subscribe', ['topic' => $topic]) }}" method="post">
+                @csrf
+                <input type="submit" class="btn btn-outline-primary btn-block mb-2" value="@lang('Subscribe')">
+            </form>
+        @endif
+    @endauth
     @can('update', $topic)
         <a class="btn btn-outline-primary btn-block mb-2" href="{{ route('topics.edit', ['topic' => $topic]) }}">@lang('Edit Topic')</a>
     @endcan

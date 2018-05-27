@@ -99,13 +99,19 @@ class TopicController extends Controller
             $post->can_delete = $user->can('delete', $post);
         }
 
-        $topic->markRead($user);
+        if (auth()->check()) {
+            $topic->markRead($user);
+        }
 
-        return view('topic', ['authUser' => auth()->user(), 'topic' => $topic, 'posts' => $posts]);
+        return view('topic', ['authUser' => $user, 'topic' => $topic, 'posts' => $posts]);
     }
 
     public function unread(Request $request)
     {
+        if (!auth()->check()) {
+            return view('home');
+        }
+
         $topics = DB::table('topics')
             ->whereNotExists(function($query) {
                 $query->select(DB::raw(1))
@@ -154,6 +160,28 @@ class TopicController extends Controller
         $topic->title = $request->title;
         $topic->firstPost->update(['body' => $request->body]);
         $topic->save();
+
+        return redirect()->route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
+    }
+
+    public function subscribe(Topic $topic)
+    {
+        if (auth()->user()->cant('view', $topic)) {
+            return Redirect::route('users.permission_denied');
+        }
+
+        $topic->subscribe();
+
+        return redirect()->route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
+    }
+
+    public function unsubscribe(Topic $topic)
+    {
+        if (auth()->user()->cant('view', $topic)) {
+            return Redirect::route('users.permission_denied');
+        }
+
+        $topic->unsubscribe();
 
         return redirect()->route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
     }
