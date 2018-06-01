@@ -69,6 +69,7 @@ class PostController extends Controller
         $user->save();
 
         $topic->markUnread($user);
+        $topic->subscribe();
 
         return Redirect::route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
     }

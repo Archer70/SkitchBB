@@ -53,7 +53,7 @@ Route::post('/topics/{topic}/destroy', 'TopicController@destroy')->name('topics.
 Route::post('/topics/{topic}/subscribe', 'TopicController@subscribe')->name('topics.subscribe');
 Route::post('/topics/{topic}/unsubscribe', 'TopicController@unsubscribe')->name('topics.unsubscribe');
 Route::get('/topics/unread', 'TopicController@unread')->name('topics.unread');
-//Route::get('/topics/unread-replies', 'TopicController@unreadReplies')->name('topics.unread-replies');
+Route::get('/topics/unread-replies', 'TopicController@replies')->name('topics.unread-replies');
 Route::get('/topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');
 
 // POSTS

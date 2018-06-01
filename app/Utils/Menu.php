@@ -20,12 +20,14 @@ class Menu
                 'type' => 'dropdown',
                 'sub_buttons' => [
                     ['href' => route('feed'), 'title' => __('Latest Posts')],
-                    ['href' => route('topics.unread'), 'title' => __('Unread Topics')],
                 ]
             ],
         ];
 
         if (Auth::check()) {
+            $buttons['feed']['sub_buttons'][] = ['href' => route('topics.unread'), 'title' => __('Unread Topics')];
+            $buttons['feed']['sub_buttons'][] = ['href' => route('topics.unread-replies'), 'title' => __('Unread Replies')];
+            
             $buttons['users.show'] = [
                 'title' => __('Profile'),
                 'href' => route('users.show', ['user' => Auth::user()]),

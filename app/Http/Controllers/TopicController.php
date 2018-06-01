@@ -125,6 +125,36 @@ class TopicController extends Controller
         return view('unread_topics', ['topics' => $topics]);
     }
 
+    public function replies(Request $request)
+    {
+        if (!auth()->check()) {
+            return view('home');
+        }
+
+        $userId = auth()->user()->id;
+
+        $topics = DB::table('topics')
+            ->whereExists(function($query) use ($userId) {
+                $query->select(DB::raw(1))
+                    ->from('topic_subscriptions')
+                    ->where([
+                        ['topic_subscriptions.user_id', '=', $userId],
+                        ['topics.id', '=', DB::raw('topic_subscriptions.topic_id')]
+                    ]);
+            })
+            ->whereNotExists(function($query) use ($userId) {
+                $query->select(DB::raw(1))
+                    ->from('read_topics')
+                    ->where([
+                        ['read_topics.user_id', '=', $userId],
+                        ['topics.id', '=', DB::raw('read_topics.topic_id')]
+                    ]);
+            })
+            ->simplePaginate(20);
+
+        return view('unread_replies', ['topics' => $topics]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
