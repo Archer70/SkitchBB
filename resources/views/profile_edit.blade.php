@@ -11,7 +11,7 @@
     ]) @endcomponent
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">@lang('Profile Settings')</h5>
+            <h5 class="card-title">@lang('General Settings')</h5>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -80,6 +80,7 @@
                     ></textarea>
                 </div>
                 <hr>
+                <h5 class="card-title">@lang('Change Password')</h5>
                 <div class="form-group">
                     <input class="form-control" type="password" name="password_old" placeholder="@lang('Old Password')">
                     <small class="form-text text-muted">@lang('Only required if changing your password.')</small>
@@ -92,6 +93,12 @@
                         <input class="form-control" type="password" name="password_confirm" placeholder="@lang('Confirm New Password')">
                     </div>
                 </div>
+                <hr>
+                <h5 class="card-title">@lang('Email')</h5>
+                <h6 class="card-subtitle text-muted mb-2">@lang('Topic Replies')</h6>
+                <a class="btn btn-primary" href="{{ route($user->receives_email ? 'users.email_unsubscribe' : 'users.email_subscribe', ['user' => $user]) }}">
+                    {{ $user->receives_email ? __('Unsubscribe') : __('Subscribe') }}
+                </a>
                 <hr>
                 @csrf
                 <button type="submit" class="btn btn-primary">@lang('Save')</button>

@@ -119,6 +119,30 @@ class UserController extends Controller
         return Redirect::route('users.show', ['user' => $user]);
     }
 
+    public function emailUnsubscribe(User $user)
+    {
+        if (auth()->user()->cant('update', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
+
+        $user->receives_email = false;
+        $user->save();
+
+        return redirect()->route('users.show', ['user' => $user]);
+    }
+
+    public function emailSubscribe(User $user)
+    {
+        if (auth()->user()->cant('update', $user)) {
+            return Redirect::route('users.permission_denied');
+        }
+
+        $user->receives_email = true;
+        $user->save();
+
+        return redirect()->route('users.show', ['user' => $user]);
+    }
+
     public function banned()
     {
         return view('banned');
