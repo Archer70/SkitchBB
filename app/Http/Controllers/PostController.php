@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Topic;
+use App\Mail\TopicReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -71,7 +73,11 @@ class PostController extends Controller
         $topic->markUnread($user);
         $topic->subscribe();
 
-        return Redirect::route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
+        foreach ($topic->subscribedUsers($user) as $emailUser) {
+            Mail::to($emailUser)->send(new TopicReply($topic, $post, $emailUser));
+        }
+        
+        return Redirect::route('posts.show', ['post' => $post]);
     }
 
     /**

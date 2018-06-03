@@ -90,6 +90,22 @@ class Topic extends Model
         return (boolean) $exists;
     }
 
+    public function subscribedUsers(User $excludingUser=null)
+    {
+        $where = [
+            ['topic_id', '=', $this->id]
+        ];
+        if ($excludingUser) {
+            $where[] = ['user_id', '<>', $excludingUser->id];
+        }
+
+        return User::whereIn(
+            'id',
+            TopicSubscriptions::select('user_id')->where($where)
+        )
+        ->get();
+    }
+
     public function markRead(User $user)
     {
         $alreadyMarkedRead = ReadTopic::where([
