@@ -20,8 +20,6 @@ Route::get('/users/{user}', 'UserController@show')->name('users.show');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::post('/users/{user}/update', 'UserController@update')->name('users.update');
 Route::post('/users/{user}/destroy', 'UserController@destroy')->name('users.destroy');
-Route::get('/users/{user}/email-unsubscribe', 'UserController@emailUnsubscribe')->name('users.email_unsubscribe');
-Route::get('/users/{user}/email-subscribe', 'UserController@emailSubscribe')->name('users.email_subscribe');
 Route::post('/users/{user}/ban', 'UserController@ban')->name('users.ban');
 Route::post('/users/{user}/unban', 'UserController@unban')->name('users.unban');
 Route::get('/banned', 'UserController@banned')->name('users.banned');

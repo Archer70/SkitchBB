@@ -94,11 +94,17 @@
                     </div>
                 </div>
                 <hr>
-                <h5 class="card-title">@lang('Email')</h5>
-                <h6 class="card-subtitle text-muted mb-2">@lang('Topic Replies')</h6>
-                <a class="btn btn-primary" href="{{ route($user->receives_email ? 'users.email_unsubscribe' : 'users.email_subscribe', ['user' => $user]) }}">
-                    {{ $user->receives_email ? __('Unsubscribe') : __('Subscribe') }}
-                </a>
+                <h5 class="card-title">@lang('Email Notifications')</h5>
+                <div class="custom-control custom-checkbox">
+                    <input
+                        name="receives_email"
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="topic-reply"
+                        {{$user->receives_email ? 'checked' : ''}}
+                    >
+                    <label class="custom-control-label" for="topic-reply">@lang('Receive notifications of replies to topics you\'re subscribed to.')</label>
+                </div>
                 <hr>
                 @csrf
                 <button type="submit" class="btn btn-primary">@lang('Save')</button>

@@ -77,6 +77,8 @@ class TopicController extends Controller
         $user->post_count++;
         $user->save();
 
+        $topic->subscribe();
+
         return Redirect::route('topics.show', ['topic' => $topic, 'slug' => $topic->slug]);
     }
 

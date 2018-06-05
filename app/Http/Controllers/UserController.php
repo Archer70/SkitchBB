@@ -94,6 +94,7 @@ class UserController extends Controller
         $user->title = $request->title;
         $user->avatar_url = $request->avatar_url;
         $user->bio = $request->bio;
+        $user->receives_email = (boolean) $request->receives_email;
         $user->save();
 
         // Password changing requires some extra logic, but still save the other stuff if it fails.
@@ -117,30 +118,6 @@ class UserController extends Controller
         }
 
         return Redirect::route('users.show', ['user' => $user]);
-    }
-
-    public function emailUnsubscribe(User $user)
-    {
-        if (auth()->user()->cant('update', $user)) {
-            return Redirect::route('users.permission_denied');
-        }
-
-        $user->receives_email = false;
-        $user->save();
-
-        return redirect()->route('users.show', ['user' => $user]);
-    }
-
-    public function emailSubscribe(User $user)
-    {
-        if (auth()->user()->cant('update', $user)) {
-            return Redirect::route('users.permission_denied');
-        }
-
-        $user->receives_email = true;
-        $user->save();
-
-        return redirect()->route('users.show', ['user' => $user]);
     }
 
     public function banned()
