@@ -28,6 +28,12 @@
   margin: 0 auto;
 }
 
+.user_group_badge {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
 .post-area {
   @include media-breakpoint-down(sm) {
     padding: 0 1rem;
@@ -51,11 +57,15 @@
         .card-body {
             padding: 1rem 0;
         }
-        .card-avatar.responsive {
+        .responsive-image {
             max-width: 50px;
             max-height: 50px;
             margin: 0 1rem 0 0;
             float: left;
+        }
+        .responsive-title {
+            float: right;
+            text-align: right;
         }
     }
 }

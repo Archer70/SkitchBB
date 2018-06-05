@@ -48672,7 +48672,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'responsive']
+    props: ['user', 'responsive'],
+    data: function data() {
+        return {
+            assetUrl: window.asset_url,
+            userGroup: this.user.group
+        };
+    },
+    methods: {
+        badgeUrl: function badgeUrl() {
+            if (this.userGroup.icon) {
+                return this.userGroup.icon;
+            } else if (this.userGroup.id == 2) {
+                return this.assetUrl + 'images/admin_icon.png';
+            } else if (this.userGroup.id == 3) {
+                return this.assetUrl + 'images/admin_icon.png';
+            }
+            return '';
+        }
+    }
 });
 
 /***/ }),
@@ -48685,21 +48703,26 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card user-card" }, [
     _c("div", { staticClass: "card-body" }, [
-      _c("img", {
-        class: _vm.responsive ? "card-avatar responsive" : "card-avatar",
-        attrs: { src: _vm.user.avatarUrl, alt: "" }
-      }),
+      _c(
+        "h5",
+        {
+          class:
+            "card-title text-center" +
+            (_vm.responsive ? " responsive-title" : "")
+        },
+        [
+          _c("a", { attrs: { href: _vm.route("users.show", _vm.user) } }, [
+            _vm._v(
+              "\n                " + _vm._s(_vm.user.name) + "\n            "
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
-      _vm.responsive
-        ? _c(
-            "a",
-            {
-              staticClass: "sm-show",
-              attrs: { href: _vm.route("users.show", _vm.user) }
-            },
-            [_vm._v("\n            " + _vm._s(_vm.user.name) + "\n        ")]
-          )
-        : _vm._e()
+      _c("img", {
+        class: _vm.responsive ? "card-avatar responsive-image" : "card-avatar",
+        attrs: { src: _vm.user.avatarUrl, alt: "" }
+      })
     ]),
     _vm._v(" "),
     _c(
@@ -48710,15 +48733,18 @@ var render = function() {
       },
       [
         _c("li", { staticClass: "list-group-item" }, [
-          _c("a", { attrs: { href: _vm.route("users.show", _vm.user) } }, [
-            _vm._v(
-              "\n                " + _vm._s(_vm.user.name) + "\n            "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "list-group-item" }, [
-          _vm._v("\n            " + _vm._s(_vm.user.group.name) + "\n        ")
+          _vm.badgeUrl()
+            ? _c("div", [
+                _c("img", {
+                  staticClass: "user_group_badge",
+                  attrs: { src: _vm.badgeUrl() }
+                })
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.badgeUrl()
+            ? _c("span", [_vm._v(_vm._s(_vm.user.group.name))])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _vm.user.title

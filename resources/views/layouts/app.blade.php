@@ -12,6 +12,7 @@
 
     <script>
         window.csrf_token = '{!! csrf_token() !!}';
+        window.asset_url = '{{ asset('') }}';
     </script>
 
     <!-- Styles -->

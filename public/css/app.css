@@ -10432,6 +10432,12 @@ a.text-dark:focus {
   margin: 0 auto;
 }
 
+.user_group_badge {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
 @media (max-width: 767.98px) {
   .post-area {
     padding: 0 1rem;
@@ -10460,11 +10466,16 @@ a.text-dark:focus {
     padding: 1rem 0;
   }
 
-  .user-card .card-avatar.responsive {
+  .user-card .responsive-image {
     max-width: 50px;
     max-height: 50px;
     margin: 0 1rem 0 0;
     float: left;
+  }
+
+  .user-card .responsive-title {
+    float: right;
+    text-align: right;
   }
 }
 
