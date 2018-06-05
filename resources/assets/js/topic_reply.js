@@ -1,5 +1,3 @@
-require('./bootstrap');
-
 $(document).ready(function() {
     $('#new-post-form').on('submit', event => {
         event.preventDefault();
