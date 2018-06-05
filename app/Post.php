@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use App\Utils\Markdown;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -12,7 +13,7 @@ class Post extends Model
 
     protected $fillable = ['category_id', 'board_id', 'topic_id', 'user_id', 'body', 'likes', 'approved'];
 
-    protected $appends = ['markdownBody'];
+    protected $appends = ['markdownBody', 'timeSincePosted'];
 
     public function category()
     {
@@ -37,6 +38,11 @@ class Post extends Model
     public function getMarkdownBodyAttribute()
     {
         return Markdown::render($this->body);
+    }
+
+    public function getTimeSincePostedAttribute()
+    {
+        return $this->updated_at->diffForHumans();
     }
 
     public function toSearchableArray()

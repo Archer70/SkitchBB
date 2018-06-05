@@ -32,7 +32,7 @@
         @if ($board->lastPost())
             <div class="card-footer">
                 <div class="float-right justify-content-end">
-                    <span>{{ $board->lastPost()->created_at }}</span>
+                    <span>{{ $board->lastPost()->timeSincePosted }}</span>
                 </div>
                 <span>
                     @lang('Last post in')

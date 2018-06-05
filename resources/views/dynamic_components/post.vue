@@ -13,7 +13,7 @@
                 </div>
             </form>
             <a :name="post.id" :href="route('posts.show', post)">
-                {{ show_title ? topic.title : '#'+post.id }} | {{ post.updated_at }}
+                {{ show_title ? topic.title : '#'+post.id }} | {{ post.timeSincePosted }}
             </a>
         </div>
         <div class="card-body post-area">

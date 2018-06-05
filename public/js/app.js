@@ -48552,7 +48552,7 @@ var render = function() {
             "\n            " +
               _vm._s(_vm.show_title ? _vm.topic.title : "#" + _vm.post.id) +
               " | " +
-              _vm._s(_vm.post.updated_at) +
+              _vm._s(_vm.post.timeSincePosted) +
               "\n        "
           )
         ]
