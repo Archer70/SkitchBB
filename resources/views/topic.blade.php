@@ -47,7 +47,7 @@
     @can('create', \App\Post::class)
         <div class="card mb-4">
             <div class="card-body">
-                <form method="post" action="{{ route('posts.store') }}">
+                <form id="new-post-form" method="post" action="{{ route('posts.store') }}">
                     <div class="form-group">
                     <textarea
                             id="post-body"
@@ -57,11 +57,15 @@
                             placeholder="@lang('New Post')"
                     ></textarea>
                     </div>
-                    <input type="hidden" name="topic_id" value="{{ $topic->id }}">
+                    <input id="topic-id" type="hidden" name="topic_id" value="{{ $topic->id }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-primary">@lang('Reply')</button>
                 </form>
             </div>
         </div>
     @endcan
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/topic_reply.js') }}"></script>
 @endsection

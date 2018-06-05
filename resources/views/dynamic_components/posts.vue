@@ -1,7 +1,7 @@
 <template>
     <div id="posts">
         <post
-            v-for="post in dataPosts"
+            v-for="post in this.$store.state.posts"
             :key="post.id"
             :topic="topic"
             :post="post"
@@ -25,26 +25,19 @@
                 default: false
             }
         },
-        data: function() {
-            return {
-                dataPosts: this.posts,
-            }
-        },
         methods: {
-            lastPost: function() {
-                return this.dataPosts[this.dataPosts.length-1];
-            },
-            appendNewPosts: function(newPosts) {
-                for (let post of newPosts) {
-                    this.dataPosts.push(post);
-                }
-            },
             checkForNewPosts: function() {
                 setTimeout(() => {
+                    if (this.$store.getters.newPostCheckBlocked) {
+                        this.checkForNewPosts(); // Try again in 10 seconds.
+                        return;
+                    }
                     axios.get(
-                        route('posts.newer-than', {lastPost: this.lastPost().id})
+                        route('posts.newer-than', {lastPost: this.$store.getters.lastPost.id})
                     ).then(response => {
-                        this.appendNewPosts(response.data);
+                        if (response.data.length > 0) {
+                            this.$store.commit('addPosts', response.data);
+                        }
                         this.checkForNewPosts();
                     }).catch(response => {
                         // Don't keep going.
@@ -53,6 +46,7 @@
             }
         },
         mounted: function() {
+            this.$store.commit('addPosts', this.posts);
             if (this.is_last_page) {
                 this.checkForNewPosts()
             }

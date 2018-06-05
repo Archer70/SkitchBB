@@ -76,6 +76,11 @@ class PostController extends Controller
         foreach ($topic->subscribedUsers($user) as $emailUser) {
             Mail::to($emailUser)->send(new TopicReply($topic, $post, $emailUser));
         }
+
+        if ($request->ajax()) {
+            $post->load(['user', 'user.group']);
+            return json_encode([$post]);
+        }
         
         return Redirect::route('posts.show', ['post' => $post]);
     }
