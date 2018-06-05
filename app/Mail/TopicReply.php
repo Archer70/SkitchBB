@@ -10,7 +10,7 @@ use App\Topic;
 use App\User;
 use App\Post;
 
-class TopicReply extends Mailable
+class TopicReply extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
