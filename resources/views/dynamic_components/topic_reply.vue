@@ -10,9 +10,10 @@
                         aria-describedby="post-body"
                         placeholder="New Post"
                         v-model="reply"
+                        :disabled="replyDisabled"
                 ></textarea>
                 </div>
-                <button id="post-reply" type="submit" class="btn btn-primary">Reply</button>
+                <button id="post-reply" type="submit" class="btn btn-primary" :disabled="replyDisabled">Reply</button>
             </form>
         </div>
     </div>
@@ -29,7 +30,8 @@
         data: function() {
             return {
                 reply: '',
-                topicId: this.topic.id
+                topicId: this.topic.id,
+                replyDisabled: false,
             }
         },
         methods: {
@@ -39,7 +41,7 @@
                 // Don't check for new posts while we're submitting,
                 // and also don't keep SMASHING that reply button
                 vuexStore.commit('blockNewPostCheck');
-                $('#post-body, #post-reply').prop('disabled', true).val('');
+                this.replyDisabled = true;
 
                 axios.post(
                     route('posts.store'),
@@ -50,8 +52,10 @@
                 ).then(response => {
                     vuexStore.commit('addPosts', response.data);
 
+                    // Okay, continue with your replying, if you must.
                     vuexStore.commit('unblockNewPostCheck');
-                    $('#post-body, #post-reply').prop('disabled', false);
+                    this.reply = '';
+                    this.replyDisabled = false;
                 }).catch(response => {
                     // he ded. rip
                 })
