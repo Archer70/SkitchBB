@@ -61,6 +61,15 @@
                             </div>
                         </div>
 
+                        @if (env('RECAPTCHA_SITEKEY'))
+                            <div class="form-group row">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">@lang('Bot Prevention')</label>
+                                <div class="col-md-6">
+                                    <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div>
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

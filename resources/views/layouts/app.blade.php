@@ -15,6 +15,11 @@
         window.asset_url = '{{ asset('') }}';
     </script>
 
+    @if (env('RECAPTCHA_SITEKEY'))
+        <!-- Docs say it has to be in <head> :| -->
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    @endif
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
