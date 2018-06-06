@@ -37,32 +37,15 @@
     ]) @endcomponent
 
     {{ $posts->links() }}
-    <posts
+    <topic
         :topic="{{ json_encode($topic) }}"
         :posts="{{ json_encode($posts->items()) }}"
         :is_last_page={{ $posts->lastPage() == $posts->currentPage() ? 'true' : 'false' }}
-    ></posts>
+    ></topic>
     {{ $posts->links() }}
 
     @can('create', \App\Post::class)
-        <div class="card mb-4">
-            <div class="card-body">
-                <form id="new-post-form" method="post" action="{{ route('posts.store') }}">
-                    <div class="form-group">
-                    <textarea
-                            id="post-body"
-                            name="body"
-                            class="form-control"
-                            aria-describedby="post-body"
-                            placeholder="@lang('New Post')"
-                    ></textarea>
-                    </div>
-                    <input id="topic-id" type="hidden" name="topic_id" value="{{ $topic->id }}">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-primary">@lang('Reply')</button>
-                </form>
-            </div>
-        </div>
+        <topic-reply :topic="{{ json_encode($topic) }}"></topic-reply>
     @endcan
 @endsection
 

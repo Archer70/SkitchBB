@@ -36,7 +36,8 @@ const store = new Vuex.Store({
 })
 window.vuexStore = store;
 
-Vue.component('posts', require('../../views/dynamic_components/posts.vue'));
+Vue.component('topic-reply', require('../../views/dynamic_components/topic_reply.vue'));
+Vue.component('topic', require('../../views/dynamic_components/topic.vue'));
 Vue.component('post', require('../../views/dynamic_components/post.vue'));
 Vue.component('user-card', require('../../views/dynamic_components/user_card.vue'));
 
