@@ -6,7 +6,6 @@
             :key="post.id"
             :topic="topic"
             :post="post"
-            :can_post="can_post"
             :show_title="false"
             v-on:quote-post="quotePost"
         ></post>

@@ -4,13 +4,13 @@
             <form method="post" :action="route('posts.destroy', post)">
                 <input type="hidden" name="_token" :value="csrf">
                 <div class="btn-group btn-group-sm justify-content-end float-right">
-                    <button class="btn btn-primary" v-if="can_post" v-on:click="quote($event, {body: post.body, post_id: post.id, poster: post.user.name})">
+                    <button class="btn btn-primary" v-if="post.canPostNew" v-on:click="quote($event, {body: post.body, post_id: post.id, poster: post.user.name})">
                         <i class="fas fa-quote-right"></i>
                     </button>
-                    <a v-if="post.can_update" class="btn btn-secondary" :href="route('posts.edit', post)">
+                    <a v-if="post.canUpdate" class="btn btn-secondary" :href="route('posts.edit', post)">
                         <i class="far fa-edit"></i>
                     </a>
-                    <button v-if="post.can_delete" type="submit" class="btn btn-danger">
+                    <button v-if="post.canDelete" type="submit" class="btn btn-danger">
                         <i class="far fa-trash-alt"></i>
                     </button>
                 </div>

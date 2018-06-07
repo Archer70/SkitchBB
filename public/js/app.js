@@ -48507,7 +48507,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48614,12 +48613,7 @@ var render = function() {
       _vm._l(_vm.dataPosts, function(post) {
         return _c("post", {
           key: post.id,
-          attrs: {
-            topic: _vm.topic,
-            post: post,
-            can_post: _vm.can_post,
-            show_title: false
-          },
+          attrs: { topic: _vm.topic, post: post, show_title: false },
           on: { "quote-post": _vm.quotePost }
         })
       }),
@@ -48796,7 +48790,7 @@ var render = function() {
                 "btn-group btn-group-sm justify-content-end float-right"
             },
             [
-              _vm.can_post
+              _vm.post.canPostNew
                 ? _c(
                     "button",
                     {
@@ -48815,7 +48809,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.post.can_update
+              _vm.post.canUpdate
                 ? _c(
                     "a",
                     {
@@ -48826,7 +48820,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.post.can_delete
+              _vm.post.canDelete
                 ? _c(
                     "button",
                     {

@@ -96,10 +96,6 @@ class TopicController extends Controller
         }
         
         $posts = $topic->posts()->with(['board', 'user', 'user.group'])->paginate(20);
-        foreach ($posts as $post) {
-            $post->can_update = $user->can('update', $post);
-            $post->can_delete = $user->can('delete', $post);
-        }
 
         if (auth()->check()) {
             $topic->markRead($user);
