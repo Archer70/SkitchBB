@@ -1,12 +1,19 @@
 <template>
     <div id="posts">
+        <div v-html="pagination.html"></div>
         <post
-            v-for="post in this.$store.state.posts"
+            v-for="post in dataPosts"
             :key="post.id"
             :topic="topic"
             :post="post"
             :show_title="false"
         ></post>
+        <div v-html="pagination.html"></div>
+        <topic-reply
+            :topic="topic"
+            v-on:add-posts="addPosts"
+            v-on:block-posts="blockPosts = $event"
+        ></topic-reply>
     </div>
 </template>
 
@@ -20,23 +27,45 @@
             posts: {
                 type: Array,
             },
+            pagination: {
+                type: Object,
+                default: null
+            },
             is_last_page: {
+                type: Boolean,
+                default: false
+            },
+            can_post: {
                 type: Boolean,
                 default: false
             }
         },
+        data: function() {
+            return {
+                blockPosts: false,
+                dataPosts: this.posts,
+            }
+        },
         methods: {
+            addPosts: function(posts) {
+                for (let post of posts) {
+                    this.dataPosts.push(post);
+                }
+            },
+            lastPostId: function() {
+                return this.dataPosts[this.dataPosts.length-1].id;
+            },
             checkForNewPosts: function() {
                 setTimeout(() => {
-                    if (this.$store.getters.newPostCheckBlocked) {
+                    if (this.blockPosts) {
                         this.checkForNewPosts(); // Try again in 10 seconds.
                         return;
                     }
                     axios.get(
-                        route('posts.newer-than', {lastPost: this.$store.getters.lastPost.id})
+                        route('posts.newer-than', {lastPost: this.lastPostId()})
                     ).then(response => {
                         if (response.data.length > 0) {
-                            this.$store.commit('addPosts', response.data);
+                            this.addPosts(response.data);
                         }
                         this.checkForNewPosts();
                     }).catch(response => {
@@ -46,7 +75,6 @@
             }
         },
         mounted: function() {
-            this.$store.commit('addPosts', this.posts);
             if (this.is_last_page) {
                 this.checkForNewPosts()
             }

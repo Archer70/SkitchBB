@@ -37,11 +37,7 @@
         methods: {
             sendReply: function(event) {
                 event.preventDefault();
-
-                // Don't check for new posts while we're submitting,
-                // and also don't keep SMASHING that reply button
-                vuexStore.commit('blockNewPostCheck');
-                this.replyDisabled = true;
+                this.blockPosts(true);
 
                 axios.post(
                     route('posts.store'),
@@ -50,15 +46,18 @@
                         topic_id: this.topicId
                     }
                 ).then(response => {
-                    vuexStore.commit('addPosts', response.data);
-
-                    // Okay, continue with your replying, if you must.
-                    vuexStore.commit('unblockNewPostCheck');
+                    this.$emit('add-posts', response.data);
+                    this.blockPosts(false);
                     this.reply = '';
-                    this.replyDisabled = false;
                 }).catch(response => {
                     // he ded. rip
                 })
+            },
+            blockPosts: function(shouldBlock) {
+                // Don't check for new posts while we're submitting,
+                // and also don't keep SMASHING that reply button
+                this.$emit('block-posts', shouldBlock)
+                this.replyDisabled = shouldBlock;
             }
         },
         mounted: function() {

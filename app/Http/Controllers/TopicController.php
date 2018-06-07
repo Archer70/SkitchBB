@@ -105,7 +105,13 @@ class TopicController extends Controller
             $topic->markRead($user);
         }
 
-        return view('topic', ['authUser' => $user, 'topic' => $topic, 'posts' => $posts]);
+        return view('topic', [
+            'topic' => $topic,
+            'posts' => $posts->items(),
+            'pagination' => ['html' => $posts->links()->__toString()],
+            'isLastPage' => $posts->lastPage() == $posts->currentPage(),
+            'can_post' => $user->can('create', Post::class),
+        ]);
     }
 
     public function unread(Request $request)

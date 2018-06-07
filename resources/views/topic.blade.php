@@ -36,17 +36,13 @@
         ]
     ]) @endcomponent
 
-    {{ $posts->links() }}
     <topic
+        :pagination="{{ json_encode($pagination) }}"
         :topic="{{ json_encode($topic) }}"
-        :posts="{{ json_encode($posts->items()) }}"
-        :is_last_page={{ $posts->lastPage() == $posts->currentPage() ? 'true' : 'false' }}
+        :posts="{{ json_encode($posts) }}"
+        :is_last_page="{{ $isLastPage ? 'true' : 'false' }}"
+        :can_post="{{ $can_post ? 'true' : 'false' }}"
     ></topic>
-    {{ $posts->links() }}
-
-    @can('create', \App\Post::class)
-        <topic-reply :topic="{{ json_encode($topic) }}"></topic-reply>
-    @endcan
 @endsection
 
 @section('js')

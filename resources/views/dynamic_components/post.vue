@@ -34,6 +34,9 @@
             return {
                 csrf: window.csrf,
             }
+        },
+        methods: {
+            
         }
     }
 </script>
