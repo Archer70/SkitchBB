@@ -9,6 +9,8 @@ class Board extends Model
 {
     use Sluggable;
 
+    private $lastPost = null;
+
     public function sluggable()
     {
         return [
@@ -35,10 +37,11 @@ class Board extends Model
 
     public function lastPost()
     {
-        return Post::where('board_id', $this->id)
+        $this->lastPost = $this->lastPost ?? Post::where('board_id', $this->id)
             ->orderBy('id', 'desc')
             ->limit(1)
             ->get()
             ->last();
+        return $this->lastPost;
     }
 }
