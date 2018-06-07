@@ -33,6 +33,8 @@ class User extends Authenticatable
 
     protected $appends = ['avatarUrl'];
 
+    protected $with = ['group'];
+
     public function topics()
     {
         return $this->hasMany('App\\Topic');
