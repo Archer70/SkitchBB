@@ -15,6 +15,10 @@
                 </div>
                 <span v-if="!badgeUrl()">{{ user.group.name }}</span>
             </li>
+            <li class="list-group-item">
+                <i v-if="user.online" class="fas fa-plug text-success"></i>
+                {{ user.online ? 'Online' : 'Offline' }}
+            </li>
             <li v-if="user.title" class="list-group-item">
                 {{ user.title }}
             </li>

@@ -48963,6 +48963,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['user', 'responsive'],
@@ -49038,6 +49042,17 @@ var render = function() {
           !_vm.badgeUrl()
             ? _c("span", [_vm._v(_vm._s(_vm.user.group.name))])
             : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-group-item" }, [
+          _vm.user.online
+            ? _c("i", { staticClass: "fas fa-plug text-success" })
+            : _vm._e(),
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.user.online ? "Online" : "Offline") +
+              "\n        "
+          )
         ]),
         _vm._v(" "),
         _vm.user.title

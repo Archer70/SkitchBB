@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
+use Carbon\Carbon;
 
 
 class User extends Authenticatable
@@ -31,7 +32,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $appends = ['avatarUrl'];
+    protected $appends = ['avatarUrl', 'online'];
 
     protected $with = ['group'];
 
@@ -67,6 +68,12 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute()
     {
         return $this->avatarUrl();
+    }
+
+    public function getOnlineAttribute()
+    {
+        $lastSeen = Carbon::parse($this->last_seen);
+        return Carbon::now()->diffInMinutes($lastSeen) <= 10;
     }
 
     public function isAdmin()
