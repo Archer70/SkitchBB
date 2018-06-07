@@ -44,11 +44,27 @@ class Markdown
     public static function bootstrapConvert($text)
     {
         $searches = [
-            '<pre>'
+            '<pre>',
+            '<blockquote>',
         ];
         $replacements = [
-            '<pre class="pre-scrollable">'
+            '<pre class="pre-scrollable">',
+            '<blockquote class="blockquote">'
         ];
-        return str_replace($searches, $replacements, $text);
+        $text = str_replace($searches, $replacements, $text);
+
+        // Quote citation
+        preg_match_all('/%cite:(\d+)\|(.+)%/U', $text, $matches, \PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            $html = '
+                <footer class="blockquote-footer">
+                    '. $match[2]. '
+                    <cite title="#'. $match[1]. '">
+                        <a href="'. route('posts.show', ['post' => $match[1]]). '">#'. $match[1]. '</a>
+                    </cite>
+                </footer>';
+            $text = str_replace($match[0], $html, $text);
+        }
+        return $text;
     }
 }

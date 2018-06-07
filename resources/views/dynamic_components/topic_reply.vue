@@ -26,6 +26,10 @@
                 type: Object,
                 default: null
             },
+            quote: {
+                type: Object,
+                default: ''
+            }
         },
         data: function() {
             return {
@@ -58,10 +62,16 @@
                 // and also don't keep SMASHING that reply button
                 this.$emit('block-posts', shouldBlock)
                 this.replyDisabled = shouldBlock;
-            }
+            },
         },
-        mounted: function() {
-            
+        watch: {
+            quote: function(quote) {
+                let body = '';
+                for (let line of quote.body.split('\n')) {
+                    body += `>${line}\n`;
+                }
+                this.reply = `${this.reply}\n ${body}> %cite:${quote.post_id}|${quote.poster}%`;
+            }
         }
     }
 </script>

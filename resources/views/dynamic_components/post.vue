@@ -4,6 +4,9 @@
             <form method="post" :action="route('posts.destroy', post)">
                 <input type="hidden" name="_token" :value="csrf">
                 <div class="btn-group btn-group-sm justify-content-end float-right">
+                    <button class="btn btn-primary" v-if="can_post" v-on:click="quote($event, {body: post.body, post_id: post.id, poster: post.user.name})">
+                        <i class="fas fa-quote-right"></i>
+                    </button>
                     <a v-if="post.can_update" class="btn btn-secondary" :href="route('posts.edit', post)">
                         <i class="far fa-edit"></i>
                     </a>
@@ -29,14 +32,32 @@
 
 <script>
     export default {
-        props: ['topic', 'post', 'show_title'],
+        props: {
+            topic: {
+                type: Object
+            },
+            post: {
+                type: Object
+            },
+            show_title: {
+                type: Boolean,
+                default: false
+            },
+            can_post: {
+                type: Boolean,
+                default: false
+            }
+        },
         data: function() {
             return {
                 csrf: window.csrf,
             }
         },
         methods: {
-            
+            quote: function(event, quote) {
+                event.preventDefault();
+                this.$emit('quote-post', quote)
+            }
         }
     }
 </script>

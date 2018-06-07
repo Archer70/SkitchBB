@@ -16,5 +16,4 @@ Vue.component('user-card', require('../../views/dynamic_components/user_card.vue
 
 const app = new Vue({
     el: '#app',
-    store,
 });

@@ -14003,8 +14003,7 @@ Vue.component('post', __webpack_require__(47));
 Vue.component('user-card', __webpack_require__(50));
 
 var app = new Vue({
-    el: '#app',
-    store: store
+    el: '#app'
 });
 
 /***/ }),
@@ -48285,6 +48284,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         topic: {
             type: Object,
             default: null
+        },
+        quote: {
+            type: Object,
+            default: ''
         }
     },
     data: function data() {
@@ -48319,7 +48322,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.replyDisabled = shouldBlock;
         }
     },
-    mounted: function mounted() {}
+    watch: {
+        quote: function quote(_quote) {
+            var body = '';
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = _quote.body.split('\n')[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var line = _step.value;
+
+                    body += '>' + line + '\n';
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            this.reply = this.reply + '\n ' + body + '> %cite:' + _quote.post_id + '|' + _quote.poster + '%';
+        }
+    }
 });
 
 /***/ }),
@@ -48472,6 +48505,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -48498,7 +48534,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             blockPosts: false,
-            dataPosts: this.posts
+            dataPosts: this.posts,
+            quote: null
         };
     },
     methods: {
@@ -48530,6 +48567,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         lastPostId: function lastPostId() {
             return this.dataPosts[this.dataPosts.length - 1].id;
+        },
+        quotePost: function quotePost(post) {
+            this.quote = post;
         },
         checkForNewPosts: function checkForNewPosts() {
             var _this = this;
@@ -48574,14 +48614,20 @@ var render = function() {
       _vm._l(_vm.dataPosts, function(post) {
         return _c("post", {
           key: post.id,
-          attrs: { topic: _vm.topic, post: post, show_title: false }
+          attrs: {
+            topic: _vm.topic,
+            post: post,
+            can_post: _vm.can_post,
+            show_title: false
+          },
+          on: { "quote-post": _vm.quotePost }
         })
       }),
       _vm._v(" "),
       _c("div", { domProps: { innerHTML: _vm._s(_vm.pagination.html) } }),
       _vm._v(" "),
       _c("topic-reply", {
-        attrs: { topic: _vm.topic },
+        attrs: { topic: _vm.topic, quote: _vm.quote },
         on: {
           "add-posts": _vm.addPosts,
           "block-posts": function($event) {
@@ -48685,15 +48731,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['topic', 'post', 'show_title'],
+    props: {
+        topic: {
+            type: Object
+        },
+        post: {
+            type: Object
+        },
+        show_title: {
+            type: Boolean,
+            default: false
+        },
+        can_post: {
+            type: Boolean,
+            default: false
+        }
+    },
     data: function data() {
         return {
             csrf: window.csrf
         };
     },
-    methods: {}
+    methods: {
+        quote: function quote(event, _quote) {
+            event.preventDefault();
+            this.$emit('quote-post', _quote);
+        }
+    }
 });
 
 /***/ }),
@@ -48727,6 +48796,25 @@ var render = function() {
                 "btn-group btn-group-sm justify-content-end float-right"
             },
             [
+              _vm.can_post
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          _vm.quote($event, {
+                            body: _vm.post.body,
+                            post_id: _vm.post.id,
+                            poster: _vm.post.user.name
+                          })
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-quote-right" })]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _vm.post.can_update
                 ? _c(
                     "a",

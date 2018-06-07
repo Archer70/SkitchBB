@@ -6,11 +6,14 @@
             :key="post.id"
             :topic="topic"
             :post="post"
+            :can_post="can_post"
             :show_title="false"
+            v-on:quote-post="quotePost"
         ></post>
         <div v-html="pagination.html"></div>
         <topic-reply
             :topic="topic"
+            :quote="quote"
             v-on:add-posts="addPosts"
             v-on:block-posts="blockPosts = $event"
         ></topic-reply>
@@ -44,6 +47,7 @@
             return {
                 blockPosts: false,
                 dataPosts: this.posts,
+                quote: null
             }
         },
         methods: {
@@ -54,6 +58,9 @@
             },
             lastPostId: function() {
                 return this.dataPosts[this.dataPosts.length-1].id;
+            },
+            quotePost: function(post) {
+                this.quote = post;
             },
             checkForNewPosts: function() {
                 setTimeout(() => {
@@ -72,7 +79,7 @@
                         // Don't keep going.
                     })
                 }, 10000) // Every ten seconds.
-            }
+            },
         },
         mounted: function() {
             if (this.is_last_page) {
