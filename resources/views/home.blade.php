@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('page_actions')
-    @if($authUser->can('create', App\Category::class))
+    @can('create', App\Category::class)
         <a href="{{ route('categories.create') }}" class="btn btn-outline-primary btn-block">@lang('Create Category')</a>
-    @endif
+    @endcan
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
     @foreach($categories as $index => $category)
         <div class="card mb-4">
             <div class="card-header">
-                @if($authUser->can('create', App\Category::class))
+                @can('create', App\Category::class)
                     <form method="post" action="{{ route('categories.destroy', ['category' => $category]) }}">
                         @csrf
                         <div class="btn-group btn-group-sm float-right" role="group">
@@ -40,7 +40,7 @@
                             </button>
                         </div>
                     </form>
-                @endif
+                @endcan
                 {{ $category->title }}
                 @if (!empty($category->description))
                     - <span class="text-muted">{{ $category->description }}</span>
@@ -57,8 +57,12 @@
             </div>
         </div>
     @endforeach
-@endsection
 
-@section('footer')
-    test footer
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">@lang('Users Online')</h5>
+            <h6 class="card-subtitle text-muted mb-2">@lang('Users active in the last 10 minutes')</h6>
+            <p>{!! !empty($usersOnlineLinks) ? implode(', ', $usersOnlineLinks) : __('No users currently online.') !!}</p>
+        </div>
+    </div>
 @endsection
