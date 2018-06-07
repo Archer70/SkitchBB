@@ -49,15 +49,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = ['name.not_regex' => trans('The percent (%) symbol is not allowed in user names.')];
         $rules = [
-            'name' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|not_regex:/\%/|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ];
         if (env('RECAPTCHA_SECRET')) {
             $rules['g-recaptcha-response'] = ['required', 'string', new Recaptcha()];
         }
-        return Validator::make($data, $rules);
+        return Validator::make($data, $rules, $messages);
     }
 
     /**
